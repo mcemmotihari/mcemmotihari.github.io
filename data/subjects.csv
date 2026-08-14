@@ -1,0 +1,46 @@
+code,name,short,L,T,P,department
+105301,Digital Electronics,DE,3,0,2,CSE
+105302,Data Structure and Algorithms,DSA,3,0,2,CSE
+105303,Object Oriented Programming using JAVA,OOP,3,0,2,CSE
+105304,Discrete Mathematics and Graph Theory,DMGT,3,1,0,CSE
+105305,Operating System,OS,3,0,2,CSE
+105306,Universal Human Values,UHV,3,0,0,CSE
+105307,Indian Knowledge System,IKS,3,0,0,CSE
+105308,Internship - I,SII,,,,CSE
+151301,Digital Electronics,DE,3,0,2,CSE
+151302,Data Structure and Algorithms,DSA,3,0,2,CSE
+151303,Object Oriented Programming using JAVA,OOP,3,0,2,CSE
+151304,Discrete Mathematics and Graph Theory,DMGT,3,1,0,CSE
+151305,Operating System,OS,3,0,2,CSE
+151306,Universal Human Values,UHV,3,0,0,CSE
+151307,Indian Knowledge System,IKS,3,0,0,CSE
+151308,Internship - I,SII,,,,CSE
+105401,Computer Organization and Architecture,COA,3,0,2,CSE
+105402,Formal Language and Automata Theory,FLAT,3,1,0,CSE
+105403,Design and Analysis of Algorithms,DAA,3,0,2,CSE
+105404,Database Management System,DBMS,3,0,2,CSE
+105405,Effective Technical Communication,ETC,3,0,0,CSE
+105406,Computer Networks,CN,3,0,2,CSE
+105407,NPTEL-I,NPTEL,0,0,4,CSE
+151401,Computer Organization and Architecture,COA,3,0,2,CSE
+151402,Formal Language and Automata Theory,FLAT,3,1,0,CSE
+151403,Design and Analysis of Algorithms,DAA,3,0,2,CSE
+151404,Database Management System,DBMS,3,0,2,CSE
+151405,Effective Technical Communication,ETC,3,0,0,CSE
+151406,Computer Networks,CN,3,0,2,CSE
+151407,NPTEL-I,NPTEL,0,0,4,CSE
+100602,Computer Networks,CN,3,0,4,CSE
+105601,Complier Design,CD,3,0,4,CSE
+105602,Machine Learning,ML,3,1,0,CSE
+105610,Elective-I (Soft Computing),SC,3,0,0,CSE
+105616,Elective-II (Cryptography and Network Security),CNS,3,0,0,CSE
+105620P,Python Programming Lab,PP,0,0,2,CSE
+100604P,NPTEL Courses-2 Lab,NPTEL,0,0,4,CSE
+151601,Machine Learning,ML,3,1,4,CSE
+151602,Automata Theory and Compiler Design,ATCD,3,0,0,CSE
+151603,Ad hoc & Network Sensors,ANS,3,0,4,CSE
+151604,AI and Ethics,AIE,1,0,0,CSE
+151605,Constitution of India,COI,3,0,0,CSE
+151610,Elective-II (Internet & Intranet Engineering),I&I,3,0,0,CSE
+151614,Elective-III (Cloud Computing),CC,3,0,0,CSE
+151606P,NPTEL - II Lab,NPTEL,0,0,4,CSE

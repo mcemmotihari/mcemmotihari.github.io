@@ -1,0 +1,45 @@
+# College-wide timetable metadata
+college: Motihari College of Engineering, Motihari
+college_short: MCE Motihari
+timezone: Asia/Kolkata
+days:
+  - MON
+  - TUE
+  - WED
+  - THU
+  - FRI
+  - SAT
+periods:
+  - id: 1
+    label: I
+    start: "10:00"
+    end: "11:00"
+  - id: 2
+    label: II
+    start: "11:00"
+    end: "12:00"
+  - id: 3
+    label: III
+    start: "12:00"
+    end: "13:00"
+  - id: 4
+    label: IV
+    start: "14:00"
+    end: "15:00"
+  - id: 5
+    label: V
+    start: "15:00"
+    end: "16:00"
+  - id: 6
+    label: VI
+    start: "16:00"
+    end: "17:00"
+breaks:
+  - after_period: 3
+    label: Lunch
+    start: "13:00"
+    end: "14:00"
+notes: |
+  Source of truth is data/*.csv (especially slots.csv).
+  Class / faculty / room views, conflicts, LTP and load are derived from slots.
+  To add another branch or semester: add a row in sections.csv, subjects/offerings, then slots.

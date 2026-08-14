@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCE Motihari · Timetable</title>
+  <meta name="description" content="College timetable for Motihari College of Engineering — class, faculty, and room views." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <p class="brand-mark">MCE Motihari</p>
+      <h1 class="brand-title">Department Timetable</h1>
+      <p class="brand-sub" id="metaLine">Loading timetable…</p>
+    </div>
+    <nav class="view-tabs" role="tablist" aria-label="Timetable view">
+      <button class="tab is-active" data-view="section" role="tab" aria-selected="true">Class</button>
+      <button class="tab" data-view="faculty" role="tab" aria-selected="false">Faculty</button>
+      <button class="tab" data-view="room" role="tab" aria-selected="false">Room</button>
+      <button class="tab" data-view="tools" role="tab" aria-selected="false">Tools</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="controls" id="controlsPanel">
+      <label class="field">
+        <span id="selectorLabel">Section</span>
+        <select id="primarySelect"></select>
+      </label>
+      <label class="field field-narrow">
+        <span>Department</span>
+        <select id="deptFilter">
+          <option value="">All</option>
+        </select>
+      </label>
+      <p class="hint" id="selectionHint"></p>
+    </section>
+
+    <section class="grid-wrap" id="gridSection">
+      <div class="table-scroll">
+        <table class="tt" id="timetable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <aside class="legend" id="legend">
+        <span><i class="swatch L"></i> Lecture</span>
+        <span><i class="swatch T"></i> Tutorial</span>
+        <span><i class="swatch P"></i> Practical</span>
+      </aside>
+    </section>
+
+    <section class="tools-panel hidden" id="toolsPanel">
+      <div class="tool-card">
+        <h2>Conflict finder</h2>
+        <p class="tool-lead">Same faculty or room booked twice in one period.</p>
+        <div id="conflictsOut"></div>
+      </div>
+      <div class="tool-card">
+        <h2>Faculty load</h2>
+        <p class="tool-lead">Scheduled contact hours this week (from slots).</p>
+        <div id="loadOut"></div>
+      </div>
+      <div class="tool-card">
+        <h2>LTP check</h2>
+        <p class="tool-lead">Scheduled weekly periods vs subject L-T-P (labs/groups may differ by design).</p>
+        <div id="ltpOut"></div>
+      </div>
+      <div class="tool-card">
+        <h2>Offerings</h2>
+        <p class="tool-lead">Subjects with L-T-P and assigned faculty.</p>
+        <div id="offeringsOut"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>To change the timetable: edit <code>data/*.csv</code> → open a PR to <code>main</code> → merge. Pages updates via GitHub Actions.</p>
+  </footer>
+
+  <script src="assets/js/app.js" type="module"></script>
+</body>
+</html>

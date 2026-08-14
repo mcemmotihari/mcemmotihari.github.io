@@ -1,0 +1,7 @@
+id,program,program_name,semester,department,batch_session,academic_year,wef,label
+CSE-3,CSE,Computer Science and Engineering,3,CSE,2025-29,2026-27,13/08/2026,CSE Sem 3
+CSE-AI-3,CSE-AI,CSE (Artificial Intelligence),3,CSE,2025-29,2026-27,13/08/2026,CSE-AI Sem 3
+CSE-4,CSE,Computer Science and Engineering,4,CSE,2024-28,2025-26,13/08/2026,CSE Sem 4
+CSE-AI-4,CSE-AI,CSE (Artificial Intelligence),4,CSE,2024-28,2025-26,13/08/2026,CSE-AI Sem 4
+CSE-6,CSE,Computer Science and Engineering,6,CSE,2023-27,2025-26,13/08/2026,CSE Sem 6
+CSE-AI-6,CSE-AI,CSE (Artificial Intelligence),6,CSE,2023-27,2025-26,13/08/2026,CSE-AI Sem 6
