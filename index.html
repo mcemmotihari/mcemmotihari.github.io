@@ -43,17 +43,23 @@
     </section>
 
     <section class="grid-wrap" id="gridSection">
-      <div class="table-scroll">
-        <table class="tt" id="timetable">
-          <thead></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <aside class="legend" id="legend">
-        <span><i class="swatch L"></i> Lecture</span>
-        <span><i class="swatch T"></i> Tutorial</span>
-        <span><i class="swatch P"></i> Practical</span>
-      </aside>
+      <article class="sheet" id="sheet">
+        <h2 class="sheet-title" id="sheetTitle"></h2>
+        <div class="sheet-meta" id="sheetMeta"></div>
+        <div class="table-scroll">
+          <table class="excel-tt" id="timetable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="mapping-wrap">
+          <table class="excel-map" id="mappingTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <footer class="sheet-sign" id="sheetSign"></footer>
+      </article>
     </section>
 
     <section class="tools-panel hidden" id="toolsPanel">

@@ -53,7 +53,7 @@ body {
 main,
 .site-footer {
   position: relative;
-  width: min(1120px, calc(100% - 2rem));
+  width: min(1240px, calc(100% - 2rem));
   margin-inline: auto;
 }
 
@@ -164,147 +164,176 @@ main,
 
 .grid-wrap {
   animation: rise 0.75s ease 0.12s both;
+  margin-bottom: 1.5rem;
+}
+
+.sheet {
+  background: #fff;
+  border: 1px solid #1a1a1a;
+  box-shadow: var(--shadow);
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+  color: #111;
+}
+
+.sheet-title {
+  margin: 0;
+  padding: 0.7rem 0.6rem 0.45rem;
+  text-align: center;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sheet-meta {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  padding: 0.15rem 0.4rem 0.55rem;
+  font-size: 0.92rem;
+  text-align: center;
+  border-bottom: 1px solid #111;
+}
+
+.sheet-meta span {
+  padding: 0.2rem 0.35rem;
+}
+
+.sheet-meta.meta-2 {
+  grid-template-columns: 1fr 1fr;
 }
 
 .table-scroll {
   overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: var(--shadow);
 }
 
-.tt {
+.excel-tt {
   width: 100%;
   border-collapse: collapse;
-  min-width: 860px;
+  min-width: 920px;
+  table-layout: fixed;
 }
 
-.tt th,
-.tt td {
-  border-bottom: 1px solid var(--line);
-  border-right: 1px solid var(--line);
-  padding: 0.65rem 0.55rem;
-  vertical-align: top;
-  text-align: left;
-}
-
-.tt th:last-child,
-.tt td:last-child {
-  border-right: 0;
-}
-
-.tt thead th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background: #1f4d38;
-  color: #f4faf6;
-  font-size: 0.78rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.tt thead th small {
-  display: block;
-  margin-top: 0.2rem;
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0;
-  opacity: 0.85;
-}
-
-.tt tbody th {
-  width: 4.5rem;
-  background: #eef5f0;
-  font-weight: 700;
-  color: var(--forest);
-  position: sticky;
-  left: 0;
-  z-index: 1;
-}
-
-.tt td {
-  min-width: 7.5rem;
+.excel-tt th,
+.excel-tt td {
+  border: 1px solid #111;
+  padding: 0.38rem 0.3rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.82rem;
   background: #fff;
 }
 
-.slot {
-  display: grid;
-  gap: 0.15rem;
-  padding: 0.45rem 0.5rem;
-  border-radius: 10px;
-  border-left: 3px solid var(--leaf);
-  background: var(--mist);
-  animation: pop 0.35s ease both;
-}
-
-.slot + .slot {
-  margin-top: 0.4rem;
-}
-
-.slot.T {
-  border-left-color: var(--amber);
-  background: var(--amber-soft);
-}
-
-.slot.P {
-  border-left-color: #245b8a;
-  background: #e4eef7;
-}
-
-.slot .code {
+.excel-tt thead th {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.84rem;
 }
 
-.slot .meta {
-  font-size: 0.78rem;
-  color: #3f5749;
-}
-
-.empty {
-  color: #8aa193;
-  font-size: 0.85rem;
-}
-
-.lunch-col {
-  background: repeating-linear-gradient(
-    -45deg,
-    #f3f7f4,
-    #f3f7f4 6px,
-    #eaf1ec 6px,
-    #eaf1ec 12px
-  ) !important;
-  color: #6a8173;
+.excel-tt .corner {
+  width: 8.2rem;
   font-size: 0.8rem;
-  font-weight: 600;
-  text-align: center !important;
-  vertical-align: middle !important;
 }
 
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 0.9rem 0 0;
-  color: #4f675a;
-  font-size: 0.88rem;
+.excel-tt .time-row th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.swatch {
-  display: inline-block;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 3px;
-  margin-right: 0.35rem;
-  vertical-align: -1px;
+.excel-tt tbody th.day {
+  width: 8.2rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
 }
 
-.swatch.L { background: var(--leaf); }
-.swatch.T { background: var(--amber); }
-.swatch.P { background: #245b8a; }
+.excel-tt td.subj {
+  font-size: 0.8rem;
+  line-height: 1.25;
+  min-height: 2.2rem;
+}
+
+.excel-tt td.room {
+  font-size: 0.72rem;
+  color: #222;
+}
+
+.excel-tt .lunch {
+  width: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: #fff;
+}
+
+.excel-tt .lunch-head {
+  width: 2.4rem;
+}
+
+.mapping-wrap {
+  overflow: auto;
+  padding: 0.9rem 0.55rem 0;
+}
+
+.excel-map {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+}
+
+.excel-map th,
+.excel-map td {
+  border: 1px solid #111;
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  font-size: 0.86rem;
+}
+
+.excel-map th {
+  font-weight: 700;
+}
+
+.excel-map td.left {
+  text-align: left;
+}
+
+.excel-map .col-sno { width: 4.5rem; }
+.excel-map .col-code { width: 8rem; }
+.excel-map .col-ltp { width: 5.5rem; }
+.excel-map .col-short { width: 10rem; }
+
+.sheet-sign {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1.6rem 0.8rem 1.1rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+}
+
+@media print {
+  .bg-grid,
+  .site-header,
+  .controls,
+  .site-footer,
+  .tools-panel {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .sheet {
+    box-shadow: none;
+    border: 0;
+  }
+}
 
 .tools-panel {
   display: grid;
@@ -410,5 +439,17 @@ main,
     flex: 1;
     text-align: center;
     padding-inline: 0.4rem;
+  }
+
+  .sheet-meta,
+  .sheet-meta.meta-2,
+  .sheet-sign {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .sheet-meta span,
+  .sheet-sign span {
+    padding: 0.15rem 0.6rem;
   }
 }
