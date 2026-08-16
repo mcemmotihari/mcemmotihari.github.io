@@ -1,11 +1,12 @@
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle.jsx";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { COLLEGE_NAME, SITE_NAME } from "../constants/site.js";
 import { enabledModules } from "../modules/registry.js";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 export default function Layout() {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
-  const current = enabledModules().find((m) => pathname.startsWith(m.path));
+  const current = enabledModules().find((mod) => pathname.startsWith(mod.path));
 
   if (isHome) {
     return <Outlet />;
@@ -18,34 +19,18 @@ export default function Layout() {
         <div className="brand">
           <p className="brand-mark">
             <Link to="/" className="brand-home">
-              MCE Motihari
+              {SITE_NAME}
             </Link>
           </p>
           <h1 className="brand-title">{current ? current.title : "Campus tools"}</h1>
         </div>
-        <div className="header-bar">
-          <nav className="app-nav" aria-label="Site">
-            {enabledModules().map((mod) => (
-              <NavLink
-                key={mod.id}
-                to={mod.path}
-                className={({ isActive }) => (isActive ? "is-active" : "")}
-              >
-                {mod.navLabel}
-              </NavLink>
-            ))}
-          </nav>
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </header>
       <main>
         <Outlet />
       </main>
       <footer className="site-footer">
-        <p>
-          Timetable data lives in <code>data/*.csv</code>. Open a PR to <code>main</code> and
-          merge — GitHub Actions rebuilds Pages.
-        </p>
+        <p>{COLLEGE_NAME} · Unofficial campus timetable</p>
       </footer>
     </>
   );

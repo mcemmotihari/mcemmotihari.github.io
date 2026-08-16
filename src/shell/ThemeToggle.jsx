@@ -1,18 +1,13 @@
-import { useState } from "react";
-import { readTheme, writeTheme } from "./theme.js";
+import { useTheme } from "../theme/ThemeProvider.jsx";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState(readTheme);
-
-  function toggle() {
-    setTheme(writeTheme(theme === "dark" ? "light" : "dark"));
-  }
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
       type="button"
       className="theme-toggle"
-      onClick={toggle}
+      onClick={toggleTheme}
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
     >
       <span className="theme-ico" aria-hidden="true" />

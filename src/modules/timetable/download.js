@@ -1,3 +1,4 @@
+import { COLLEGE_NAME_FULL } from "../../constants/site.js";
 import {
   DAY_NAMES,
   LUNCH_LETTERS,
@@ -65,7 +66,7 @@ export async function downloadExcel({ data, view, primaryId, slots, byDayPeriod 
   const periods = data.meta.periods;
   const lunchAfter = data.meta.breaks?.[0]?.after_period ?? 3;
   const withRooms = view === "section";
-  const title = (data.meta.college || "Motihari College of Engineering, Motihari").toUpperCase();
+  const title = (data.meta.college || COLLEGE_NAME_FULL).toUpperCase();
   const meta = sheetMetaLines(data, view, primaryId);
   const heads = mappingHeads(view);
   const mapRows = mappingValueRows(mappingRows(data, view, primaryId, slots), view);

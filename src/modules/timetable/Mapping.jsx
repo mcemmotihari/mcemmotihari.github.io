@@ -1,92 +1,44 @@
+import { DataTable } from "../../ui/DataTable.jsx";
+
+const SHARED = [
+  { key: "sno", label: "S.No.", thClass: "col-sno", render: (_row, i) => i + 1 },
+  { key: "code", label: "Paper Code", thClass: "col-code", render: (row) => row.code },
+  { key: "ltp", label: "L-T-P", thClass: "col-ltp", render: (row) => row.ltp },
+  { key: "subject", label: "Subjects", render: (row) => row.subject },
+  {
+    key: "short",
+    label: "Course Short Form",
+    thClass: "col-short",
+    render: (row) => row.short,
+  },
+];
+
+const COLUMNS = {
+  section: [...SHARED, { key: "faculty", label: "Faculty", render: (row) => row.faculty }],
+  faculty: [
+    ...SHARED,
+    { key: "branch", label: "Branch", render: (row) => row.branch },
+    { key: "semester", label: "Semester", render: (row) => row.semester },
+  ],
+  room: [
+    ...SHARED,
+    { key: "faculty", label: "Faculty", render: (row) => row.faculty },
+    { key: "branch", label: "Branch", render: (row) => row.branch },
+    { key: "semester", label: "Semester", render: (row) => row.semester },
+  ],
+};
+
 export default function Mapping({ view, rows }) {
-  if (view === "section") {
-    return (
-      <table className="excel-map">
-        <thead>
-          <tr>
-            <th className="col-sno">S.No.</th>
-            <th className="col-code">Paper Code</th>
-            <th className="col-ltp">L-T-P</th>
-            <th>Subjects</th>
-            <th className="col-short">Course Short Form</th>
-            <th>Faculty</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={`${r.code}-${i}`}>
-              <td>{i + 1}</td>
-              <td>{r.code}</td>
-              <td>{r.ltp}</td>
-              <td>{r.subject}</td>
-              <td>{r.short}</td>
-              <td>{r.faculty}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
-
-  if (view === "faculty") {
-    return (
-      <table className="excel-map">
-        <thead>
-          <tr>
-            <th className="col-sno">S.No.</th>
-            <th className="col-code">Paper Code</th>
-            <th className="col-ltp">L-T-P</th>
-            <th>Subjects</th>
-            <th className="col-short">Course Short Form</th>
-            <th>Branch</th>
-            <th>Semester</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={`${r.code}-${r.branch}-${i}`}>
-              <td>{i + 1}</td>
-              <td>{r.code}</td>
-              <td>{r.ltp}</td>
-              <td>{r.subject}</td>
-              <td>{r.short}</td>
-              <td>{r.branch}</td>
-              <td>{r.semester}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
-
+  const columns = COLUMNS[view] || COLUMNS.room;
+  const useBranchKey = view !== "section";
   return (
-    <table className="excel-map">
-      <thead>
-        <tr>
-          <th className="col-sno">S.No.</th>
-          <th className="col-code">Paper Code</th>
-          <th className="col-ltp">L-T-P</th>
-          <th>Subjects</th>
-          <th className="col-short">Course Short Form</th>
-          <th>Faculty</th>
-          <th>Branch</th>
-          <th>Semester</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r, i) => (
-          <tr key={`${r.code}-${r.branch}-${i}`}>
-            <td>{i + 1}</td>
-            <td>{r.code}</td>
-            <td>{r.ltp}</td>
-            <td>{r.subject}</td>
-            <td>{r.short}</td>
-            <td>{r.faculty}</td>
-            <td>{r.branch}</td>
-            <td>{r.semester}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <DataTable
+      className="excel-map"
+      columns={columns}
+      rows={rows}
+      rowKey={(row, i) =>
+        useBranchKey ? `${row.code}-${row.branch}-${i}` : `${row.code}-${i}`
+      }
+    />
   );
 }

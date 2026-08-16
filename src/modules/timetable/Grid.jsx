@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   DAY_NAMES,
   LUNCH_LETTERS,
@@ -12,7 +13,7 @@ export default function Grid({ data, view, slots }) {
   const periods = data.meta.periods;
   const lunchAfter = data.meta.breaks?.[0]?.after_period ?? 3;
   const withRooms = view === "section";
-  const byDayPeriod = groupByDayPeriod(slots);
+  const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
 
   return (
     <div className="table-scroll">
