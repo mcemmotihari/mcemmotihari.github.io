@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { COLLEGE_NAME, LANDING_SEEN_KEY } from "../constants/site.js";
 import ThemeToggle from "./ThemeToggle.jsx";
+import VisitorCount from "./VisitorCount.jsx";
 
 const SPARKS = Array.from({ length: 22 }, (_, i) => i);
 
@@ -90,6 +91,7 @@ export default function Home() {
           <span className="notice-label">More pages under development</span>
         </div>
       </div>
+      <VisitorCount />
     </section>
   );
 }

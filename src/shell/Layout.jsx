@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { COLLEGE_NAME, SITE_NAME } from "../constants/site.js";
 import { enabledModules } from "../modules/registry.js";
 import ThemeToggle from "./ThemeToggle.jsx";
+import VisitorCount from "./VisitorCount.jsx";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ export default function Layout() {
       </main>
       <footer className="site-footer">
         <p>{COLLEGE_NAME} · Unofficial campus timetable</p>
+        <VisitorCount />
       </footer>
     </>
   );
