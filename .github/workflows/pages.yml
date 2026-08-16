@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   validate:
@@ -89,8 +89,31 @@ jobs:
         run: |
           npm ci
           npm run build
+          test -f dist/index.html
+          test -f dist/brand/mce-logo.webp
+          grep -q '/assets/' dist/index.html
+          if grep -q 'src/main.jsx' dist/index.html; then
+            echo "dist/index.html still points at source JSX"
+            exit 1
+          fi
+
+      - name: Publish from GitHub Actions, not the source branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "/repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            gh api --method PUT "/repos/${GITHUB_REPOSITORY}/pages" \
+              -H "Accept: application/vnd.github+json" \
+              -f build_type='workflow'
+          else
+            gh api --method POST "/repos/${GITHUB_REPOSITORY}/pages" \
+              -H "Accept: application/vnd.github+json" \
+              -f build_type='workflow'
+          fi
 
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
