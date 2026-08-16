@@ -113,6 +113,22 @@ export function groupByDayPeriod(slots) {
   return map;
 }
 
+export function slotSubjectCodes(slots) {
+  return [...new Set(slots.map((s) => s.subject_code).filter(Boolean))];
+}
+
+export function slotTypeClass(slots) {
+  if (!slots.length) return "";
+  const types = [...new Set(slots.map((s) => s.type || "L"))];
+  if (types.length === 1) return `cell-${types[0]}`;
+  return "cell-mix";
+}
+
+export function slotsMatchCodes(slots, codes) {
+  if (!codes?.length) return false;
+  return slots.some((s) => codes.includes(s.subject_code));
+}
+
 export function mappingRows(data, view, primaryId, slots) {
   if (view === "section") {
     return data.offerings
@@ -121,6 +137,7 @@ export function mappingRows(data, view, primaryId, slots) {
         const sub = subjectOf(data, o.subject_code) || {};
         const fac = facultyOf(data, o.faculty_id);
         return {
+          subjectCode: o.subject_code,
           code: paperCode(sub) || o.subject_code,
           ltp: ltpText(sub),
           subject: sub.name || "",
@@ -137,6 +154,7 @@ export function mappingRows(data, view, primaryId, slots) {
         const sub = subjectOf(data, o.subject_code) || {};
         const sec = sectionOf(data, o.section_id);
         return {
+          subjectCode: o.subject_code,
           code: paperCode(sub) || o.subject_code,
           ltp: ltpText(sub),
           subject: sub.name || "",
@@ -160,6 +178,7 @@ export function mappingRows(data, view, primaryId, slots) {
     );
     const fac = facultyOf(data, off?.faculty_id || s.faculty_id);
     rows.push({
+      subjectCode: s.subject_code,
       code: paperCode(sub) || s.subject_code,
       ltp: ltpText(sub),
       subject: sub.name || "",

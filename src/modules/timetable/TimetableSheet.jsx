@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Grid from "./Grid.jsx";
 import Mapping from "./Mapping.jsx";
 import { signDept } from "./lib.js";
@@ -12,6 +13,8 @@ export function TimetableSheet({
   rows,
   primaryId,
 }) {
+  const [highlightKeys, setHighlightKeys] = useState([]);
+
   return (
     <section className="grid-wrap sheet-desktop">
       <article className="sheet" ref={sheetRef}>
@@ -21,9 +24,20 @@ export function TimetableSheet({
             <span key={line}>{line}</span>
           ))}
         </div>
-        <Grid data={data} view={view} slots={slots} />
+        <Grid
+          data={data}
+          view={view}
+          slots={slots}
+          highlightKeys={highlightKeys}
+          onHoverCodes={setHighlightKeys}
+        />
         <div className="mapping-wrap">
-          <Mapping view={view} rows={rows} />
+          <Mapping
+            view={view}
+            rows={rows}
+            highlightKeys={highlightKeys}
+            onHoverCodes={setHighlightKeys}
+          />
         </div>
         <footer className="sheet-sign">
           <span>Time Table In-Charge</span>

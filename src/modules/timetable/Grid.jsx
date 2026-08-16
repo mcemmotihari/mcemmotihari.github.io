@@ -1,19 +1,27 @@
 import { useMemo } from "react";
+import { cx } from "../../ui/cx.js";
 import {
   DAY_NAMES,
   LUNCH_LETTERS,
   clockRange,
   groupByDayPeriod,
   roomLine,
+  slotTypeClass,
+  slotsMatchCodes,
+  slotSubjectCodes,
   subjectLine,
 } from "./lib.js";
 
-export default function Grid({ data, view, slots }) {
+export default function Grid({ data, view, slots, highlightKeys, onHoverCodes }) {
   const days = data.meta.days;
   const periods = data.meta.periods;
   const lunchAfter = data.meta.breaks?.[0]?.after_period ?? 3;
   const withRooms = view === "section";
   const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
+
+  function hoverList(list) {
+    onHoverCodes?.(list.length ? slotSubjectCodes(list) : []);
+  }
 
   return (
     <div className="table-scroll">
@@ -45,7 +53,16 @@ export default function Grid({ data, view, slots }) {
               const list = byDayPeriod.get(`${day}|${p.id}`) || [];
               const line = list.length ? subjectLine(data, list, view) : "";
               subjCells.push(
-                <td key={`${day}-s-${p.id}`} className="subj">
+                <td
+                  key={`${day}-s-${p.id}`}
+                  className={cx(
+                    "subj",
+                    slotTypeClass(list),
+                    slotsMatchCodes(list, highlightKeys) && "is-linked"
+                  )}
+                  onMouseEnter={() => hoverList(list)}
+                  onMouseLeave={() => onHoverCodes?.([])}
+                >
                   {line}
                 </td>
               );
@@ -78,6 +95,9 @@ export default function Grid({ data, view, slots }) {
                 subjCells={subjCells}
                 periods={periods}
                 byDayPeriod={byDayPeriod}
+                highlightKeys={highlightKeys}
+                hoverList={hoverList}
+                onHoverCodes={onHoverCodes}
               />
             );
           })}
@@ -87,7 +107,15 @@ export default function Grid({ data, view, slots }) {
   );
 }
 
-function DayRows({ day, subjCells, periods, byDayPeriod }) {
+function DayRows({
+  day,
+  subjCells,
+  periods,
+  byDayPeriod,
+  highlightKeys,
+  hoverList,
+  onHoverCodes,
+}) {
   return (
     <>
       <tr>
@@ -96,12 +124,17 @@ function DayRows({ day, subjCells, periods, byDayPeriod }) {
         </th>
         {subjCells}
       </tr>
-      <tr>
+      <tr className="room-row">
         {periods.map((p) => {
           const list = byDayPeriod.get(`${day}|${p.id}`) || [];
           const line = list.length ? roomLine(list) : "";
           return (
-            <td key={`${day}-r-${p.id}`} className="room">
+            <td
+              key={`${day}-r-${p.id}`}
+              className={cx("room", slotsMatchCodes(list, highlightKeys) && "is-linked")}
+              onMouseEnter={() => hoverList(list)}
+              onMouseLeave={() => onHoverCodes?.([])}
+            >
               {line}
             </td>
           );

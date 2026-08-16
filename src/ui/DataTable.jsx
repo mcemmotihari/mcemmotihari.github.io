@@ -7,7 +7,15 @@
  *   rowKey: (row: *, index: number) => string,
  * }} props
  */
-export function DataTable({ className, columns, rows, rowKey }) {
+export function DataTable({
+  className,
+  columns,
+  rows,
+  rowKey,
+  rowClassName,
+  onRowEnter,
+  onRowLeave,
+}) {
   return (
     <table className={className}>
       <thead>
@@ -21,7 +29,12 @@ export function DataTable({ className, columns, rows, rowKey }) {
       </thead>
       <tbody>
         {rows.map((row, index) => (
-          <tr key={rowKey(row, index)}>
+          <tr
+            key={rowKey(row, index)}
+            className={rowClassName?.(row, index)}
+            onMouseEnter={() => onRowEnter?.(row, index)}
+            onMouseLeave={() => onRowLeave?.(row, index)}
+          >
             {columns.map((col) => (
               <td key={col.key} className={col.tdClass?.(row, index)}>
                 {col.render(row, index)}

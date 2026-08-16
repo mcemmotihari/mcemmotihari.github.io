@@ -28,7 +28,7 @@ const COLUMNS = {
   ],
 };
 
-export default function Mapping({ view, rows }) {
+export default function Mapping({ view, rows, highlightKeys, onHoverCodes }) {
   const columns = COLUMNS[view] || COLUMNS.room;
   const useBranchKey = view !== "section";
   return (
@@ -39,6 +39,11 @@ export default function Mapping({ view, rows }) {
       rowKey={(row, i) =>
         useBranchKey ? `${row.code}-${row.branch}-${i}` : `${row.code}-${i}`
       }
+      rowClassName={(row) =>
+        highlightKeys?.includes(row.subjectCode) ? "is-linked" : undefined
+      }
+      onRowEnter={(row) => onHoverCodes?.(row.subjectCode ? [row.subjectCode] : [])}
+      onRowLeave={() => onHoverCodes?.([])}
     />
   );
 }

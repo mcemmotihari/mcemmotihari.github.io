@@ -33,6 +33,11 @@
   --sheet-day: #e6ecf5;
   --sheet-lunch: #f6edd8;
   --sheet-room: #fafbfd;
+  --cell-l: #e7eef8;
+  --cell-t: #f6edd8;
+  --cell-p: #eee6f5;
+  --cell-mix: #f3ebe3;
+  --link-hl: #1d6fd8;
   --dl-fg: #fffdf8;
   --radius: 16px;
   --font-display: "Fraunces", Georgia, serif;
@@ -73,6 +78,11 @@
   --sheet-day: #283348;
   --sheet-lunch: #3a3424;
   --sheet-room: #131820;
+  --cell-l: #243044;
+  --cell-t: #3a3424;
+  --cell-p: #322844;
+  --cell-mix: #2c2830;
+  --link-hl: #4d9fff;
   --dl-fg: #10151d;
 }
 
@@ -615,16 +625,84 @@ main,
   background: var(--sheet-day);
 }
 
+.excel-tt td.subj,
+.excel-tt td.room {
+  cursor: pointer;
+}
+
 .excel-tt td.subj {
   font-size: 0.8rem;
   line-height: 1.25;
-  height: 2.6rem;
+  height: 2.7rem;
+}
+
+.excel-tt td.subj.cell-L {
+  background: var(--cell-l);
+}
+
+.excel-tt td.subj.cell-T {
+  background: var(--cell-t);
+}
+
+.excel-tt td.subj.cell-P {
+  background: var(--cell-p);
+}
+
+.excel-tt td.subj.cell-mix {
+  background: var(--cell-mix);
 }
 
 .excel-tt td.room {
-  font-size: 0.72rem;
-  height: 2.15rem;
+  font-size: 0.62rem;
+  line-height: 1.1;
+  height: 1.15rem;
+  padding: 0.08rem 0.25rem;
   background: var(--sheet-room);
+  color: color-mix(in srgb, var(--sheet-ink) 72%, transparent);
+}
+
+.excel-tt tr.room-row td {
+  height: 1.15rem;
+}
+
+.excel-tt td.subj.is-linked {
+  box-shadow: inset 0 0 0 2.5px var(--link-hl);
+}
+
+.excel-tt tr:has(+ .room-row) td.subj.is-linked {
+  box-shadow:
+    inset 0 2.5px 0 0 var(--link-hl),
+    inset 2.5px 0 0 0 var(--link-hl),
+    inset -2.5px 0 0 0 var(--link-hl);
+  border-bottom-color: color-mix(in srgb, var(--sheet-ink) 18%, transparent);
+}
+
+.excel-tt td.room.is-linked {
+  box-shadow:
+    inset 0 -2.5px 0 0 var(--link-hl),
+    inset 2.5px 0 0 0 var(--link-hl),
+    inset -2.5px 0 0 0 var(--link-hl);
+  border-top-color: transparent;
+}
+
+.excel-map tbody tr.is-linked td {
+  box-shadow:
+    inset 0 2.5px 0 0 var(--link-hl),
+    inset 0 -2.5px 0 0 var(--link-hl);
+}
+
+.excel-map tbody tr.is-linked td:first-child {
+  box-shadow:
+    inset 2.5px 0 0 0 var(--link-hl),
+    inset 0 2.5px 0 0 var(--link-hl),
+    inset 0 -2.5px 0 0 var(--link-hl);
+}
+
+.excel-map tbody tr.is-linked td:last-child {
+  box-shadow:
+    inset -2.5px 0 0 0 var(--link-hl),
+    inset 0 2.5px 0 0 var(--link-hl),
+    inset 0 -2.5px 0 0 var(--link-hl);
 }
 
 .excel-tt .lunch {
@@ -642,6 +720,10 @@ main,
 .mapping-wrap {
   overflow: auto;
   padding: 0.9rem 0.55rem 0;
+}
+
+.excel-map tbody tr {
+  cursor: pointer;
 }
 
 .excel-map {
@@ -1532,6 +1614,21 @@ main,
   border-radius: 999px;
   background: var(--mist);
   color: var(--forest);
+}
+
+.type-pill.type-L {
+  background: var(--cell-l);
+  color: var(--forest);
+}
+
+.type-pill.type-T {
+  background: var(--cell-t);
+  color: #6b5420;
+}
+
+.type-pill.type-P {
+  background: var(--cell-p);
+  color: #5a3d78;
 }
 
 .period-free {
