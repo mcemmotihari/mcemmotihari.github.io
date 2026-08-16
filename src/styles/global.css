@@ -48,46 +48,46 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --ink: #eef1f6;
-  --muted: #a8b0c0;
-  --forest: #8fb0e0;
-  --leaf: #6f93c9;
-  --gold: #d4b56a;
-  --mist: #1c2433;
-  --paper: #0e1218;
-  --line: #2e3a4d;
-  --chrome: rgba(16, 22, 32, 0.84);
-  --chrome-border: #3a4658;
-  --select-bg: #151b26;
-  --select-arrow: #d4deee;
-  --card: rgba(18, 24, 34, 0.92);
-  --danger: #ffb4b4;
-  --danger-soft: #3a2222;
-  --ok-bg: #1a283c;
-  --ok-fg: #c5d6f0;
-  --code-bg: rgba(143, 176, 224, 0.14);
-  --shadow: 0 22px 55px rgba(0, 0, 0, 0.45);
-  --glow-a: #1a2740;
-  --glow-b: #2c2616;
-  --page-top: #0b0e14;
-  --page-mid: #10151d;
-  --page-bot: #0a0d12;
-  --grid-line: rgba(200, 214, 235, 0.06);
-  --sheet-bg: #161c28;
-  --sheet-ink: #f4f7fb;
-  --sheet-border: #c5d0de;
-  --sheet-head: #222b3a;
-  --sheet-day: #283348;
-  --sheet-lunch: #3a3424;
-  --sheet-room: #131820;
-  --cell-l: #243044;
-  --cell-t: #3a3424;
-  --cell-p: #322844;
-  --cell-mix: #2c2830;
-  --link-hl: #b8e0ff;
-  --now-live: #5ec8a8;
-  --now-live-soft: color-mix(in srgb, #5ec8a8 18%, var(--sheet-bg));
-  --dl-fg: #10151d;
+  --ink: #f4f7ff;
+  --muted: #9eb0cc;
+  --forest: #7ec2ff;
+  --leaf: #5aa3e8;
+  --gold: #f0c45c;
+  --mist: #1a2438;
+  --paper: #0a0e16;
+  --line: #334563;
+  --chrome: rgba(12, 18, 32, 0.88);
+  --chrome-border: #42587a;
+  --select-bg: #121a2c;
+  --select-arrow: #dce8f8;
+  --card: rgba(14, 22, 38, 0.94);
+  --danger: #ff9b9b;
+  --danger-soft: #3d1c22;
+  --ok-bg: #15304a;
+  --ok-fg: #c5e4ff;
+  --code-bg: rgba(126, 194, 255, 0.16);
+  --shadow: 0 24px 56px rgba(0, 0, 0, 0.55);
+  --glow-a: #1a3a68;
+  --glow-b: #3a2810;
+  --page-top: #080c14;
+  --page-mid: #0e1524;
+  --page-bot: #070a10;
+  --grid-line: rgba(160, 190, 230, 0.08);
+  --sheet-bg: #101826;
+  --sheet-ink: #f7f9fc;
+  --sheet-border: #4a6080;
+  --sheet-head: #1a2c48;
+  --sheet-day: #203656;
+  --sheet-lunch: #463618;
+  --sheet-room: #0c121c;
+  --cell-l: #1a3d6e;
+  --cell-t: #5a4214;
+  --cell-p: #4a2870;
+  --cell-mix: #3a3040;
+  --link-hl: #7ec8ff;
+  --now-live: #3ee0b4;
+  --now-live-soft: color-mix(in srgb, #3ee0b4 22%, var(--sheet-bg));
+  --dl-fg: #071018;
 }
 
 *,
@@ -1404,10 +1404,61 @@ main,
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(143, 176, 224, 0.1) 48%,
+    rgba(126, 194, 255, 0.12) 48%,
     transparent 52%
   );
   background-size: 100% 220%;
+}
+
+[data-theme="dark"] .sheet {
+  box-shadow:
+    var(--shadow),
+    0 0 0 1px color-mix(in srgb, var(--forest) 16%, transparent);
+}
+
+[data-theme="dark"] .excel-tt td.subj.cell-L {
+  color: #eaf3ff;
+}
+
+[data-theme="dark"] .excel-tt td.subj.cell-T {
+  color: #fff6e0;
+}
+
+[data-theme="dark"] .excel-tt td.subj.cell-P {
+  color: #f6ecff;
+}
+
+[data-theme="dark"] .day-banner,
+[data-theme="dark"] .up-next-banner {
+  background: color-mix(in srgb, var(--gold) 20%, var(--card));
+}
+
+[data-theme="dark"] .period-card.is-now {
+  background: color-mix(in srgb, var(--now-live) 16%, var(--card));
+}
+
+[data-theme="dark"] .period-card .now-progress {
+  background: color-mix(in srgb, var(--now-live) 24%, var(--mist));
+}
+
+[data-theme="dark"] .period-card .now-progress span {
+  background: linear-gradient(90deg, #5eead4, var(--now-live));
+}
+
+[data-theme="dark"] .page-tab.is-active {
+  box-shadow: 0 -4px 16px color-mix(in srgb, var(--forest) 22%, transparent);
+}
+
+[data-theme="dark"] .type-pill.type-L {
+  color: #b8dcff;
+}
+
+[data-theme="dark"] .type-pill.type-T {
+  color: #ffe08a;
+}
+
+[data-theme="dark"] .type-pill.type-P {
+  color: #e4c4ff;
 }
 
 .landing-chrome {

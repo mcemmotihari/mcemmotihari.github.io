@@ -32,6 +32,8 @@ export function campusNow(timeZone = "Asia/Kolkata") {
   return {
     weekday: WEEKDAY_FROM_SHORT[parts.weekday] || "MON",
     minutes: Number(parts.hour) * 60 + Number(parts.minute),
+    // weekday: "TUE",
+    // minutes: 10 * 60 +54,
   };
 }
 
