@@ -9,5 +9,8 @@ export const THEME_STORAGE_KEY = "mce-theme";
 
 export const LANDING_SEEN_KEY = "mce-landed";
 
+/** sessionStorage/localStorage flag after a successful staff PIN check. */
+export const STAFF_SESSION_KEY = "mce-staff";
+
 /** GoatCounter site code (https://mcemotihari.goatcounter.com). */
 export const GOATCOUNTER_CODE = "mcemotihari";

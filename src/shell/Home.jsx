@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { COLLEGE_NAME, LANDING_SEEN_KEY } from "../constants/site.js";
+import { LoginButton } from "../auth/StaffAuth.jsx";
 import ThemeToggle from "./ThemeToggle.jsx";
 import VisitorCount from "./VisitorCount.jsx";
 
@@ -91,7 +92,10 @@ export default function Home() {
           <span className="notice-label">More pages under development</span>
         </div>
       </div>
-      <VisitorCount />
+      <div className="landing-foot">
+        <VisitorCount />
+        <LoginButton />
+      </div>
     </section>
   );
 }
