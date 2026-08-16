@@ -26,24 +26,3 @@ export function useTimetableData() {
 
   return { data, error };
 }
-
-/**
- * Keeps the primary selector on a valid option when the list changes.
- * @param {Array<{id: string}>} options
- * @return {[string, function(string): void]}
- */
-export function usePrimaryId(options) {
-  const [primaryId, setPrimaryId] = useState("");
-
-  useEffect(() => {
-    if (!options.length) {
-      setPrimaryId("");
-      return;
-    }
-    if (!options.some((option) => option.id === primaryId)) {
-      setPrimaryId(options[0].id);
-    }
-  }, [options, primaryId]);
-
-  return [primaryId, setPrimaryId];
-}

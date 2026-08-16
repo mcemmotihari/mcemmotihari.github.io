@@ -211,6 +211,41 @@ export function downloadName(data, view, primaryId) {
   return `${slug || "timetable"}-${view}`;
 }
 
+/**
+ * Distinct academic programmes (branches) for the branch dropdown.
+ * @return {Array<{id: string, label: string}>}
+ */
+export function branchOptions(data) {
+  const seen = new Map();
+  for (const section of data.sections) {
+    const id = section.program;
+    if (!id || seen.has(id)) continue;
+    seen.set(id, section.program_name || id);
+  }
+  return [...seen.entries()]
+    .map(([id, label]) => ({ id, label }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/**
+ * Sections of one branch, oldest semester first.
+ * @return {Array<{id: string, label: string, semester: number}>}
+ */
+export function semesterTabsForBranch(data, program) {
+  return data.sections
+    .filter((section) => section.program === program)
+    .sort((a, b) => Number(a.semester) - Number(b.semester))
+    .map((section) => {
+      const sem = Number(section.semester);
+      const ord = SEM_ORD[sem] || String(section.semester);
+      return {
+        id: section.id,
+        label: `${ord} Sem`,
+        semester: sem,
+      };
+    });
+}
+
 export function selectorOptions(data, view, dept) {
   if (view === "section") {
     return filteredSections(data, dept).map((s) => ({

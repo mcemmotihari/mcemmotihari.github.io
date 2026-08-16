@@ -1,81 +1,102 @@
-import { useCallback, useMemo, useRef, useState } from "react";
-import { Button } from "../../ui/Button.jsx";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StatusMessage } from "../../ui/StatusMessage.jsx";
 import { TabList } from "../../ui/TabList.jsx";
 import { COLLEGE_NAME_FULL } from "../../constants/site.js";
 import ScheduleCards from "./ScheduleCards.jsx";
-import Tools from "./Tools.jsx";
-import { TimetableControls, TIMETABLE_VIEWS } from "./TimetableControls.jsx";
+import { TimetableControls } from "./TimetableControls.jsx";
 import { TimetableSheet } from "./TimetableSheet.jsx";
 import { downloadExcel, downloadPdf } from "./download.js";
 import {
+  branchOptions,
   groupByDayPeriod,
   mappingRows,
   matchingSlots,
-  selectorOptions,
+  semesterTabsForBranch,
   sheetMetaLines,
 } from "./lib.js";
-import { usePrimaryId, useTimetableData } from "./useTimetable.js";
+import { useTimetableData } from "./useTimetable.js";
+
+const VIEW = "section";
 
 export default function TimetablePage() {
   const { data, error } = useTimetableData();
-  const [view, setView] = useState("section");
-  const [dept, setDept] = useState("");
+  const [program, setProgram] = useState("");
+  const [sectionId, setSectionId] = useState("");
   const [busy, setBusy] = useState("");
-  const [showMore, setShowMore] = useState(false);
   const sheetRef = useRef(null);
 
-  const depts = useMemo(() => {
-    if (!data) return [];
-    return [...new Set(data.sections.map((s) => s.department).filter(Boolean))].sort();
-  }, [data]);
+  const branches = useMemo(() => (data ? branchOptions(data) : []), [data]);
 
-  const options = useMemo(() => {
-    if (!data || view === "tools") return [];
-    return selectorOptions(data, view, dept);
-  }, [data, view, dept]);
+  useEffect(() => {
+    if (!branches.length) {
+      setProgram("");
+      return;
+    }
+    if (!branches.some((branch) => branch.id === program)) {
+      setProgram(branches[0].id);
+    }
+  }, [branches, program]);
 
-  const [primaryId, setPrimaryId] = usePrimaryId(options);
+  const semesterTabs = useMemo(
+    () => (data && program ? semesterTabsForBranch(data, program) : []),
+    [data, program]
+  );
+
+  useEffect(() => {
+    if (!semesterTabs.length) {
+      setSectionId("");
+      return;
+    }
+    if (!semesterTabs.some((tab) => tab.id === sectionId)) {
+      setSectionId(semesterTabs[0].id);
+    }
+  }, [semesterTabs, sectionId]);
 
   const slots = useMemo(
-    () => (data ? matchingSlots(data, view, primaryId, dept) : []),
-    [data, view, primaryId, dept]
+    () => (data ? matchingSlots(data, VIEW, sectionId, "") : []),
+    [data, sectionId]
   );
   const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
   const rows = useMemo(
-    () => (data ? mappingRows(data, view, primaryId, slots) : []),
-    [data, view, primaryId, slots]
+    () => (data ? mappingRows(data, VIEW, sectionId, slots) : []),
+    [data, sectionId, slots]
   );
   const metaLines = useMemo(
-    () => (data ? sheetMetaLines(data, view, primaryId) : []),
-    [data, view, primaryId]
+    () => (data ? sheetMetaLines(data, VIEW, sectionId) : []),
+    [data, sectionId]
   );
 
   const onExcel = useCallback(async () => {
-    if (view === "tools" || !data) return;
+    if (!data || !sectionId) return;
     setBusy("xlsx");
     try {
-      await downloadExcel({ data, view, primaryId, slots, byDayPeriod });
+      await downloadExcel({
+        data,
+        view: VIEW,
+        primaryId: sectionId,
+        slots,
+        byDayPeriod,
+      });
     } catch (err) {
       console.error(err);
       alert(`Could not download Excel: ${err.message}`);
     } finally {
       setBusy("");
     }
-  }, [data, view, primaryId, slots, byDayPeriod]);
+  }, [data, sectionId, slots, byDayPeriod]);
 
   const onPdf = useCallback(async () => {
-    if (view === "tools" || !sheetRef.current || !data) return;
+    if (!data || !sectionId || !sheetRef.current) return;
     setBusy("pdf");
     try {
-      await downloadPdf(sheetRef.current, data, view, primaryId);
+      await downloadPdf(sheetRef.current, data, VIEW, sectionId);
     } catch (err) {
       console.error(err);
       alert(`Could not download PDF: ${err.message}`);
     } finally {
       setBusy("");
     }
-  }, [data, view, primaryId]);
+  }, [data, sectionId]);
 
   if (error) {
     return (
@@ -87,67 +108,43 @@ export default function TimetablePage() {
   }
 
   const college = (data.meta.college || COLLEGE_NAME_FULL).toUpperCase();
-  const showGrid = view !== "tools";
 
   return (
     <div className="page-body">
-      {showMore ? (
-        <TabList
-          label="Timetable view"
-          items={TIMETABLE_VIEWS}
-          value={view}
-          onChange={setView}
-        />
-      ) : null}
+      <TimetableControls
+        program={program}
+        onProgramChange={setProgram}
+        branches={branches}
+        busy={busy}
+        onExcel={onExcel}
+        onPdf={onPdf}
+      />
 
-      {showGrid ? (
-        <TimetableControls
-          view={view}
-          primaryId={primaryId}
-          onPrimaryChange={setPrimaryId}
-          options={options}
-          showMore={showMore}
-          dept={dept}
-          onDeptChange={setDept}
-          depts={depts}
-          busy={busy}
-          onExcel={onExcel}
-          onPdf={onPdf}
-          onToggleMore={() => setShowMore((open) => !open)}
-        />
-      ) : null}
-
-      {!showGrid ? (
-        <div className="tools-toolbar">
-          <Button
-            variant="ghost"
-            className="more-toggle"
-            onClick={() => {
-              setView("section");
-              setShowMore(false);
-            }}
-          >
-            Back to class
-          </Button>
-        </div>
-      ) : null}
-
-      {showGrid ? (
-        <>
-          <ScheduleCards data={data} view={view} slots={slots} />
+      {sectionId ? (
+        <div className="tt-stage">
+          {semesterTabs.length ? (
+            <TabList
+              variant="pages"
+              label="Semester"
+              items={semesterTabs}
+              value={sectionId}
+              onChange={setSectionId}
+            />
+          ) : null}
+          <ScheduleCards data={data} view={VIEW} slots={slots} />
           <TimetableSheet
             sheetRef={sheetRef}
             college={college}
-            view={view}
+            view={VIEW}
             metaLines={metaLines}
             data={data}
             slots={slots}
             rows={rows}
-            primaryId={primaryId}
+            primaryId={sectionId}
           />
-        </>
+        </div>
       ) : (
-        <Tools data={data} />
+        <StatusMessage>Select a branch to view its timetable.</StatusMessage>
       )}
     </div>
   );
