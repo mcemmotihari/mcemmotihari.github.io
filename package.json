@@ -1,0 +1,25 @@
+{
+  "name": "mcemmotihari-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "python3 scripts/build_json.py && node scripts/sync-data.mjs",
+    "dev": "vite",
+    "prebuild": "python3 scripts/build_json.py && node scripts/sync-data.mjs",
+    "build": "vite build && node scripts/spa-404.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "xlsx-js-style": "^1.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
