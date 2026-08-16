@@ -13,10 +13,11 @@ export default function App() {
         <Route index element={<Home />} />
         {enabledModules().map((mod) => {
           const Page = pages[mod.id];
+          const routePath = `${String(mod.path).replace(/^\/+|\/+$/g, "")}/*`;
           return (
             <Route
               key={mod.id}
-              path={mod.path}
+              path={routePath}
               element={
                 <Suspense fallback={<p className="brand-sub">Loading…</p>}>
                   <Page />
