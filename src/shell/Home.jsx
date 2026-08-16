@@ -1,7 +1,17 @@
-import { COLLEGE_NAME } from "../constants/site.js";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { COLLEGE_NAME, LANDING_SEEN_KEY } from "../constants/site.js";
 import ThemeToggle from "./ThemeToggle.jsx";
 
 const SPARKS = Array.from({ length: 22 }, (_, i) => i);
+
+function readLanded() {
+  try {
+    return sessionStorage.getItem(LANDING_SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 function LandingBackdrop() {
   return (
@@ -43,8 +53,18 @@ function CollegeEmblem() {
 }
 
 export default function Home() {
+  const [returning] = useState(readLanded);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(LANDING_SEEN_KEY, "1");
+    } catch {
+      /* ignore quota / private mode */
+    }
+  }, []);
+
   return (
-    <section className="landing" aria-label={COLLEGE_NAME}>
+    <section className={returning ? "landing is-return" : "landing"} aria-label={COLLEGE_NAME}>
       <LandingBackdrop />
       <div className="landing-chrome">
         <ThemeToggle />
@@ -58,14 +78,17 @@ export default function Home() {
         </h1>
         <p className="landing-hindi">मोतिहारी अभियंत्रण महाविद्यालय</p>
         <p className="landing-place">Motihari · East Champaran · Bihar</p>
+        <p className="landing-copy">
+          Unofficial campus site for {COLLEGE_NAME}. Timetables are live; more
+          tools are still being assembled.
+        </p>
+        <Link className="landing-cta" to="/timetable">
+          Open timetable
+        </Link>
         <div className="landing-notice" role="status">
           <span className="notice-dot" aria-hidden="true" />
-          <span className="notice-label">Under development</span>
+          <span className="notice-label">More pages under development</span>
         </div>
-        <p className="landing-copy">
-          Un-Official campus site for {COLLEGE_NAME}. Pages and tools are being
-          assembled — this space will open when they are ready.
-        </p>
       </div>
     </section>
   );

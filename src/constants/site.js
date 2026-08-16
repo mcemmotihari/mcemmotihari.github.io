@@ -6,3 +6,5 @@ export const COLLEGE_NAME = "Motihari College of Engineering";
 export const COLLEGE_NAME_FULL = "Motihari College of Engineering, Motihari";
 
 export const THEME_STORAGE_KEY = "mce-theme";
+
+export const LANDING_SEEN_KEY = "mce-landed";

@@ -6,6 +6,7 @@ export function TimetableControls({
   onProgramChange,
   branches,
   busy,
+  downloaded,
   onExcel,
   onPdf,
 }) {
@@ -22,7 +23,7 @@ export function TimetableControls({
           </option>
         ))}
       </SelectField>
-      <DownloadMenu busy={busy} onExcel={onExcel} onPdf={onPdf} />
+      <DownloadMenu busy={busy} downloaded={downloaded} onExcel={onExcel} onPdf={onPdf} />
     </section>
   );
 }

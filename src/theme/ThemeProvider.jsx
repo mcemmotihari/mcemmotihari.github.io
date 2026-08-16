@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { runViewTransition } from "../ui/viewTransition.js";
 import { readTheme, writeTheme } from "./storage.js";
 
 const ThemeContext = createContext(null);
@@ -10,8 +11,12 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(readTheme);
 
   const toggleTheme = useCallback(() => {
-    setTheme((current) => writeTheme(current === "dark" ? "light" : "dark"));
-  }, []);
+    const next = theme === "dark" ? "light" : "dark";
+    runViewTransition(() => {
+      writeTheme(next);
+      setTheme(next);
+    });
+  }, [theme]);
 
   const value = useMemo(
     () => ({ theme, toggleTheme }),

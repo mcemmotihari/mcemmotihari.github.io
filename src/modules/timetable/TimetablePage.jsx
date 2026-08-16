@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StatusMessage } from "../../ui/StatusMessage.jsx";
 import { TabList } from "../../ui/TabList.jsx";
+import { runViewTransition } from "../../ui/viewTransition.js";
 import { COLLEGE_NAME_FULL } from "../../constants/site.js";
+import {
+  findCurrentPeriod,
+  findLunchNow,
+  useCampusClock,
+} from "./clock.js";
 import ScheduleCards from "./ScheduleCards.jsx";
+import TimetableSkeleton from "./TimetableSkeleton.jsx";
 import { TimetableControls } from "./TimetableControls.jsx";
 import { TimetableSheet } from "./TimetableSheet.jsx";
 import { downloadExcel, downloadPdf } from "./download.js";
@@ -23,7 +30,9 @@ export default function TimetablePage() {
   const [program, setProgram] = useState("");
   const [sectionId, setSectionId] = useState("");
   const [busy, setBusy] = useState("");
+  const [downloaded, setDownloaded] = useState(false);
   const sheetRef = useRef(null);
+  const doneTimer = useRef(0);
 
   const branches = useMemo(() => (data ? branchOptions(data) : []), [data]);
 
@@ -66,6 +75,20 @@ export default function TimetablePage() {
     [data, sectionId]
   );
 
+  const clock = useCampusClock(data?.meta?.timezone);
+  const liveToday =
+    data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
+  const nowPeriod = data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;
+  const lunchNow = Boolean(data && liveToday && findLunchNow(data.meta.breaks, clock.minutes));
+
+  const markDownloaded = useCallback(() => {
+    setDownloaded(true);
+    window.clearTimeout(doneTimer.current);
+    doneTimer.current = window.setTimeout(() => setDownloaded(false), 1600);
+  }, []);
+
+  useEffect(() => () => window.clearTimeout(doneTimer.current), []);
+
   const onExcel = useCallback(async () => {
     if (!data || !sectionId) return;
     setBusy("xlsx");
@@ -80,10 +103,12 @@ export default function TimetablePage() {
     } catch (err) {
       console.error(err);
       alert(`Could not download Excel: ${err.message}`);
+      return;
     } finally {
       setBusy("");
     }
-  }, [data, sectionId, slots, byDayPeriod]);
+    markDownloaded();
+  }, [data, sectionId, slots, byDayPeriod, markDownloaded]);
 
   const onPdf = useCallback(async () => {
     if (!data || !sectionId || !sheetRef.current) return;
@@ -93,10 +118,12 @@ export default function TimetablePage() {
     } catch (err) {
       console.error(err);
       alert(`Could not download PDF: ${err.message}`);
+      return;
     } finally {
       setBusy("");
     }
-  }, [data, sectionId]);
+    markDownloaded();
+  }, [data, sectionId, markDownloaded]);
 
   if (error) {
     return (
@@ -104,7 +131,7 @@ export default function TimetablePage() {
     );
   }
   if (!data) {
-    return <StatusMessage className="tt-loading">Loading timetable…</StatusMessage>;
+    return <TimetableSkeleton />;
   }
 
   const college = (data.meta.college || COLLEGE_NAME_FULL).toUpperCase();
@@ -113,9 +140,10 @@ export default function TimetablePage() {
     <div className="page-body">
       <TimetableControls
         program={program}
-        onProgramChange={setProgram}
+        onProgramChange={(next) => runViewTransition(() => setProgram(next))}
         branches={branches}
         busy={busy}
+        downloaded={downloaded}
         onExcel={onExcel}
         onPdf={onPdf}
       />
@@ -128,10 +156,10 @@ export default function TimetablePage() {
               label="Semester"
               items={semesterTabs}
               value={sectionId}
-              onChange={setSectionId}
+              onChange={(next) => runViewTransition(() => setSectionId(next))}
             />
           ) : null}
-          <ScheduleCards data={data} view={VIEW} slots={slots} />
+          <ScheduleCards data={data} view={VIEW} slots={slots} clock={clock} />
           <TimetableSheet
             sheetRef={sheetRef}
             college={college}
@@ -141,6 +169,9 @@ export default function TimetablePage() {
             slots={slots}
             rows={rows}
             primaryId={sectionId}
+            today={liveToday}
+            nowPeriodId={nowPeriod?.id ?? null}
+            lunchNow={lunchNow}
           />
         </div>
       ) : (

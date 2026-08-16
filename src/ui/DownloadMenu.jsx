@@ -1,10 +1,33 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { cx } from "./cx.js";
 import { DownloadIcon } from "./DownloadIcon.jsx";
 
 const MENU_WIDTH = 168;
 
-export function DownloadMenu({ busy, onExcel, onPdf }) {
+function CheckIcon() {
+  return (
+    <svg
+      className="download-ico"
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13.5 10 18l9-11"
+      />
+    </svg>
+  );
+}
+
+export function DownloadMenu({ busy, downloaded, onExcel, onPdf }) {
   const [open, setOpen] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const rootRef = useRef(null);
@@ -56,15 +79,19 @@ export function DownloadMenu({ busy, onExcel, onPdf }) {
     <div className="download-menu" ref={rootRef}>
       <button
         type="button"
-        className="icon-btn"
+        className={cx("icon-btn", busy && "is-busy", downloaded && !busy && "is-done")}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
-        aria-label="Download timetable"
+        aria-label={
+          busy ? "Preparing download" : downloaded ? "Downloaded" : "Download timetable"
+        }
         disabled={!!busy}
         onClick={() => setOpen((value) => !value)}
       >
-        <DownloadIcon />
+        {busy ? <span className="btn-spinner" aria-hidden="true" /> : null}
+        {!busy && downloaded ? <CheckIcon /> : null}
+        {!busy && !downloaded ? <DownloadIcon /> : null}
       </button>
       {open
         ? createPortal(

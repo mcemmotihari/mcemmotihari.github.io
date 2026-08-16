@@ -12,7 +12,16 @@ import {
   subjectLine,
 } from "./lib.js";
 
-export default function Grid({ data, view, slots, highlightKeys, onHoverCodes }) {
+export default function Grid({
+  data,
+  view,
+  slots,
+  highlightKeys,
+  onHoverCodes,
+  today,
+  nowPeriodId,
+  lunchNow,
+}) {
   const days = data.meta.days;
   const periods = data.meta.periods;
   const lunchAfter = data.meta.breaks?.[0]?.after_period ?? 3;
@@ -32,33 +41,48 @@ export default function Grid({ data, view, slots, highlightKeys, onHoverCodes })
               Period, Time &amp; Days
             </th>
             {periods.flatMap((p) => {
-              const cells = [<th key={p.id}>{p.label}</th>];
+              const cells = [
+                <th key={p.id} className={cx(p.id === nowPeriodId && "is-now")}>
+                  {p.label}
+                </th>,
+              ];
               if (p.id === lunchAfter) {
-                cells.push(<th key="lunch-h" className="lunch-head" rowSpan={2} />);
+                cells.push(
+                  <th
+                    key="lunch-h"
+                    className={cx("lunch-head", lunchNow && "is-now")}
+                    rowSpan={2}
+                  />
+                );
               }
               return cells;
             })}
           </tr>
           <tr className="time-row">
             {periods.map((p) => (
-              <th key={p.id}>{clockRange(p.start, p.end)}</th>
+              <th key={p.id} className={cx(p.id === nowPeriodId && "is-now")}>
+                {clockRange(p.start, p.end)}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {days.map((day, di) => {
             const lunch = LUNCH_LETTERS[di] ?? "";
+            const isToday = day === today;
             const subjCells = [];
             periods.forEach((p) => {
               const list = byDayPeriod.get(`${day}|${p.id}`) || [];
               const line = list.length ? subjectLine(data, list, view) : "";
+              const isNowCell = isToday && p.id === nowPeriodId;
               subjCells.push(
                 <td
                   key={`${day}-s-${p.id}`}
                   className={cx(
                     "subj",
                     slotTypeClass(list),
-                    slotsMatchCodes(list, highlightKeys) && "is-linked"
+                    slotsMatchCodes(list, highlightKeys) && "is-linked",
+                    isNowCell && "is-now"
                   )}
                   onMouseEnter={() => hoverList(list)}
                   onMouseLeave={() => onHoverCodes?.([])}
@@ -70,7 +94,7 @@ export default function Grid({ data, view, slots, highlightKeys, onHoverCodes })
                 subjCells.push(
                   <td
                     key={`${day}-lunch`}
-                    className="lunch"
+                    className={cx("lunch", isToday && lunchNow && "is-now")}
                     rowSpan={withRooms ? 2 : undefined}
                   >
                     {lunch}
@@ -81,8 +105,8 @@ export default function Grid({ data, view, slots, highlightKeys, onHoverCodes })
 
             if (!withRooms) {
               return (
-                <tr key={day}>
-                  <th className="day">{DAY_NAMES[day] || day}</th>
+                <tr key={day} className={cx(isToday && "is-today-row")}>
+                  <th className={cx("day", isToday && "is-today")}>{DAY_NAMES[day] || day}</th>
                   {subjCells}
                 </tr>
               );
@@ -92,6 +116,8 @@ export default function Grid({ data, view, slots, highlightKeys, onHoverCodes })
               <DayRows
                 key={day}
                 day={day}
+                isToday={isToday}
+                nowPeriodId={nowPeriodId}
                 subjCells={subjCells}
                 periods={periods}
                 byDayPeriod={byDayPeriod}
@@ -109,6 +135,8 @@ export default function Grid({ data, view, slots, highlightKeys, onHoverCodes })
 
 function DayRows({
   day,
+  isToday,
+  nowPeriodId,
   subjCells,
   periods,
   byDayPeriod,
@@ -118,20 +146,24 @@ function DayRows({
 }) {
   return (
     <>
-      <tr>
-        <th className="day" rowSpan={2}>
+      <tr className={cx(isToday && "is-today-row")}>
+        <th className={cx("day", isToday && "is-today")} rowSpan={2}>
           {DAY_NAMES[day] || day}
         </th>
         {subjCells}
       </tr>
-      <tr className="room-row">
+      <tr className={cx("room-row", isToday && "is-today-row")}>
         {periods.map((p) => {
           const list = byDayPeriod.get(`${day}|${p.id}`) || [];
           const line = list.length ? roomLine(list) : "";
           return (
             <td
               key={`${day}-r-${p.id}`}
-              className={cx("room", slotsMatchCodes(list, highlightKeys) && "is-linked")}
+              className={cx(
+                "room",
+                slotsMatchCodes(list, highlightKeys) && "is-linked",
+                isToday && p.id === nowPeriodId && "is-now"
+              )}
               onMouseEnter={() => hoverList(list)}
               onMouseLeave={() => onHoverCodes?.([])}
             >

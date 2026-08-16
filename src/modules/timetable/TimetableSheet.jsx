@@ -12,6 +12,9 @@ export function TimetableSheet({
   slots,
   rows,
   primaryId,
+  today,
+  nowPeriodId,
+  lunchNow,
 }) {
   const [highlightKeys, setHighlightKeys] = useState([]);
 
@@ -30,6 +33,9 @@ export function TimetableSheet({
           slots={slots}
           highlightKeys={highlightKeys}
           onHoverCodes={setHighlightKeys}
+          today={today}
+          nowPeriodId={nowPeriodId}
+          lunchNow={lunchNow}
         />
         <div className="mapping-wrap">
           <Mapping
