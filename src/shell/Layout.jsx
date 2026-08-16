@@ -1,24 +1,30 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { enabledModules } from "../modules/registry.js";
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const isHome = pathname === "/";
   const current = enabledModules().find((m) => pathname.startsWith(m.path));
+
+  if (isHome) {
+    return <Outlet />;
+  }
 
   return (
     <>
       <div className="bg-grid" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
-          <p className="brand-mark">MCE Motihari</p>
+          <p className="brand-mark">
+            <Link to="/" className="brand-home">
+              MCE Motihari
+            </Link>
+          </p>
           <h1 className="brand-title">{current ? current.title : "Campus tools"}</h1>
         </div>
         <div className="header-bar">
           <nav className="app-nav" aria-label="Site">
-            <NavLink to="/" end className={({ isActive }) => (isActive ? "is-active" : "")}>
-              Home
-            </NavLink>
             {enabledModules().map((mod) => (
               <NavLink
                 key={mod.id}
