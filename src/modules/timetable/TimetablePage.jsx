@@ -6,6 +6,7 @@ import { COLLEGE_NAME_FULL } from "../../constants/site.js";
 import {
   findCurrentPeriod,
   findLunchNow,
+  periodProgress,
   useCampusClock,
 } from "./clock.js";
 import ScheduleCards from "./ScheduleCards.jsx";
@@ -79,7 +80,9 @@ export default function TimetablePage() {
   const liveToday =
     data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
   const nowPeriod = data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;
-  const lunchNow = Boolean(data && liveToday && findLunchNow(data.meta.breaks, clock.minutes));
+  const lunch = data && liveToday ? findLunchNow(data.meta.breaks, clock.minutes) : null;
+  const lunchNow = Boolean(lunch);
+  const nowProgress = nowPeriod ? periodProgress(nowPeriod, clock.minutes) : lunch ? periodProgress(lunch, clock.minutes) : 0;
 
   const markDownloaded = useCallback(() => {
     setDownloaded(true);
@@ -172,6 +175,7 @@ export default function TimetablePage() {
             today={liveToday}
             nowPeriodId={nowPeriod?.id ?? null}
             lunchNow={lunchNow}
+            nowProgress={nowProgress}
           />
         </div>
       ) : (

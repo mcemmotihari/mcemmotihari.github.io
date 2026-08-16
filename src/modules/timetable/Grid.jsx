@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { cx } from "../../ui/cx.js";
+import NowLive, { NowProgress } from "./NowLive.jsx";
 import {
   DAY_NAMES,
   LUNCH_LETTERS,
@@ -21,6 +22,7 @@ export default function Grid({
   today,
   nowPeriodId,
   lunchNow,
+  nowProgress = 0,
 }) {
   const days = data.meta.days;
   const periods = data.meta.periods;
@@ -88,6 +90,8 @@ export default function Grid({
                   onMouseLeave={() => onHoverCodes?.([])}
                 >
                   {line}
+                  {isNowCell ? <NowLive /> : null}
+                  {isNowCell ? <NowProgress value={nowProgress} /> : null}
                 </td>
               );
               if (p.id === lunchAfter) {
@@ -98,6 +102,7 @@ export default function Grid({
                     rowSpan={withRooms ? 2 : undefined}
                   >
                     {lunch}
+                    {isToday && lunchNow ? <NowProgress value={nowProgress} /> : null}
                   </td>
                 );
               }

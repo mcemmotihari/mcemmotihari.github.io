@@ -15,6 +15,7 @@ export function TimetableSheet({
   today,
   nowPeriodId,
   lunchNow,
+  nowProgress,
 }) {
   const [highlightKeys, setHighlightKeys] = useState([]);
 
@@ -36,6 +37,7 @@ export function TimetableSheet({
           today={today}
           nowPeriodId={nowPeriodId}
           lunchNow={lunchNow}
+          nowProgress={nowProgress}
         />
         <div className="mapping-wrap">
           <Mapping

@@ -29,11 +29,10 @@ export function campusNow(timeZone = "Asia/Kolkata") {
       .formatToParts(new Date())
       .map((part) => [part.type, part.value])
   );
-  return { weekday: "MON", minutes: 10 * 60 + 20 }; // Mon 10:20
-  // return {
-  //   weekday: WEEKDAY_FROM_SHORT[parts.weekday] || "MON",
-  //   minutes: Number(parts.hour) * 60 + Number(parts.minute),
-  // };
+  return {
+    weekday: WEEKDAY_FROM_SHORT[parts.weekday] || "MON",
+    minutes: Number(parts.hour) * 60 + Number(parts.minute),
+  };
 }
 
 export function useCampusClock(timeZone = "Asia/Kolkata") {
@@ -41,7 +40,7 @@ export function useCampusClock(timeZone = "Asia/Kolkata") {
 
   useEffect(() => {
     const tick = () => setNow(campusNow(timeZone));
-    const id = window.setInterval(tick, 20000);
+    const id = window.setInterval(tick, 10000);
     const onVis = () => {
       if (!document.hidden) tick();
     };

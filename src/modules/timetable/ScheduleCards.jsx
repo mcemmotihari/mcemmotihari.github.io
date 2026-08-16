@@ -16,6 +16,7 @@ import {
   sectionOf,
   subjectOf,
 } from "./lib.js";
+import NowLive, { NowProgress } from "./NowLive.jsx";
 
 function typeLabel(type) {
   if (type === "P") return "Lab";
@@ -208,15 +209,11 @@ export default function ScheduleCards({ data, view, slots, clock }) {
                 !list.length && "is-free"
               )}
             >
-              {current ? (
-                <span className="now-progress" aria-hidden="true">
-                  <span style={{ transform: `scaleX(${periodProgress(p, nowMin)})` }} />
-                </span>
-              ) : null}
+              {current ? <NowProgress value={periodProgress(p, nowMin)} tone="gold" /> : null}
               <div className="period-time">
                 <span className="period-no">{p.label}</span>
                 <span className="period-clock">{clockRange(p.start, p.end)}</span>
-                {current ? <span className="now-pill">Now</span> : null}
+                {current ? <NowLive /> : null}
               </div>
               {list.length ? (
                 <ul className="period-items">
@@ -249,7 +246,7 @@ export default function ScheduleCards({ data, view, slots, clock }) {
           if (p.id === lunchAfter) {
             nodes.push(
               <div key="lunch" className={cx("lunch-break", lunchNow && "is-now")} role="note">
-                Lunch break
+                {lunchNow ? <NowLive label="Lunch now" /> : "Lunch break"}
               </div>
             );
           }

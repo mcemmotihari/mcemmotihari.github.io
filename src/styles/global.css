@@ -38,6 +38,8 @@
   --cell-p: #eee6f5;
   --cell-mix: #f3ebe3;
   --link-hl: #1d6fd8;
+  --now-live: #0f7a62;
+  --now-live-soft: color-mix(in srgb, #0f7a62 16%, var(--sheet-bg));
   --dl-fg: #fffdf8;
   --radius: 16px;
   --font-display: "Fraunces", Georgia, serif;
@@ -83,6 +85,8 @@
   --cell-p: #322844;
   --cell-mix: #2c2830;
   --link-hl: #b8e0ff;
+  --now-live: #5ec8a8;
+  --now-live-soft: color-mix(in srgb, #5ec8a8 18%, var(--sheet-bg));
   --dl-fg: #10151d;
 }
 
@@ -767,11 +771,88 @@ main,
   );
 }
 
-.excel-tt td.subj.is-now:not(.is-linked),
-.excel-tt td.room.is-now:not(.is-linked),
+.excel-tt td.subj.is-now,
 .excel-tt td.lunch.is-now,
 .excel-tt .lunch-head.is-now {
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--gold) 78%, transparent);
+  background-color: var(--now-live-soft);
+}
+
+.excel-tt td.subj.is-now {
+  position: relative;
+  height: auto;
+  min-height: 2.7rem;
+  padding: 0.38rem 0.32rem 0.72rem;
+  animation: now-cell-blink 1s ease-in-out infinite;
+}
+
+.excel-tt td.lunch.is-now {
+  position: relative;
+  padding-bottom: 0.7rem;
+}
+
+.excel-tt td.room.is-now:not(.is-linked),
+.excel-tt td.lunch.is-now {
+  animation: now-cell-blink 1s ease-in-out infinite;
+}
+
+.excel-tt tr:has(+ .room-row) td.subj.is-now {
+  animation: now-cell-blink-top 1s ease-in-out infinite;
+}
+
+.excel-tt td.room.is-now:not(.is-linked) {
+  animation: now-cell-blink-bottom 1s ease-in-out infinite;
+}
+
+.now-live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.32rem;
+  margin-top: 0.28rem;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--now-live);
+  line-height: 1;
+}
+
+.now-live-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--now-live);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--now-live) 22%, transparent);
+  animation: now-dot-blink 1s step-end infinite;
+}
+
+.now-progress {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.now-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transition: transform 0.6s linear;
+}
+
+.excel-tt .now-progress {
+  left: 5px;
+  right: 5px;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--now-live) 22%, transparent);
+}
+
+.excel-tt .now-progress span {
+  background: var(--now-live);
+  border-radius: 99px;
 }
 
 .excel-tt td.subj,
@@ -801,6 +882,15 @@ main,
   background: var(--cell-mix);
 }
 
+.excel-tt td.subj.is-now {
+  background: color-mix(in srgb, var(--now-live) 20%, var(--sheet-bg));
+}
+
+.excel-tt td.subj.is-now.is-linked,
+.excel-tt td.room.is-now.is-linked {
+  animation: none;
+}
+
 .excel-tt td.room {
   font-size: 0.62rem;
   line-height: 1.1;
@@ -808,6 +898,10 @@ main,
   padding: 0.08rem 0.25rem;
   background: var(--sheet-room);
   color: color-mix(in srgb, var(--sheet-ink) 72%, transparent);
+}
+
+.excel-tt td.room.is-now {
+  background: color-mix(in srgb, var(--now-live) 14%, var(--sheet-room));
 }
 
 .excel-tt tr.room-row td {
@@ -979,6 +1073,12 @@ main,
     border-color: #111;
     box-shadow: none !important;
     background-image: none !important;
+    animation: none !important;
+  }
+
+  .now-live,
+  .now-progress {
+    display: none !important;
   }
 }
 
@@ -1083,16 +1183,52 @@ main,
   to { opacity: 1; transform: none; }
 }
 
-@keyframes now-breathe {
+@keyframes now-dot-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.2; }
+}
+
+@keyframes now-cell-blink {
+  0%, 100% { box-shadow: inset 0 0 0 2.5px var(--now-live); }
+  50% { box-shadow: inset 0 0 0 2.5px color-mix(in srgb, var(--now-live) 28%, transparent); }
+}
+
+@keyframes now-cell-blink-top {
   0%, 100% {
     box-shadow:
-      0 0 0 4px color-mix(in srgb, var(--gold) 16%, transparent),
-      var(--shadow);
+      inset 0 2.5px 0 0 var(--now-live),
+      inset 2.5px 0 0 0 var(--now-live),
+      inset -2.5px 0 0 0 var(--now-live);
   }
   50% {
     box-shadow:
-      0 0 0 7px color-mix(in srgb, var(--gold) 26%, transparent),
-      var(--shadow);
+      inset 0 2.5px 0 0 color-mix(in srgb, var(--now-live) 28%, transparent),
+      inset 2.5px 0 0 0 color-mix(in srgb, var(--now-live) 28%, transparent),
+      inset -2.5px 0 0 0 color-mix(in srgb, var(--now-live) 28%, transparent);
+  }
+}
+
+@keyframes now-cell-blink-bottom {
+  0%, 100% {
+    box-shadow:
+      inset 0 -2.5px 0 0 var(--now-live),
+      inset 2.5px 0 0 0 var(--now-live),
+      inset -2.5px 0 0 0 var(--now-live);
+  }
+  50% {
+    box-shadow:
+      inset 0 -2.5px 0 0 color-mix(in srgb, var(--now-live) 28%, transparent),
+      inset 2.5px 0 0 0 color-mix(in srgb, var(--now-live) 28%, transparent),
+      inset -2.5px 0 0 0 color-mix(in srgb, var(--now-live) 28%, transparent);
+  }
+}
+
+@keyframes now-card-blink {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--now-live), var(--shadow);
+  }
+  50% {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--now-live) 28%, transparent), var(--shadow);
   }
 }
 
@@ -1685,11 +1821,24 @@ main,
   .day-chip-pill,
   .sk-block,
   .now-progress span,
+  .now-live-dot,
   .period-list.slide-left,
   .period-list.slide-right,
   .btn-spinner {
     animation: none;
     transition: none;
+  }
+
+  .excel-tt td.subj.is-now,
+  .excel-tt td.room.is-now,
+  .excel-tt td.lunch.is-now {
+    animation: none;
+    box-shadow: inset 0 0 0 2.5px var(--now-live);
+  }
+
+  .period-card.is-now {
+    animation: none;
+    box-shadow: 0 0 0 2px var(--now-live), var(--shadow);
   }
 }
 
@@ -1850,35 +1999,33 @@ main,
 .period-card:nth-child(7) { animation-delay: 0.24s; }
 
 .period-card.is-now {
-  border-color: color-mix(in srgb, var(--gold) 70%, var(--line));
-  box-shadow:
-    0 0 0 4px color-mix(in srgb, var(--gold) 18%, transparent),
-    var(--shadow);
-  animation: now-breathe 5.2s ease-in-out infinite;
+  border-color: var(--now-live);
+  background: color-mix(in srgb, var(--now-live) 9%, var(--card));
+  animation: now-card-blink 1s ease-in-out infinite;
+  padding-bottom: 1.15rem;
 }
 
-.now-progress {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  overflow: hidden;
-  border-radius: 0 0 var(--radius) var(--radius);
-  background: color-mix(in srgb, var(--gold) 22%, transparent);
+.period-card .now-live {
+  margin: 0 0 0 auto;
+  font-size: 0.68rem;
 }
 
-.now-progress span {
-  display: block;
-  height: 100%;
-  width: 100%;
-  transform-origin: left center;
-  background: var(--gold);
-  transition: transform 0.6s linear;
+.period-card .now-progress {
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.55rem;
+  height: 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--gold) 26%, var(--mist));
+}
+
+.period-card .now-progress span {
+  background: linear-gradient(90deg, #d4b56a, var(--gold));
+  border-radius: 999px;
 }
 
 .period-next {
-  margin: 0.65rem 0 0;
+  margin: 0.65rem 0 0.15rem;
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 600;
@@ -1891,7 +2038,7 @@ main,
 .period-time {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 0.45rem 0.7rem;
   margin-bottom: 0.45rem;
 }
@@ -1904,15 +2051,6 @@ main,
 .period-clock {
   color: var(--muted);
   font-size: 0.88rem;
-}
-
-.now-pill {
-  margin-left: auto;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
 }
 
 .period-items {
@@ -1981,7 +2119,11 @@ main,
 }
 
 .lunch-break.is-now {
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
+}
+
+.lunch-break .now-live {
+  margin-top: 0;
 }
 
 @media (max-width: 960px) {
@@ -2036,7 +2178,11 @@ main,
   .period-list.slide-left,
   .period-list.slide-right,
   .sk-block,
-  .btn-spinner {
+  .btn-spinner,
+  .now-live-dot,
+  .excel-tt td.subj.is-now,
+  .excel-tt td.room.is-now,
+  .excel-tt td.lunch.is-now {
     animation: none;
   }
 
