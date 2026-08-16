@@ -1,49 +1,45 @@
 import { useEffect, useState } from "react";
-import { GOATCOUNTER_CODE } from "../constants/site.js";
-import { VISIT_EVENT } from "./Analytics.jsx";
 
-const COUNTER_URL = `https://${GOATCOUNTER_CODE}.goatcounter.com/counter/TOTAL.json`;
+const HITS_URL = "https://hitscounter.dev/api/hit?url=https://mcemmotihari.github.io";
 
-function readCount(data) {
-  const value = data?.count ?? data?.count_unique;
-  if (value == null || value === "") return "";
-  return String(value);
+let cachedTotal = "";
+let pending;
+
+function parseTotal(svg) {
+  const label = String(svg).match(/aria-label="([^"]+)"/)?.[1] || "";
+  const parts = label.split("/");
+  return (parts[1] || parts[0] || "").trim();
 }
 
-function loadTotal(signal) {
-  return fetch(`${COUNTER_URL}?t=${Date.now()}`, { signal, cache: "no-store" })
-    .then((res) => (res.ok ? res.json() : null))
-    .then((data) => readCount(data))
-    .catch(() => "");
+function loadTotal() {
+  if (cachedTotal) return Promise.resolve(cachedTotal);
+  if (pending) return pending;
+
+  pending = fetch(HITS_URL, { cache: "no-store" })
+    .then((res) => (res.ok ? res.text() : ""))
+    .then((svg) => {
+      const total = parseTotal(svg);
+      if (total) cachedTotal = total;
+      return total;
+    })
+    .catch(() => "")
+    .finally(() => {
+      pending = null;
+    });
+
+  return pending;
 }
 
 export default function VisitorCount() {
-  const [count, setCount] = useState("0");
+  const [count, setCount] = useState(cachedTotal || "0");
 
   useEffect(() => {
-    if (!GOATCOUNTER_CODE) return undefined;
-    const ctrl = new AbortController();
-
-    const timers = [];
-    const refresh = () => {
-      loadTotal(ctrl.signal).then((value) => {
-        if (value) setCount(value);
-      });
-    };
-    const refreshSoon = () => {
-      refresh();
-      timers.push(window.setTimeout(refresh, 1500), window.setTimeout(refresh, 5000));
-    };
-
-    refresh();
-    const poll = window.setInterval(refresh, 15_000);
-    window.addEventListener(VISIT_EVENT, refreshSoon);
-
+    let alive = true;
+    loadTotal().then((value) => {
+      if (alive && value) setCount(value);
+    });
     return () => {
-      ctrl.abort();
-      window.clearInterval(poll);
-      timers.forEach((id) => window.clearTimeout(id));
-      window.removeEventListener(VISIT_EVENT, refreshSoon);
+      alive = false;
     };
   }, []);
 

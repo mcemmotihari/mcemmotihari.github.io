@@ -8,11 +8,9 @@ Live: [mcemmotihari.github.io](https://mcemmotihari.github.io)
 
 ## Analytics (GoatCounter)
 
-The site uses [GoatCounter](https://www.goatcounter.com/) — a free, cookie-free tracker that works on GitHub Pages. Dashboard: [mcemotihari.goatcounter.com](https://mcemotihari.goatcounter.com).
+The site uses [GoatCounter](https://www.goatcounter.com/) for the dashboard (devices, browsers, referrers): [mcemotihari.goatcounter.com](https://mcemotihari.goatcounter.com).
 
-The footer shows the site-wide visitor total. In GoatCounter go to **Settings** and enable **Allow adding visitor counts on your website**.
-
-Local `npm run dev` does not send hits. The dashboard can stay private (Settings → Password / login only).
+The tiny footer number is a live hit total. GoatCounter’s own public counter is cached for up to four hours, so it is not used on the page.
 
 ---
 
