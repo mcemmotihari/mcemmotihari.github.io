@@ -36,6 +36,47 @@ export function clockRange(start, end) {
   return `${toClock(start)} to ${toClock(end)}`;
 }
 
+export function slotTypeLabel(type) {
+  if (type === "P") return "Lab";
+  if (type === "T") return "Tutorial";
+  return "Lecture";
+}
+
+export function slotTitle(data, slot) {
+  const sub = subjectOf(data, slot.subject_code);
+  return slot.subject_short || sub?.short || slot.subject_code || "Class";
+}
+
+export function slotCounterpart(data, view, slot) {
+  const fac = facultyOf(data, slot.faculty_id);
+  const sec = sectionOf(data, slot.section_id);
+  if (view === "section") return fac?.name || "";
+  if (view === "faculty") return sec?.label || "";
+  return [sec?.label, fac?.name].filter(Boolean).join(" · ");
+}
+
+export function describeSlots(data, view, slots) {
+  return (slots || []).map((slot) => ({
+    title: slotTitle(data, slot),
+    type: slotTypeLabel(slot.type),
+    group: slot.group ? `Group ${slot.group}` : "",
+    room: view === "room" ? "" : slot.room_id ? `Room ${slot.room_id}` : "",
+    who: slotCounterpart(data, view, slot),
+  }));
+}
+
+export function formatLiveClass(data, view, slots) {
+  return describeSlots(data, view, slots)
+    .map((row) => [row.title, row.type, row.group, row.room, row.who].filter(Boolean).join(" · "))
+    .join(" / ");
+}
+
+export function idleNowLabel(view) {
+  if (view === "faculty") return "No class now";
+  if (view === "room") return "Room vacant";
+  return "Free period";
+}
+
 export function paperCode(sub) {
   if (!sub?.code) return "";
   const p = Number(sub.P);

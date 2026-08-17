@@ -714,6 +714,114 @@ main,
   grid-template-columns: 1fr 1fr;
 }
 
+.live-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.45rem 0.45rem 0.55rem;
+  font-family: var(--font-body);
+}
+
+.live-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem 0.7rem;
+  min-height: 3.1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--sheet-border);
+  background: var(--sheet-bg);
+  color: var(--sheet-ink);
+  flex: 1 1 16rem;
+}
+
+.live-chip .now-live {
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+
+.live-copy {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.live-copy strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.live-copy span {
+  color: color-mix(in srgb, var(--sheet-ink) 62%, transparent);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.live-kicker {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.live-countdown {
+  display: grid;
+  justify-items: center;
+  margin-left: auto;
+  min-width: 3.1rem;
+  line-height: 1;
+}
+
+.live-countdown small {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--sheet-ink) 48%, transparent);
+  margin-bottom: 0.12rem;
+}
+
+.live-countdown em {
+  font-style: normal;
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.live-countdown span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--sheet-ink) 55%, transparent);
+}
+
+.live-chip.is-live {
+  border-color: color-mix(in srgb, var(--now-live) 55%, var(--sheet-border));
+  background: var(--now-live-soft);
+}
+
+.live-chip.is-next {
+  border-color: color-mix(in srgb, var(--gold) 55%, var(--sheet-border));
+  background: color-mix(in srgb, var(--gold) 12%, var(--sheet-bg));
+}
+
+.live-chip.is-lunch,
+.live-chip.is-idle {
+  background: color-mix(in srgb, var(--gold) 8%, var(--sheet-bg));
+}
+
+.live-chip.is-done {
+  color: color-mix(in srgb, var(--sheet-ink) 62%, transparent);
+  background: color-mix(in srgb, var(--sheet-ink) 5%, var(--sheet-bg));
+}
+
 .table-scroll {
   overflow: auto;
 }
@@ -769,6 +877,10 @@ main,
 
 .excel-tt thead th.is-now {
   box-shadow: inset 0 -2px 0 var(--gold);
+}
+
+.excel-tt thead th.is-soon {
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--gold) 70%, transparent);
 }
 
 .excel-tt tr.is-today-row td.subj:not(.is-now):not(.is-linked) {
@@ -860,6 +972,25 @@ main,
 .excel-tt .now-progress span {
   background: var(--now-live);
   border-radius: 99px;
+}
+
+.excel-tt td.subj.is-soon {
+  position: relative;
+  padding-bottom: 1.05rem;
+}
+
+.excel-tt .cell-soon {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 3px;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: color-mix(in srgb, var(--sheet-ink) 72%, var(--gold));
+  line-height: 1;
 }
 
 .excel-tt td.subj,
@@ -1089,7 +1220,9 @@ main,
   }
 
   .now-live,
-  .now-progress {
+  .now-progress,
+  .live-strip,
+  .cell-soon {
     display: none !important;
   }
 }
@@ -1485,6 +1618,14 @@ main,
 [data-theme="dark"] .day-banner,
 [data-theme="dark"] .up-next-banner {
   background: color-mix(in srgb, var(--gold) 20%, var(--card));
+}
+
+[data-theme="dark"] .live-chip {
+  background: color-mix(in srgb, var(--sheet-ink) 6%, var(--sheet-bg));
+}
+
+[data-theme="dark"] .live-chip.is-next {
+  background: color-mix(in srgb, var(--gold) 16%, var(--sheet-bg));
 }
 
 [data-theme="dark"] .period-card.is-now {
@@ -2160,6 +2301,18 @@ main,
   background: color-mix(in srgb, var(--now-live) 9%, var(--card));
   animation: now-card-blink 1s ease-in-out infinite;
   padding-bottom: 1.15rem;
+}
+
+.period-card.is-soon:not(.is-now) {
+  border-color: color-mix(in srgb, var(--gold) 70%, var(--line));
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.period-soon {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--gold);
 }
 
 .period-card .now-live {

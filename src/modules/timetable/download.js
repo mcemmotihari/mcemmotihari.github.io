@@ -202,8 +202,8 @@ export async function downloadPdf(sheetEl, data, view, primaryId) {
   clone.style.maxWidth = "1400px";
   clone.style.background = "#ffffff";
   clone.style.color = "#111111";
-  clone.querySelectorAll(".now-live, .now-progress").forEach((el) => el.remove());
-  clone.querySelectorAll(".is-now").forEach((el) => el.classList.remove("is-now"));
+  clone.querySelectorAll(".now-live, .now-progress, .cell-soon, .live-strip").forEach((el) => el.remove());
+  clone.querySelectorAll(".is-now, .is-soon").forEach((el) => el.classList.remove("is-now", "is-soon"));
   clone.querySelectorAll("*").forEach((el) => {
     el.style.color = "#111111";
     el.style.background = "#ffffff";

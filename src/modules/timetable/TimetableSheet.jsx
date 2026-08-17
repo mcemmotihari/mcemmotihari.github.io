@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Grid from "./Grid.jsx";
+import LiveStrip from "./LiveStrip.jsx";
 import Mapping from "./Mapping.jsx";
+import { formatIn, toMinutes } from "./clock.js";
 import { signDept } from "./lib.js";
 
 export function TimetableSheet({
@@ -13,11 +15,19 @@ export function TimetableSheet({
   rows,
   primaryId,
   today,
+  live,
+  clockMinutes,
   nowPeriodId,
+  clockPeriodId,
+  nextPeriodId,
   lunchNow,
   nowProgress,
 }) {
   const [highlightKeys, setHighlightKeys] = useState([]);
+  const nextWaitLabel =
+    live?.nextPeriod && clockMinutes != null
+      ? formatIn(toMinutes(live.nextPeriod.start) - clockMinutes)
+      : "";
 
   return (
     <section className="grid-wrap sheet-desktop">
@@ -28,6 +38,7 @@ export function TimetableSheet({
             <span key={line}>{line}</span>
           ))}
         </div>
+        <LiveStrip data={data} view={view} live={live} minutes={clockMinutes} />
         <Grid
           data={data}
           view={view}
@@ -36,6 +47,9 @@ export function TimetableSheet({
           onHoverCodes={setHighlightKeys}
           today={today}
           nowPeriodId={nowPeriodId}
+          clockPeriodId={clockPeriodId}
+          nextPeriodId={nextPeriodId}
+          nextWaitLabel={nextWaitLabel}
           lunchNow={lunchNow}
           nowProgress={nowProgress}
         />

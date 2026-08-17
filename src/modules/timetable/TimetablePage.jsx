@@ -7,9 +7,8 @@ import { TabList } from "../../ui/TabList.jsx";
 import { runViewTransition } from "../../ui/viewTransition.js";
 import { COLLEGE_NAME_FULL } from "../../constants/site.js";
 import {
+  buildLive,
   findCurrentPeriod,
-  findLunchNow,
-  periodProgress,
   useCampusClock,
 } from "./clock.js";
 import ScheduleCards from "./ScheduleCards.jsx";
@@ -130,10 +129,13 @@ export default function TimetablePage() {
   const clock = useCampusClock(data?.meta?.timezone);
   const liveToday =
     data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
-  const nowPeriod = data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;
-  const lunch = data && liveToday ? findLunchNow(data.meta.breaks, clock.minutes) : null;
-  const lunchNow = Boolean(lunch);
-  const nowProgress = nowPeriod ? periodProgress(nowPeriod, clock.minutes) : lunch ? periodProgress(lunch, clock.minutes) : 0;
+  const live =
+    data && liveToday ? buildLive(data, byDayPeriod, liveToday, clock.minutes) : null;
+  const nowPeriod = live?.currentOccupied || null;
+  const clockPeriod =
+    data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;
+  const lunchNow = Boolean(live?.lunchNow);
+  const nowProgress = live?.nowProgress || 0;
 
   const markDownloaded = useCallback(() => {
     setDownloaded(true);
@@ -252,7 +254,11 @@ export default function TimetablePage() {
             rows={rows}
             primaryId={primaryId}
             today={liveToday}
+            live={live}
+            clockMinutes={clock.minutes}
             nowPeriodId={nowPeriod?.id ?? null}
+            clockPeriodId={clockPeriod?.id ?? null}
+            nextPeriodId={live?.nextPeriod?.id ?? null}
             lunchNow={lunchNow}
             nowProgress={nowProgress}
           />

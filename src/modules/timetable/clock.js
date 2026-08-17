@@ -33,7 +33,7 @@ export function campusNow(timeZone = "Asia/Kolkata") {
     weekday: WEEKDAY_FROM_SHORT[parts.weekday] || "MON",
     minutes: Number(parts.hour) * 60 + Number(parts.minute),
     // weekday: "TUE",
-    // minutes: 10 * 60 +54,
+    // minutes: 10 * 60 +64,
   };
 }
 
@@ -73,6 +73,66 @@ export function findLunchNow(breaks, minutes) {
 
 export function findNextPeriod(periods, minutes) {
   return periods.find((period) => toMinutes(period.start) > minutes) || null;
+}
+
+export function periodSlots(byDayPeriod, day, periodId) {
+  return byDayPeriod.get(`${day}|${periodId}`) || [];
+}
+
+/** Current clock period only if that cell has a lecture, lab, or tutorial. */
+export function findCurrentOccupied(periods, byDayPeriod, day, minutes) {
+  const period = findCurrentPeriod(periods, minutes);
+  if (!period) return null;
+  return periodSlots(byDayPeriod, day, period.id).length ? period : null;
+}
+
+/** Next occupied period after `minutes`, skipping free / empty cells. */
+export function findNextOccupied(periods, byDayPeriod, day, minutes) {
+  return (
+    periods.find(
+      (period) =>
+        toMinutes(period.start) > minutes &&
+        periodSlots(byDayPeriod, day, period.id).length > 0
+    ) || null
+  );
+}
+
+export function formatIn(minutesFromNow) {
+  const wait = formatWait(minutesFromNow);
+  return wait === "now" ? "now" : `in ${wait}`;
+}
+
+export function countdownParts(minutesFromNow) {
+  const mins = Math.max(0, Math.round(minutesFromNow));
+  if (mins < 1) return { value: "now", unit: "" };
+  if (mins < 60) return { value: String(mins), unit: "min" };
+  const hours = Math.floor(mins / 60);
+  const rest = mins % 60;
+  if (!rest) return { value: String(hours), unit: hours === 1 ? "hr" : "hrs" };
+  return { value: `${hours}h`, unit: `${rest}m` };
+}
+
+export function buildLive(data, byDayPeriod, day, minutes) {
+  const periods = data.meta.periods;
+  const currentOccupied = findCurrentOccupied(periods, byDayPeriod, day, minutes);
+  const nextPeriod = findNextOccupied(periods, byDayPeriod, day, minutes);
+  const lunch = findLunchNow(data.meta.breaks, minutes);
+  const dayHasClasses = periods.some((period) => periodSlots(byDayPeriod, day, period.id).length);
+  return {
+    currentOccupied,
+    currentSlots: currentOccupied ? periodSlots(byDayPeriod, day, currentOccupied.id) : [],
+    nextPeriod,
+    nextSlots: nextPeriod ? periodSlots(byDayPeriod, day, nextPeriod.id) : [],
+    lunchNow: Boolean(lunch),
+    lunch,
+    nowProgress: currentOccupied
+      ? periodProgress(currentOccupied, minutes)
+      : lunch
+        ? periodProgress(lunch, minutes)
+        : 0,
+    doneToday: dayHasClasses && !currentOccupied && !lunch && !nextPeriod,
+    dayHasClasses,
+  };
 }
 
 export function periodProgress(period, minutes) {

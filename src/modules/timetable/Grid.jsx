@@ -21,6 +21,9 @@ export default function Grid({
   onHoverCodes,
   today,
   nowPeriodId,
+  clockPeriodId,
+  nextPeriodId,
+  nextWaitLabel = "",
   lunchNow,
   nowProgress = 0,
 }) {
@@ -44,7 +47,10 @@ export default function Grid({
             </th>
             {periods.flatMap((p) => {
               const cells = [
-                <th key={p.id} className={cx(p.id === nowPeriodId && "is-now")}>
+                <th
+                  key={p.id}
+                  className={cx(p.id === clockPeriodId && "is-now", p.id === nextPeriodId && "is-soon")}
+                >
                   {p.label}
                 </th>,
               ];
@@ -62,7 +68,10 @@ export default function Grid({
           </tr>
           <tr className="time-row">
             {periods.map((p) => (
-              <th key={p.id} className={cx(p.id === nowPeriodId && "is-now")}>
+              <th
+                key={p.id}
+                className={cx(p.id === clockPeriodId && "is-now", p.id === nextPeriodId && "is-soon")}
+              >
                 {clockRange(p.start, p.end)}
               </th>
             ))}
@@ -76,7 +85,9 @@ export default function Grid({
             periods.forEach((p) => {
               const list = byDayPeriod.get(`${day}|${p.id}`) || [];
               const line = list.length ? subjectLine(data, list, view) : "";
-              const isNowCell = isToday && p.id === nowPeriodId;
+              const occupied = list.length > 0;
+              const isNowCell = isToday && occupied && p.id === nowPeriodId;
+              const isSoonCell = isToday && occupied && p.id === nextPeriodId;
               subjCells.push(
                 <td
                   key={`${day}-s-${p.id}`}
@@ -84,7 +95,8 @@ export default function Grid({
                     "subj",
                     slotTypeClass(list),
                     slotsMatchCodes(list, highlightKeys) && "is-linked",
-                    isNowCell && "is-now"
+                    isNowCell && "is-now",
+                    isSoonCell && "is-soon"
                   )}
                   onMouseEnter={() => hoverList(list)}
                   onMouseLeave={() => onHoverCodes?.([])}
@@ -92,6 +104,7 @@ export default function Grid({
                   {line}
                   {isNowCell ? <NowLive /> : null}
                   {isNowCell ? <NowProgress value={nowProgress} /> : null}
+                  {isSoonCell && nextWaitLabel ? <span className="cell-soon">{nextWaitLabel}</span> : null}
                 </td>
               );
               if (p.id === lunchAfter) {
@@ -123,6 +136,7 @@ export default function Grid({
                 day={day}
                 isToday={isToday}
                 nowPeriodId={nowPeriodId}
+                nextPeriodId={nextPeriodId}
                 subjCells={subjCells}
                 periods={periods}
                 byDayPeriod={byDayPeriod}
@@ -142,6 +156,7 @@ function DayRows({
   day,
   isToday,
   nowPeriodId,
+  nextPeriodId,
   subjCells,
   periods,
   byDayPeriod,
@@ -161,13 +176,15 @@ function DayRows({
         {periods.map((p) => {
           const list = byDayPeriod.get(`${day}|${p.id}`) || [];
           const line = list.length ? roomLine(list) : "";
+          const occupied = list.length > 0;
           return (
             <td
               key={`${day}-r-${p.id}`}
               className={cx(
                 "room",
                 slotsMatchCodes(list, highlightKeys) && "is-linked",
-                isToday && p.id === nowPeriodId && "is-now"
+                isToday && occupied && p.id === nowPeriodId && "is-now",
+                isToday && occupied && p.id === nextPeriodId && "is-soon"
               )}
               onMouseEnter={() => hoverList(list)}
               onMouseLeave={() => onHoverCodes?.([])}
