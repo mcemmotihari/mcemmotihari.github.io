@@ -4,6 +4,8 @@ import {
   LUNCH_LETTERS,
   clockRange,
   downloadName,
+  iterateDayColumns,
+  groupByDayPeriod,
   mappingRows,
   roomLine,
   sheetMetaLines,
@@ -71,6 +73,7 @@ export async function downloadExcel({ data, view, primaryId, slots, byDayPeriod 
   const heads = mappingHeads(view);
   const mapRows = mappingValueRows(mappingRows(data, view, primaryId, slots), view);
   const signs = ["Time Table In-Charge", `HOD(${signDept(data, view, primaryId)})`, "Principal"];
+  const startMap = byDayPeriod || groupByDayPeriod(slots);
 
   const periodCols = [];
   for (const p of periods) {
@@ -136,22 +139,35 @@ export async function downloadExcel({ data, view, primaryId, slots, byDayPeriod 
       set(subjRow, 1, excelCell(DAY_NAMES[day] || day, { bold: true }));
     }
 
-    periodCols.forEach((col, i) => {
-      const c = i + 2;
+    let c = 2;
+    for (const col of iterateDayColumns(periods, data.meta, startMap, day)) {
       if (col.kind === "lunch") {
         set(subjRow, c, excelCell(lunch, { bold: true }));
         if (withRooms) {
           set(roomRow, c, excelCell(""));
           merges.push({ s: { r: subjRow - 1, c: c - 1 }, e: { r: roomRow - 1, c: c - 1 } });
         }
-        return;
+        c += 1;
+        continue;
       }
-      const list = byDayPeriod.get(`${day}|${col.period.id}`) || [];
+      const list = col.slots;
+      const span = col.colspan || 1;
       set(subjRow, c, excelCell(list.length ? subjectLine(data, list, view) : "", { sz: 10 }));
       if (withRooms) {
         set(roomRow, c, excelCell(list.length ? roomLine(list) : "", { sz: 9 }));
       }
-    });
+      if (span > 1) {
+        merges.push({ s: { r: subjRow - 1, c: c - 1 }, e: { r: subjRow - 1, c: c + span - 2 } });
+        if (withRooms) {
+          merges.push({ s: { r: roomRow - 1, c: c - 1 }, e: { r: roomRow - 1, c: c + span - 2 } });
+        }
+        for (let extra = 1; extra < span; extra += 1) {
+          set(subjRow, c + extra, excelCell(""));
+          if (withRooms) set(roomRow, c + extra, excelCell(""));
+        }
+      }
+      c += span;
+    }
 
     r += withRooms ? 2 : 1;
   }

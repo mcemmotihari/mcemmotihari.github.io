@@ -144,6 +144,32 @@ export function matchingSlots(data, view, primaryId, dept) {
   });
 }
 
+export function slotHours(slot) {
+  const n = Number(slot?.hours);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+}
+
+export function lunchAfterPeriod(meta) {
+  return meta?.breaks?.[0]?.after_period ?? 3;
+}
+
+export function maxPeriodId(meta) {
+  return Math.max(0, ...(meta?.periods || []).map((p) => p.id));
+}
+
+/** Period ids this slot occupies (does not cross lunch). */
+export function slotPeriodIds(slot, lunchAfter, lastPeriodId) {
+  const start = Number(slot.period);
+  const ids = [];
+  for (let i = 0; i < slotHours(slot); i += 1) {
+    const id = start + i;
+    if (lastPeriodId && id > lastPeriodId) break;
+    if (start <= lunchAfter && id > lunchAfter) break;
+    ids.push(id);
+  }
+  return ids.length ? ids : [start];
+}
+
 export function groupByDayPeriod(slots) {
   const map = new Map();
   for (const s of slots) {
@@ -152,6 +178,61 @@ export function groupByDayPeriod(slots) {
     map.get(key).push(s);
   }
   return map;
+}
+
+/** Slots covering each day+period, including multi-hour continuations. */
+export function occupyByDayPeriod(slots, meta) {
+  const lunchAfter = lunchAfterPeriod(meta);
+  const lastId = maxPeriodId(meta);
+  const map = new Map();
+  for (const s of slots) {
+    for (const pid of slotPeriodIds(s, lunchAfter, lastId)) {
+      const key = `${s.day}|${pid}`;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(s);
+    }
+  }
+  return map;
+}
+
+export function slotPeriodLabel(periods, slot, meta) {
+  const ids = slotPeriodIds(slot, lunchAfterPeriod(meta), maxPeriodId(meta));
+  const labels = ids.map((id) => periods.find((p) => p.id === id)?.label).filter(Boolean);
+  if (labels.length <= 1) return labels[0] || "";
+  return `${labels[0]}–${labels[labels.length - 1]}`;
+}
+
+export function slotClockRange(periods, slot, meta) {
+  const ids = slotPeriodIds(slot, lunchAfterPeriod(meta), maxPeriodId(meta));
+  const first = periods.find((p) => p.id === ids[0]);
+  const last = periods.find((p) => p.id === ids[ids.length - 1]) || first;
+  if (!first || !last) return "";
+  return clockRange(first.start, last.end);
+}
+
+/**
+ * Walk a day's columns. Multi-hour classes become one cell with colspan;
+ * continuation periods are omitted. Lunch is still emitted after its period.
+ */
+export function iterateDayColumns(periods, meta, startMap, day) {
+  const lunchAfter = lunchAfterPeriod(meta);
+  const lastId = maxPeriodId(meta);
+  const skip = new Set();
+  const cols = [];
+  for (const period of periods) {
+    if (!skip.has(period.id)) {
+      const slots = startMap.get(`${day}|${period.id}`) || [];
+      let colspan = 1;
+      if (slots.length) {
+        const spans = slots.map((s) => slotPeriodIds(s, lunchAfter, lastId).length);
+        if (spans.every((h) => h === spans[0])) colspan = Math.max(1, spans[0]);
+      }
+      for (let i = 1; i < colspan; i += 1) skip.add(period.id + i);
+      cols.push({ kind: "period", period, slots, colspan });
+    }
+    if (period.id === lunchAfter) cols.push({ kind: "lunch" });
+  }
+  return cols;
 }
 
 export function slotSubjectCodes(slots) {

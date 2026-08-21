@@ -59,7 +59,8 @@ The timetable module is the working example. Leave `enabled: false` until the pa
 | `id` | Unique slot id | `S0190` |
 | `section_id` | Class batch | `CSE-3` |
 | `day` | `MON` … `SAT` | `MON` |
-| `period` | `1` … `6` | `2` |
+| `period` | Start period `1` … `6` | `2` |
+| `hours` | How many periods this class lasts (`1`, `2`, `3`, …). Does not cross lunch. | `2` |
 | `subject_code` | Paper code | `105303` |
 | `subject_short` | Short name | `OOP` |
 | `type` | `L` / `T` / `P` | `P` |
@@ -68,7 +69,9 @@ The timetable module is the working example. Leave `enabled: false` until the pa
 | `faculty_id` | From `faculties.csv` | `md-sharique-eliyas` |
 | `notes` | Optional note | |
 
-**Parallel labs** = two rows, same `day` + `period`, different `group` / `room_id`.
+**Parallel labs** = two rows, same `day` + `period` + `hours`, different `group` / `room_id`.
+
+**Multi-hour class** (2-hour lab, 3-hour workshop) = one row with `hours` set to `2` or `3`. `period` is the first hour. Do not list the later hours as extra rows.
 
 ---
 

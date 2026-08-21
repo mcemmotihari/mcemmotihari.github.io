@@ -22,6 +22,7 @@ import {
   groupByDayPeriod,
   mappingRows,
   matchingSlots,
+  occupyByDayPeriod,
   selectorOptions,
   semesterTabsForBranch,
   sheetMetaLines,
@@ -117,6 +118,10 @@ export default function TimetablePage() {
     [data, view, primaryId]
   );
   const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
+  const occupyMap = useMemo(
+    () => (data ? occupyByDayPeriod(slots, data.meta) : new Map()),
+    [data, slots]
+  );
   const rows = useMemo(
     () => (data && view !== "tools" ? mappingRows(data, view, primaryId, slots) : []),
     [data, view, primaryId, slots]
@@ -130,7 +135,7 @@ export default function TimetablePage() {
   const liveToday =
     data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
   const live =
-    data && liveToday ? buildLive(data, byDayPeriod, liveToday, clock.minutes) : null;
+    data && liveToday ? buildLive(data, occupyMap, liveToday, clock.minutes) : null;
   const nowPeriod = live?.currentOccupied || null;
   const clockPeriod =
     data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;

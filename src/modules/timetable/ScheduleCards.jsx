@@ -12,22 +12,21 @@ import {
   formatLiveClass,
   groupByDayPeriod,
   idleNowLabel,
+  iterateDayColumns,
+  occupyByDayPeriod,
+  slotClockRange,
   slotCounterpart,
+  slotPeriodLabel,
   slotTitle,
   slotTypeLabel,
 } from "./lib.js";
 import NowLive, { NowProgress } from "./NowLive.jsx";
 
-function firstSlots(byDayPeriod, day, period) {
-  return byDayPeriod.get(`${day}|${period.id}`) || [];
-}
-
 export default function ScheduleCards({ data, view, slots, clock }) {
   const days = data.meta.days;
   const periods = data.meta.periods;
-  const lunch = data.meta.breaks?.[0];
-  const lunchAfter = lunch?.after_period ?? 3;
   const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
+  const occupyMap = useMemo(() => occupyByDayPeriod(slots, data.meta), [slots, data.meta]);
   const today = clock.weekday;
   const campusOff = !days.includes(today);
   const [activeDay, setActiveDay] = useState(() =>
@@ -81,14 +80,14 @@ export default function ScheduleCards({ data, view, slots, clock }) {
 
   const nowMin = clock.minutes;
   const isToday = activeDay === today;
-  const live = isToday ? buildLive(data, byDayPeriod, activeDay, nowMin) : null;
+  const live = isToday ? buildLive(data, occupyMap, activeDay, nowMin) : null;
   const currentOccupied = live?.currentOccupied || null;
   const lunchNow = live?.lunchNow || false;
   const nextPeriod = live?.nextPeriod || null;
   const nextSlots = live?.nextSlots || [];
   const nextLabel = formatLiveClass(data, view, nextSlots);
   const nextWait = nextPeriod ? formatIn(toMinutes(nextPeriod.start) - nowMin) : "";
-  const dayHasClasses = periods.some((p) => firstSlots(byDayPeriod, activeDay, p).length);
+  const dayHasClasses = periods.some((p) => occupyMap.get(`${activeDay}|${p.id}`)?.length);
   const doneToday = Boolean(live?.doneToday);
 
   function onTouchStart(event) {
@@ -172,11 +171,27 @@ export default function ScheduleCards({ data, view, slots, clock }) {
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {periods.flatMap((p) => {
-          const list = firstSlots(byDayPeriod, activeDay, p);
-          const current = Boolean(currentOccupied && currentOccupied.id === p.id);
+        {iterateDayColumns(periods, data.meta, byDayPeriod, activeDay).flatMap((col) => {
+          if (col.kind === "lunch") {
+            return [
+              <div key="lunch" className={cx("lunch-break", lunchNow && "is-now")} role="note">
+                {lunchNow ? <NowLive label="Lunch now" /> : "Lunch break"}
+              </div>,
+            ];
+          }
+          const p = col.period;
+          const list = col.slots;
+          const spanned = [];
+          for (let i = 0; i < col.colspan; i += 1) spanned.push(p.id + i);
+          const current = Boolean(currentOccupied && spanned.includes(currentOccupied.id));
           const soon = Boolean(nextPeriod && nextPeriod.id === p.id);
-          const nodes = [
+          const timeLabel = list.length
+            ? slotClockRange(periods, list[0], data.meta)
+            : clockRange(p.start, p.end);
+          const periodLabel = list.length
+            ? slotPeriodLabel(periods, list[0], data.meta) || p.label
+            : p.label;
+          return [
             <article
               key={p.id}
               className={cx(
@@ -186,10 +201,10 @@ export default function ScheduleCards({ data, view, slots, clock }) {
                 !list.length && "is-free"
               )}
             >
-              {current ? <NowProgress value={periodProgress(p, nowMin)} tone="gold" /> : null}
+              {current ? <NowProgress value={periodProgress(currentOccupied, nowMin)} tone="gold" /> : null}
               <div className="period-time">
-                <span className="period-no">{p.label}</span>
-                <span className="period-clock">{clockRange(p.start, p.end)}</span>
+                <span className="period-no">{periodLabel}</span>
+                <span className="period-clock">{timeLabel}</span>
                 {current ? <NowLive /> : null}
                 {soon && nextWait ? <span className="period-soon">{nextWait}</span> : null}
               </div>
@@ -221,14 +236,6 @@ export default function ScheduleCards({ data, view, slots, clock }) {
               ) : null}
             </article>,
           ];
-          if (p.id === lunchAfter) {
-            nodes.push(
-              <div key="lunch" className={cx("lunch-break", lunchNow && "is-now")} role="note">
-                {lunchNow ? <NowLive label="Lunch now" /> : "Lunch break"}
-              </div>
-            );
-          }
-          return nodes;
         })}
       </div>
     </section>

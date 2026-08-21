@@ -42,4 +42,5 @@ breaks:
 notes: |
   Source of truth is data/*.csv (especially slots.csv).
   Class / faculty / room views, conflicts, LTP and load are derived from slots.
+  A slot may last more than one period via the hours column in slots.csv (does not cross lunch).
   To add another branch or semester: add a row in sections.csv, subjects/offerings, then slots.

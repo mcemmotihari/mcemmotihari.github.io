@@ -77,6 +77,42 @@ def read_meta() -> dict:
     return meta
 
 
+def parse_hours(value) -> int:
+    try:
+        hours = int(value)
+    except (TypeError, ValueError):
+        hours = 1
+    return hours if hours > 0 else 1
+
+
+def lunch_after(meta: dict) -> int:
+    breaks = meta.get("breaks") or []
+    if breaks and breaks[0].get("after_period") is not None:
+        return int(breaks[0]["after_period"])
+    return 3
+
+
+def max_period_id(meta: dict) -> int:
+    periods = meta.get("periods") or []
+    return max((int(p["id"]) for p in periods), default=6)
+
+
+def occupied_periods(slot: dict, meta: dict) -> list[int]:
+    start = int(slot["period"])
+    hours = parse_hours(slot.get("hours"))
+    after = lunch_after(meta)
+    last = max_period_id(meta)
+    ids = []
+    for i in range(hours):
+        pid = start + i
+        if pid > last:
+            break
+        if start <= after and pid > after:
+            break
+        ids.append(pid)
+    return ids or [start]
+
+
 def index_by(rows: list[dict], key: str) -> dict:
     return {r[key]: r for r in rows}
 
@@ -92,6 +128,7 @@ def enrich_slots(slots, subjects, faculties, rooms, sections) -> list[dict]:
             {
                 **s,
                 "period": int(s["period"]) if s.get("period") else None,
+                "hours": parse_hours(s.get("hours")),
                 "subject_name": subj.get("name", ""),
                 "faculty_name": fac.get("name", ""),
                 "room_name": room.get("name", s.get("room_id", "")),
@@ -104,7 +141,7 @@ def enrich_slots(slots, subjects, faculties, rooms, sections) -> list[dict]:
     return out
 
 
-def find_conflicts(slots: list[dict]) -> dict:
+def find_conflicts(slots: list[dict], meta: dict) -> dict:
     faculty_conflicts = []
     room_conflicts = []
     section_conflicts = []
@@ -112,14 +149,13 @@ def find_conflicts(slots: list[dict]) -> dict:
     def collect(key_fn, bucket, label_keys):
         groups: dict[tuple, list] = {}
         for s in slots:
-            key = key_fn(s)
-            if key is None:
-                continue
-            groups.setdefault(key, []).append(s)
+            for pid in occupied_periods(s, meta):
+                key = key_fn(s, pid)
+                if key is None:
+                    continue
+                groups.setdefault(key, []).append(s)
         for key, items in groups.items():
             if len(items) > 1:
-                # parallel lab groups for same section/subject are OK for section? 
-                # For section: same section+day+period with different groups is OK
                 bucket.append(
                     {
                         **{k: v for k, v in zip(label_keys, key)},
@@ -132,24 +168,23 @@ def find_conflicts(slots: list[dict]) -> dict:
                     }
                 )
 
-    def faculty_key(s):
+    def faculty_key(s, pid):
         if not s.get("faculty_id"):
             return None
-        return (s["day"], s["period"], s["faculty_id"])
+        return (s["day"], pid, s["faculty_id"])
 
-    def room_key(s):
+    def room_key(s, pid):
         if not s.get("room_id"):
             return None
-        return (s["day"], s["period"], s["room_id"])
+        return (s["day"], pid, s["room_id"])
 
-    # Section conflict only when same group (or both empty) overlap
     section_groups: dict[tuple, list] = {}
     for s in slots:
         g = s.get("group") or ""
-        key = (s["day"], s["period"], s["section_id"], g)
-        section_groups.setdefault(key, []).append(s)
+        for pid in occupied_periods(s, meta):
+            key = (s["day"], pid, s["section_id"], g)
+            section_groups.setdefault(key, []).append(s)
     for key, items in section_groups.items():
-        # Also catch two empty-group lectures in same cell (shouldn't happen)
         if len(items) > 1:
             section_conflicts.append(
                 {
@@ -163,14 +198,9 @@ def find_conflicts(slots: list[dict]) -> dict:
                 }
             )
 
-    # For section: different groups at same time are intentional (parallel labs)
-    # But two different subjects with empty group is a conflict — handled above.
-    # Cross-group check: if one slot has no group and another has group, still OK for labs vs free? skip.
-
     collect(faculty_key, faculty_conflicts, ["day", "period", "faculty_id"])
     collect(room_key, room_conflicts, ["day", "period", "room_id"])
 
-    # Filter faculty conflicts where two entries are the same parallel teaching? keep all for review
     return {
         "faculty": faculty_conflicts,
         "room": room_conflicts,
@@ -195,10 +225,10 @@ def faculty_load(slots: list[dict], faculties: dict) -> list[dict]:
                 "P": 0,
             },
         )
-        rec["hours"] += 1
+        rec["hours"] += parse_hours(s.get("hours"))
         t = s.get("type") or "L"
         if t in rec:
-            rec[t] += 1
+            rec[t] += parse_hours(s.get("hours"))
     return sorted(loads.values(), key=lambda r: (-r["hours"], r["faculty_name"]))
 
 
@@ -210,7 +240,7 @@ def ltp_check(slots: list[dict], offerings: list[dict], subjects: dict) -> list[
         rec = counts.setdefault(key, {"L": 0, "T": 0, "P": 0})
         t = s.get("type") or "L"
         if t in rec:
-            rec[t] += 1
+            rec[t] += parse_hours(s.get("hours"))
 
     rows = []
     for off in offerings:
@@ -255,7 +285,7 @@ def main() -> None:
     subjects_i = index_by(subjects, "code")
 
     slots = enrich_slots(slots_raw, subjects_i, faculties_i, rooms_i, sections_i)
-    conflicts = find_conflicts(slots)
+    conflicts = find_conflicts(slots, meta)
     loads = faculty_load(slots, faculties_i)
     ltp = ltp_check(slots, offerings, subjects_i)
 

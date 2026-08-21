@@ -6,6 +6,7 @@ import {
   LUNCH_LETTERS,
   clockRange,
   groupByDayPeriod,
+  iterateDayColumns,
   roomLine,
   slotTypeClass,
   slotsMatchCodes,
@@ -81,16 +82,31 @@ export default function Grid({
           {days.map((day, di) => {
             const lunch = LUNCH_LETTERS[di] ?? "";
             const isToday = day === today;
-            const subjCells = [];
-            periods.forEach((p) => {
-              const list = byDayPeriod.get(`${day}|${p.id}`) || [];
+            const cols = iterateDayColumns(periods, data.meta, byDayPeriod, day);
+            const subjCells = cols.map((col) => {
+              if (col.kind === "lunch") {
+                return (
+                  <td
+                    key={`${day}-lunch`}
+                    className={cx("lunch", isToday && lunchNow && "is-now")}
+                    rowSpan={withRooms ? 2 : undefined}
+                  >
+                    {lunch}
+                    {isToday && lunchNow ? <NowProgress value={nowProgress} /> : null}
+                  </td>
+                );
+              }
+              const list = col.slots;
               const line = list.length ? subjectLine(data, list, view) : "";
               const occupied = list.length > 0;
-              const isNowCell = isToday && occupied && p.id === nowPeriodId;
-              const isSoonCell = isToday && occupied && p.id === nextPeriodId;
-              subjCells.push(
+              const spanned = [];
+              for (let i = 0; i < col.colspan; i += 1) spanned.push(col.period.id + i);
+              const isNowCell = isToday && occupied && spanned.includes(nowPeriodId);
+              const isSoonCell = isToday && occupied && col.period.id === nextPeriodId;
+              return (
                 <td
-                  key={`${day}-s-${p.id}`}
+                  key={`${day}-s-${col.period.id}`}
+                  colSpan={col.colspan > 1 ? col.colspan : undefined}
                   className={cx(
                     "subj",
                     slotTypeClass(list),
@@ -107,18 +123,6 @@ export default function Grid({
                   {isSoonCell && nextWaitLabel ? <span className="cell-soon">{nextWaitLabel}</span> : null}
                 </td>
               );
-              if (p.id === lunchAfter) {
-                subjCells.push(
-                  <td
-                    key={`${day}-lunch`}
-                    className={cx("lunch", isToday && lunchNow && "is-now")}
-                    rowSpan={withRooms ? 2 : undefined}
-                  >
-                    {lunch}
-                    {isToday && lunchNow ? <NowProgress value={nowProgress} /> : null}
-                  </td>
-                );
-              }
             });
 
             if (!withRooms) {
@@ -138,8 +142,7 @@ export default function Grid({
                 nowPeriodId={nowPeriodId}
                 nextPeriodId={nextPeriodId}
                 subjCells={subjCells}
-                periods={periods}
-                byDayPeriod={byDayPeriod}
+                cols={cols}
                 highlightKeys={highlightKeys}
                 hoverList={hoverList}
                 onHoverCodes={onHoverCodes}
@@ -158,8 +161,7 @@ function DayRows({
   nowPeriodId,
   nextPeriodId,
   subjCells,
-  periods,
-  byDayPeriod,
+  cols,
   highlightKeys,
   hoverList,
   onHoverCodes,
@@ -173,18 +175,22 @@ function DayRows({
         {subjCells}
       </tr>
       <tr className={cx("room-row", isToday && "is-today-row")}>
-        {periods.map((p) => {
-          const list = byDayPeriod.get(`${day}|${p.id}`) || [];
+        {cols.map((col) => {
+          if (col.kind === "lunch") return null;
+          const list = col.slots;
           const line = list.length ? roomLine(list) : "";
           const occupied = list.length > 0;
+          const spanned = [];
+          for (let i = 0; i < col.colspan; i += 1) spanned.push(col.period.id + i);
           return (
             <td
-              key={`${day}-r-${p.id}`}
+              key={`${day}-r-${col.period.id}`}
+              colSpan={col.colspan > 1 ? col.colspan : undefined}
               className={cx(
                 "room",
                 slotsMatchCodes(list, highlightKeys) && "is-linked",
-                isToday && occupied && p.id === nowPeriodId && "is-now",
-                isToday && occupied && p.id === nextPeriodId && "is-soon"
+                isToday && occupied && spanned.includes(nowPeriodId) && "is-now",
+                isToday && occupied && col.period.id === nextPeriodId && "is-soon"
               )}
               onMouseEnter={() => hoverList(list)}
               onMouseLeave={() => onHoverCodes?.([])}

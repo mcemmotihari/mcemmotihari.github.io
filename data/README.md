@@ -4,7 +4,7 @@ Edit these CSVs, then open a PR to `main`. CI rebuilds the website.
 
 | File | Edit when… |
 |------|------------|
-| `slots.csv` | Changing the weekly grid (main file) |
+| `slots.csv` | Changing the weekly grid (main file). Use `hours` for 2- or 3-period labs/lectures. |
 | `sections.csv` | Adding a class / semester / branch |
 | `subjects.csv` | Adding a paper code / L-T-P |
 | `faculties.csv` | Adding a teacher |

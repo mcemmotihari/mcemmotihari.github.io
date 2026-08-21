@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { lunchAfterPeriod, maxPeriodId, slotPeriodIds } from "./lib.js";
 
 export const WEEKDAY = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -79,6 +80,44 @@ export function periodSlots(byDayPeriod, day, periodId) {
   return byDayPeriod.get(`${day}|${periodId}`) || [];
 }
 
+function slotsEndMinutes(periods, meta, slots) {
+  const lunchAfter = lunchAfterPeriod(meta);
+  const lastId = maxPeriodId(meta);
+  let end = -Infinity;
+  for (const slot of slots) {
+    const ids = slotPeriodIds(slot, lunchAfter, lastId);
+    const last = periods.find((p) => p.id === ids[ids.length - 1]);
+    if (last) end = Math.max(end, toMinutes(last.end));
+  }
+  return Number.isFinite(end) ? end : null;
+}
+
+function slotsStartMinutes(periods, meta, slots) {
+  const lunchAfter = lunchAfterPeriod(meta);
+  const lastId = maxPeriodId(meta);
+  let start = Infinity;
+  for (const slot of slots) {
+    const ids = slotPeriodIds(slot, lunchAfter, lastId);
+    const first = periods.find((p) => p.id === ids[0]);
+    if (first) start = Math.min(start, toMinutes(first.start));
+  }
+  return Number.isFinite(start) ? start : null;
+}
+
+function withClassSpan(period, periods, meta, slots) {
+  const startMin = slotsStartMinutes(periods, meta, slots);
+  const endMin = slotsEndMinutes(periods, meta, slots);
+  const start = startMin != null ? periodFromMinutes(startMin) : period.start;
+  const end = endMin != null ? periodFromMinutes(endMin) : period.end;
+  return { ...period, start, end };
+}
+
+function periodFromMinutes(mins) {
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
 /** Current clock period only if that cell has a lecture, lab, or tutorial. */
 export function findCurrentOccupied(periods, byDayPeriod, day, minutes) {
   const period = findCurrentPeriod(periods, minutes);
@@ -86,11 +125,17 @@ export function findCurrentOccupied(periods, byDayPeriod, day, minutes) {
   return periodSlots(byDayPeriod, day, period.id).length ? period : null;
 }
 
-/** Next occupied period after `minutes`, skipping free / empty cells. */
-export function findNextOccupied(periods, byDayPeriod, day, minutes) {
+/** Next occupied period after the current class ends (or after `minutes`). */
+export function findNextOccupied(periods, byDayPeriod, day, minutes, meta, currentSlots) {
+  const after =
+    currentSlots?.length && meta
+      ? slotsEndMinutes(periods, meta, currentSlots)
+      : minutes;
+  const cutoff = after == null ? minutes : after;
   return (
     periods.find(
       (period) =>
+        toMinutes(period.start) >= cutoff &&
         toMinutes(period.start) > minutes &&
         periodSlots(byDayPeriod, day, period.id).length > 0
     ) || null
@@ -114,22 +159,30 @@ export function countdownParts(minutesFromNow) {
 
 export function buildLive(data, byDayPeriod, day, minutes) {
   const periods = data.meta.periods;
-  const currentOccupied = findCurrentOccupied(periods, byDayPeriod, day, minutes);
-  const nextPeriod = findNextOccupied(periods, byDayPeriod, day, minutes);
+  const clockPeriod = findCurrentOccupied(periods, byDayPeriod, day, minutes);
+  const currentSlots = clockPeriod ? periodSlots(byDayPeriod, day, clockPeriod.id) : [];
+  const currentOccupied = clockPeriod
+    ? withClassSpan(clockPeriod, periods, data.meta, currentSlots)
+    : null;
+  const nextPeriod = findNextOccupied(
+    periods,
+    byDayPeriod,
+    day,
+    minutes,
+    data.meta,
+    currentSlots
+  );
   const lunch = findLunchNow(data.meta.breaks, minutes);
   const dayHasClasses = periods.some((period) => periodSlots(byDayPeriod, day, period.id).length);
+  const progressPeriod = currentOccupied || lunch;
   return {
     currentOccupied,
-    currentSlots: currentOccupied ? periodSlots(byDayPeriod, day, currentOccupied.id) : [],
+    currentSlots,
     nextPeriod,
     nextSlots: nextPeriod ? periodSlots(byDayPeriod, day, nextPeriod.id) : [],
     lunchNow: Boolean(lunch),
     lunch,
-    nowProgress: currentOccupied
-      ? periodProgress(currentOccupied, minutes)
-      : lunch
-        ? periodProgress(lunch, minutes)
-        : 0,
+    nowProgress: progressPeriod ? periodProgress(progressPeriod, minutes) : 0,
     doneToday: dayHasClasses && !currentOccupied && !lunch && !nextPeriod,
     dayHasClasses,
   };
