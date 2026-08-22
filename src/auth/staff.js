@@ -7,8 +7,10 @@ import { STAFF_SESSION_KEY } from "../constants/site.js";
  */
 export const STAFF_PIN_HASH = String(
   import.meta.env.VITE_STAFF_PIN_HASH ||
-    "01bcf51dc9e97dde45262197af96eac25f9e186ab98e07fe6a354547f2883d9a"
-).toLowerCase();
+    "bfdcab7acaa8967856c62eaf0df1e9c872cb0b081cfa16f964182d8d54704471"
+)
+  .trim()
+  .toLowerCase();
 
 export async function sha256Hex(text) {
   const bytes = new TextEncoder().encode(text);

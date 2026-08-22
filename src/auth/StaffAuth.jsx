@@ -141,6 +141,9 @@ function StaffLoginDialog() {
             />
           </label>
           {error ? <p className="staff-error">{error}</p> : null}
+          <button type="submit" className="btn btn-primary" disabled={busy || !pin.trim()}>
+            {busy ? "Checking…" : "Sign in"}
+          </button>
         </form>
       </Panel>
     </div>
