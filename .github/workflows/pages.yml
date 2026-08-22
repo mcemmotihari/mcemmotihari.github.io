@@ -43,26 +43,48 @@ jobs:
               "subjects.csv",
               "faculties.csv",
               "rooms.csv",
-              "offerings.csv",
-              "slots.csv",
               "timetable.json",
           ]
           missing = [f for f in required if not (data / f).exists()]
           if missing:
               sys.exit(f"Missing files: {missing}")
 
-          for name in ["sections", "subjects", "faculties", "rooms", "offerings", "slots"]:
+          with (data / "sections.csv").open(newline="", encoding="utf-8") as f:
+              sections = list(csv.DictReader(f))
+          if not sections:
+              sys.exit("sections.csv has no rows")
+
+          for name in ["subjects", "faculties", "rooms"]:
               with (data / f"{name}.csv").open(newline="", encoding="utf-8") as f:
                   rows = list(csv.DictReader(f))
-              if name == "slots" and not rows:
-                  sys.exit("slots.csv has no rows")
               print(f"{name}.csv: {len(rows)} rows")
+
+          active = [s for s in sections if str(s.get("status") or "active").strip().lower() == "active"]
+          slot_total = 0
+          for sec in active:
+              sid = sec["id"]
+              slot_path = data / "schedules" / sid / "slots.csv"
+              off_path = data / "schedules" / sid / "offerings.csv"
+              if not slot_path.exists():
+                  sys.exit(f"Active section {sid} missing {slot_path}")
+              with slot_path.open(newline="", encoding="utf-8") as f:
+                  rows = list(csv.DictReader(f))
+              if not rows:
+                  sys.exit(f"{slot_path} has no rows")
+              slot_total += len(rows)
+              if off_path.exists():
+                  with off_path.open(newline="", encoding="utf-8") as f:
+                      print(f"{sid}: {len(rows)} slots, {len(list(csv.DictReader(f)))} offerings")
+              else:
+                  print(f"{sid}: {len(rows)} slots")
+          if slot_total == 0:
+              sys.exit("No slots found for active sections")
 
           payload = json.loads((data / "timetable.json").read_text(encoding="utf-8"))
           for key in ["meta", "sections", "slots", "derived"]:
               if key not in payload:
                   sys.exit(f"timetable.json missing key: {key}")
-          print(f"timetable.json: {len(payload['slots'])} slots OK")
+          print(f"timetable.json: {len(payload['slots'])} slots OK, {len(active)} active sections")
           PY
 
   deploy:

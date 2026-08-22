@@ -17,6 +17,67 @@ export function sectionOf(data, id) {
   return data.sections.find((s) => s.id === id);
 }
 
+export function isSectionActive(section) {
+  return String(section?.status || "active").toLowerCase() === "active";
+}
+
+export function liveSections(data) {
+  return (data.sections || []).filter(isSectionActive);
+}
+
+function wefSortValue(wef) {
+  const match = String(wef || "")
+    .trim()
+    .match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return 0;
+  return Date.UTC(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+}
+
+export const CURRENT_EDITION = "current";
+
+/** Current plus frozen w.e.f. dates. Empty when this class has no history yet. */
+export function sectionEditionOptions(section) {
+  const history = section?.editions?.history || [];
+  if (!history.length) return [];
+  const currentWef = section?.wef || section?.editions?.current_wef || "";
+  const past = [...history].sort((a, b) => wefSortValue(b.wef) - wefSortValue(a.wef));
+  return [
+    {
+      id: CURRENT_EDITION,
+      wef: currentWef,
+      label: currentWef ? `w.e.f. ${currentWef} (current)` : "Current",
+    },
+    ...past.map((edition) => ({
+      id: edition.wef,
+      wef: edition.wef,
+      label: `w.e.f. ${edition.wef}`,
+    })),
+  ];
+}
+
+/** Overlay a frozen edition onto timetable data for class view. */
+export function dataForSectionEdition(data, sectionId, editionId) {
+  if (!data || !editionId || editionId === CURRENT_EDITION) return data;
+  const edition = (data.history?.[sectionId] || []).find((row) => row.wef === editionId);
+  if (!edition) return data;
+  return {
+    ...data,
+    slots: edition.slots || [],
+    offerings: edition.offerings || [],
+    sections: data.sections.map((section) =>
+      section.id === sectionId ? { ...section, wef: edition.wef } : section
+    ),
+  };
+}
+
+export function latestWef(data, slots) {
+  const fromSlots = (slots || [])
+    .map((slot) => sectionOf(data, slot.section_id)?.wef)
+    .filter(Boolean);
+  const pool = fromSlots.length ? fromSlots : liveSections(data).map((s) => s.wef).filter(Boolean);
+  return [...pool].sort((a, b) => wefSortValue(b) - wefSortValue(a))[0] || "";
+}
+
 export function subjectOf(data, code) {
   return data.subjects.find((s) => s.code === code);
 }
@@ -131,7 +192,7 @@ export function roomLine(slots) {
 }
 
 export function filteredSections(data, dept) {
-  return data.sections.filter((s) => !dept || s.department === dept);
+  return liveSections(data).filter((s) => !dept || s.department === dept);
 }
 
 export function matchingSlots(data, view, primaryId, dept) {
@@ -325,7 +386,7 @@ export function sheetMetaLines(data, view, primaryId) {
       `w.e.f :- ${sec?.wef || ""}`,
     ];
   }
-  const wef = data.sections.map((s) => s.wef).find(Boolean) || "";
+  const wef = latestWef(data, matchingSlots(data, view, primaryId, ""));
   if (view === "faculty") {
     const fac = facultyOf(data, primaryId);
     return [`Faculty Name :- ${fac?.name || ""}`, `w.e.f :- ${wef}`];
@@ -358,7 +419,7 @@ export function downloadName(data, view, primaryId) {
  */
 export function branchOptions(data) {
   const seen = new Map();
-  for (const section of data.sections) {
+  for (const section of liveSections(data)) {
     const id = section.program;
     if (!id || seen.has(id)) continue;
     seen.set(id, section.program_name || id);
@@ -373,7 +434,7 @@ export function branchOptions(data) {
  * @return {Array<{id: string, label: string, semester: number}>}
  */
 export function semesterTabsForBranch(data, program) {
-  return data.sections
+  return liveSections(data)
     .filter((section) => section.program === program)
     .sort((a, b) => Number(a.semester) - Number(b.semester))
     .map((section) => {

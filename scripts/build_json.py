@@ -5,16 +5,138 @@ from __future__ import annotations
 
 import csv
 import json
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
+SCHEDULES = DATA / "schedules"
+
+ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+DMY_DATE = re.compile(r"^(\d{1,2})/(\d{1,2})/(\d{4})$")
 
 
 def read_csv(name: str) -> list[dict]:
-    path = DATA / name
+    return read_csv_path(DATA / name)
+
+
+def read_csv_path(path: Path) -> list[dict]:
     with path.open(newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def is_active(section: dict) -> bool:
+    return str(section.get("status") or "active").strip().lower() == "active"
+
+
+def wef_to_iso(wef: str) -> str:
+    value = str(wef or "").strip()
+    if ISO_DATE.match(value):
+        return value
+    match = DMY_DATE.match(value)
+    if not match:
+        raise ValueError(f"Unrecognised w.e.f date: {wef!r} (use DD/MM/YYYY)")
+    day, month, year = match.groups()
+    return f"{year}-{int(month):02d}-{int(day):02d}"
+
+
+def iso_to_wef(iso: str) -> str:
+    year, month, day = iso.split("-")
+    return f"{day}/{month}/{year}"
+
+
+def history_editions(section_id: str) -> list[dict]:
+    hist = SCHEDULES / section_id / "history"
+    if not hist.is_dir():
+        return []
+    editions = []
+    for child in sorted(hist.iterdir()):
+        if not child.is_dir():
+            continue
+        if not (child / "slots.csv").exists() and not (child / "offerings.csv").exists():
+            continue
+        wef = iso_to_wef(child.name) if ISO_DATE.match(child.name) else child.name
+        editions.append({"wef": wef, "folder": child.name})
+    return editions
+
+
+def attach_editions(sections: list[dict]) -> None:
+    for section in sections:
+        section["editions"] = {
+            "current_wef": section.get("wef", ""),
+            "history": history_editions(section["id"]),
+        }
+
+
+def load_schedules(sections: list[dict]) -> tuple[list[dict], list[dict]]:
+    slots: list[dict] = []
+    offerings: list[dict] = []
+    seen_slot_ids: set[str] = set()
+
+    for section in sections:
+        sid = section["id"]
+        folder = SCHEDULES / sid
+        slot_path = folder / "slots.csv"
+        off_path = folder / "offerings.csv"
+        active = is_active(section)
+
+        if active and not slot_path.exists():
+            sys.exit(f"Active section {sid} is missing {slot_path}")
+
+        if not is_active(section):
+            continue
+
+        if slot_path.exists():
+            for row in read_csv_path(slot_path):
+                row_sid = (row.get("section_id") or sid).strip()
+                if row_sid != sid:
+                    sys.exit(f"{slot_path}: slot {row.get('id')} has section_id {row_sid}, expected {sid}")
+                row["section_id"] = sid
+                slot_id = row.get("id") or ""
+                if slot_id in seen_slot_ids:
+                    sys.exit(f"Duplicate slot id {slot_id} (last seen in {slot_path})")
+                seen_slot_ids.add(slot_id)
+                slots.append(row)
+
+        if off_path.exists():
+            for row in read_csv_path(off_path):
+                row_sid = (row.get("section_id") or sid).strip()
+                if row_sid != sid:
+                    sys.exit(f"{off_path}: offering has section_id {row_sid}, expected {sid}")
+                row["section_id"] = sid
+                offerings.append(row)
+
+    return slots, offerings
+
+
+def load_history(sections, subjects_i, faculties_i, rooms_i, sections_i) -> dict[str, list]:
+    """Earlier editions from schedules/<id>/history/<ISO-date>/, keyed by section id."""
+    history: dict[str, list] = {}
+    for section in sections:
+        sid = section["id"]
+        editions = []
+        for item in history_editions(sid):
+            folder = SCHEDULES / sid / "history" / item["folder"]
+            slot_path = folder / "slots.csv"
+            off_path = folder / "offerings.csv"
+            slots_raw = read_csv_path(slot_path) if slot_path.exists() else []
+            offerings = read_csv_path(off_path) if off_path.exists() else []
+            for row in slots_raw:
+                row["section_id"] = sid
+            for row in offerings:
+                row["section_id"] = sid
+            editions.append(
+                {
+                    "wef": item["wef"],
+                    "folder": item["folder"],
+                    "slots": enrich_slots(slots_raw, subjects_i, faculties_i, rooms_i, sections_i),
+                    "offerings": offerings,
+                }
+            )
+        if editions:
+            history[sid] = editions
+    return history
 
 
 def read_meta() -> dict:
@@ -276,8 +398,8 @@ def main() -> None:
     faculties = read_csv("faculties.csv")
     rooms = read_csv("rooms.csv")
     subjects = read_csv("subjects.csv")
-    offerings = read_csv("offerings.csv")
-    slots_raw = read_csv("slots.csv")
+    attach_editions(sections)
+    slots_raw, offerings = load_schedules(sections)
 
     sections_i = index_by(sections, "id")
     faculties_i = index_by(faculties, "id")
@@ -285,6 +407,7 @@ def main() -> None:
     subjects_i = index_by(subjects, "code")
 
     slots = enrich_slots(slots_raw, subjects_i, faculties_i, rooms_i, sections_i)
+    history = load_history(sections, subjects_i, faculties_i, rooms_i, sections_i)
     conflicts = find_conflicts(slots, meta)
     loads = faculty_load(slots, faculties_i)
     ltp = ltp_check(slots, offerings, subjects_i)
@@ -297,6 +420,7 @@ def main() -> None:
         "subjects": subjects,
         "offerings": offerings,
         "slots": slots,
+        "history": history,
         "derived": {
             "conflicts": conflicts,
             "faculty_load": loads,
@@ -306,7 +430,11 @@ def main() -> None:
 
     out = DATA / "timetable.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {out} ({len(slots)} slots)")
+    hist_n = sum(len(editions) for editions in history.values())
+    print(
+        f"Wrote {out} ({len(slots)} slots from {sum(1 for s in sections if is_active(s))} active sections"
+        f", {hist_n} earlier editions)"
+    )
     print(
         f"Conflicts — faculty: {len(conflicts['faculty'])}, "
         f"room: {len(conflicts['room'])}, section: {len(conflicts['section'])}"

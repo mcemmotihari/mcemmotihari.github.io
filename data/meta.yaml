@@ -40,7 +40,9 @@ breaks:
     start: "13:00"
     end: "14:00"
 notes: |
-  Source of truth is data/*.csv (especially slots.csv).
-  Class / faculty / room views, conflicts, LTP and load are derived from slots.
-  A slot may last more than one period via the hours column in slots.csv (does not cross lunch).
-  To add another branch or semester: add a row in sections.csv, subjects/offerings, then slots.
+  Source of truth is data/sections.csv plus data/schedules/<section-id>/.
+  Class / faculty / room views, conflicts, LTP and load are derived from current slots of active sections.
+  A slot may last more than one period via the hours column (does not cross lunch).
+  To add another branch or semester: add a row in sections.csv (status=active), then schedules/<id>/slots.csv and offerings.csv.
+  To hide a finished semester: set status=archived — files stay for history.
+  To issue a new w.e.f.: python3 scripts/new_edition.py <section-id> --wef DD/MM/YYYY

@@ -42,15 +42,34 @@ The timetable module is the working example. Leave `enabled: false` until the pa
 
 ## How to edit an existing timetable
 
+Each **branch + semester** has its own files and its own **w.e.f.** (the `wef` column on that row in `data/sections.csv`).
+
 1. Branch from `main` (or edit on GitHub → “Create a new branch”).
-2. Change the row in **`data/slots.csv`**.
+2. Change rows in **`data/schedules/<section-id>/slots.csv`**  
+   Example: `data/schedules/CSE-3/slots.csv`
 3. If the faculty / room / subject is new, also update:
    - `data/faculties.csv`
    - `data/rooms.csv`
    - `data/subjects.csv`
-   - `data/offerings.csv` (section + subject + faculty link)
+   - `data/schedules/<section-id>/offerings.csv`
 4. Open a **Pull Request → `main`**.
 5. Wait for CI, then merge. Pages updates after merge.
+
+### New w.e.f. (keep the old timetable)
+
+Do not overwrite the live CSVs until the previous edition is frozen:
+
+```bash
+python3 scripts/new_edition.py CSE-3 --wef 01/09/2026
+```
+
+That copies the current slots/offerings into `data/schedules/CSE-3/history/2026-08-13/` and sets the new date on the section. Then edit the current `slots.csv`. On the class timetable, an **Edition** dropdown lists the current grid and earlier w.e.f. dates so you can open the 13/08/2026 version after 26/08/2026 is published.
+
+### Hide a semester that is not running
+
+In `data/sections.csv`, set `status` to `archived` (for example when 6th sem ends). The folder is kept. Set it back to `active` to show it again.
+
+When 7th sem starts, add a new row (`CSE-7`, `status=active`) and a new folder `data/schedules/CSE-7/`.
 
 ### `slots.csv` columns
 
@@ -77,12 +96,12 @@ The timetable module is the working example. Leave `enabled: false` until the pa
 
 ## How to add a new branch / semester
 
-1. Add a row in **`data/sections.csv`**  
-   Example: `EEE-3,EEE,Electrical and Electronics Engineering,3,EEE,2025-29,2026-27,13/08/2026,EEE Sem 3`
+1. Add a row in **`data/sections.csv`** with its own `wef` and `status=active`  
+   Example: `EEE-3,EEE,Electrical and Electronics Engineering,3,EEE,2025-29,2026-27,13/08/2026,active,EEE Sem 3`
 2. Add new subjects in **`data/subjects.csv`** (skip if they already exist).
 3. Add faculty / rooms in **`data/faculties.csv`** and **`data/rooms.csv`** if needed.
-4. Link them in **`data/offerings.csv`**: `section_id,subject_code,faculty_id`
-5. Add all periods in **`data/slots.csv`**
+4. Create **`data/schedules/EEE-3/offerings.csv`**: `section_id,subject_code,faculty_id`
+5. Create **`data/schedules/EEE-3/slots.csv`** with that class’s periods
 6. Open a **Pull Request → `main`** and merge.
 
 Same process for every department.

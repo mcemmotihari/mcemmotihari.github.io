@@ -18,11 +18,14 @@ import { TimetableControls } from "./TimetableControls.jsx";
 import { TimetableSheet } from "./TimetableSheet.jsx";
 import { downloadExcel, downloadPdf } from "./download.js";
 import {
+  CURRENT_EDITION,
   branchOptions,
+  dataForSectionEdition,
   groupByDayPeriod,
   mappingRows,
   matchingSlots,
   occupyByDayPeriod,
+  sectionEditionOptions,
   selectorOptions,
   semesterTabsForBranch,
   sheetMetaLines,
@@ -46,6 +49,7 @@ export default function TimetablePage() {
 
   const [program, setProgram] = useState("");
   const [sectionId, setSectionId] = useState("");
+  const [editionId, setEditionId] = useState(CURRENT_EDITION);
   const [facultyId, setFacultyId] = useState("");
   const [roomId, setRoomId] = useState("");
   const [busy, setBusy] = useState("");
@@ -91,6 +95,32 @@ export default function TimetablePage() {
   }, [semesterTabs, sectionId]);
 
   useEffect(() => {
+    setEditionId(CURRENT_EDITION);
+  }, [sectionId]);
+
+  const editionOptions = useMemo(() => {
+    if (!data || view !== "section" || !sectionId) return [];
+    return sectionEditionOptions(data.sections.find((s) => s.id === sectionId));
+  }, [data, view, sectionId]);
+
+  useEffect(() => {
+    if (!editionOptions.length) {
+      setEditionId(CURRENT_EDITION);
+      return;
+    }
+    if (!editionOptions.some((option) => option.id === editionId)) {
+      setEditionId(CURRENT_EDITION);
+    }
+  }, [editionOptions, editionId]);
+
+  const viewData = useMemo(() => {
+    if (!data || view !== "section") return data;
+    return dataForSectionEdition(data, sectionId, editionId);
+  }, [data, view, sectionId, editionId]);
+
+  const viewingPast = view === "section" && editionId !== CURRENT_EDITION;
+
+  useEffect(() => {
     if (!facultyOptions.length) {
       setFacultyId("");
       return;
@@ -114,28 +144,28 @@ export default function TimetablePage() {
   const primaryOptions = view === "faculty" ? facultyOptions : roomOptions;
 
   const slots = useMemo(
-    () => (data && view !== "tools" ? matchingSlots(data, view, primaryId, "") : []),
-    [data, view, primaryId]
+    () => (viewData && view !== "tools" ? matchingSlots(viewData, view, primaryId, "") : []),
+    [viewData, view, primaryId]
   );
   const byDayPeriod = useMemo(() => groupByDayPeriod(slots), [slots]);
   const occupyMap = useMemo(
-    () => (data ? occupyByDayPeriod(slots, data.meta) : new Map()),
-    [data, slots]
+    () => (viewData ? occupyByDayPeriod(slots, viewData.meta) : new Map()),
+    [viewData, slots]
   );
   const rows = useMemo(
-    () => (data && view !== "tools" ? mappingRows(data, view, primaryId, slots) : []),
-    [data, view, primaryId, slots]
+    () => (viewData && view !== "tools" ? mappingRows(viewData, view, primaryId, slots) : []),
+    [viewData, view, primaryId, slots]
   );
   const metaLines = useMemo(
-    () => (data && view !== "tools" ? sheetMetaLines(data, view, primaryId) : []),
-    [data, view, primaryId]
+    () => (viewData && view !== "tools" ? sheetMetaLines(viewData, view, primaryId) : []),
+    [viewData, view, primaryId]
   );
 
   const clock = useCampusClock(data?.meta?.timezone);
   const liveToday =
-    data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
+    !viewingPast && data && data.meta.days.includes(clock.weekday) ? clock.weekday : "";
   const live =
-    data && liveToday ? buildLive(data, occupyMap, liveToday, clock.minutes) : null;
+    viewData && liveToday ? buildLive(viewData, occupyMap, liveToday, clock.minutes) : null;
   const nowPeriod = live?.currentOccupied || null;
   const clockPeriod =
     data && liveToday ? findCurrentPeriod(data.meta.periods, clock.minutes) : null;
@@ -155,7 +185,7 @@ export default function TimetablePage() {
     setBusy("xlsx");
     try {
       await downloadExcel({
-        data,
+        data: viewData,
         view,
         primaryId,
         slots,
@@ -169,13 +199,13 @@ export default function TimetablePage() {
       setBusy("");
     }
     markDownloaded();
-  }, [data, view, primaryId, slots, byDayPeriod, markDownloaded]);
+  }, [data, viewData, view, primaryId, slots, byDayPeriod, markDownloaded]);
 
   const onPdf = useCallback(async () => {
     if (!data || !primaryId || view === "tools" || !sheetRef.current) return;
     setBusy("pdf");
     try {
-      await downloadPdf(sheetRef.current, data, view, primaryId);
+      await downloadPdf(sheetRef.current, viewData, view, primaryId);
     } catch (err) {
       console.error(err);
       alert(`Could not download PDF: ${err.message}`);
@@ -184,7 +214,7 @@ export default function TimetablePage() {
       setBusy("");
     }
     markDownloaded();
-  }, [data, view, primaryId, markDownloaded]);
+  }, [data, viewData, view, primaryId, markDownloaded]);
 
   const setView = useCallback(
     (next) => {
@@ -221,6 +251,9 @@ export default function TimetablePage() {
         program={program}
         onProgramChange={(next) => runViewTransition(() => setProgram(next))}
         branches={branches}
+        editionId={editionId}
+        editionOptions={editionOptions}
+        onEditionChange={(next) => runViewTransition(() => setEditionId(next))}
         primaryId={primaryId}
         onPrimaryChange={(next) =>
           runViewTransition(() => {
@@ -248,13 +281,13 @@ export default function TimetablePage() {
               onChange={(next) => runViewTransition(() => setSectionId(next))}
             />
           ) : null}
-          <ScheduleCards data={data} view={view} slots={slots} clock={clock} />
+          <ScheduleCards data={viewData} view={view} slots={slots} clock={clock} />
           <TimetableSheet
             sheetRef={sheetRef}
             college={college}
             view={view}
             metaLines={metaLines}
-            data={data}
+            data={viewData}
             slots={slots}
             rows={rows}
             primaryId={primaryId}

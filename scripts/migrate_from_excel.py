@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import csv
 import re
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 from pathlib import Path
 
 import openpyxl
@@ -311,9 +311,9 @@ breaks:
     start: "13:00"
     end: "14:00"
 notes: |
-  Source of truth is data/*.csv (especially slots.csv).
-  Class / faculty / room views, conflicts, LTP and load are derived from slots.
-  To add another branch or semester: add a row in sections.csv, subjects/offerings, then slots.
+  Source of truth is data/sections.csv plus data/schedules/<section-id>/.
+  Class / faculty / room views, conflicts, LTP and load are derived from current slots of active sections.
+  To add another branch or semester: add a row in sections.csv, then schedules/<id>/slots.csv and offerings.csv.
 """
     path.write_text(content, encoding="utf-8")
 
@@ -366,6 +366,7 @@ def main() -> None:
                 "batch_session": meta.get("batch_session", ""),
                 "academic_year": meta.get("academic_year", ""),
                 "wef": meta.get("wef", ""),
+                "status": "active",
                 "label": f"{section_base['program']} Sem {section_base['semester']}",
             }
         )
@@ -463,6 +464,7 @@ def main() -> None:
             "batch_session",
             "academic_year",
             "wef",
+            "status",
             "label",
         ],
         sections,
@@ -482,29 +484,35 @@ def main() -> None:
         ["code", "name", "short", "L", "T", "P", "department"],
         list(subjects.values()),
     )
-    write_csv(
-        DATA / "offerings.csv",
-        ["section_id", "subject_code", "faculty_id"],
-        offerings,
-    )
-    write_csv(
-        DATA / "slots.csv",
-        [
-            "id",
-            "section_id",
-            "day",
-            "period",
-            "hours",
-            "subject_code",
-            "subject_short",
-            "type",
-            "group",
-            "room_id",
-            "faculty_id",
-            "notes",
-        ],
-        slots,
-    )
+    slot_fields = [
+        "id",
+        "section_id",
+        "day",
+        "period",
+        "hours",
+        "subject_code",
+        "subject_short",
+        "type",
+        "group",
+        "room_id",
+        "faculty_id",
+        "notes",
+    ]
+    slots_by: dict[str, list] = defaultdict(list)
+    offerings_by: dict[str, list] = defaultdict(list)
+    for row in slots:
+        slots_by[row["section_id"]].append(row)
+    for row in offerings:
+        offerings_by[row["section_id"]].append(row)
+    for section in sections:
+        folder = DATA / "schedules" / section["id"]
+        folder.mkdir(parents=True, exist_ok=True)
+        write_csv(folder / "slots.csv", slot_fields, slots_by[section["id"]])
+        write_csv(
+            folder / "offerings.csv",
+            ["section_id", "subject_code", "faculty_id"],
+            offerings_by[section["id"]],
+        )
 
     unresolved = [s for s in slots if s["notes"]]
     print(f"Wrote {len(sections)} sections, {len(subjects)} subjects, {len(faculties)} faculties,")
