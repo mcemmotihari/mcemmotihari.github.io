@@ -364,18 +364,19 @@ main,
   animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
-.controls:has(.field-narrow) {
-  grid-template-columns: 1fr 0.8fr;
+.controls:has(.field-edition) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) auto;
+  max-width: 52rem;
 }
 
-.controls:has(.field-narrow) .download-actions {
-  grid-column: 1 / -1;
-  justify-content: center;
+.controls .download-menu {
+  justify-self: end;
 }
 
 .field {
   display: grid;
   gap: 0.35rem;
+  min-width: 0;
 }
 
 .field span {
@@ -1431,6 +1432,11 @@ main,
     width: 100%;
     gap: 0.55rem;
     margin-bottom: 0.85rem;
+  }
+
+  .controls:has(.field-edition) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) auto;
+    max-width: none;
   }
 }
 

@@ -6,6 +6,7 @@ export function TimetableControls({
   program,
   onProgramChange,
   branches,
+  showEdition,
   editionId,
   editionOptions,
   onEditionChange,
@@ -34,8 +35,9 @@ export function TimetableControls({
               </option>
             ))}
           </SelectField>
-          {editionOptions?.length ? (
+          {showEdition ? (
             <SelectField
+              className="field-edition"
               label="Edition"
               value={editionId}
               onChange={(event) => onEditionChange(event.target.value)}

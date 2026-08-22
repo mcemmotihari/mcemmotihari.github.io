@@ -103,22 +103,24 @@ export default function TimetablePage() {
     return sectionEditionOptions(data.sections.find((s) => s.id === sectionId));
   }, [data, view, sectionId]);
 
+  const showEdition = signedIn && view === "section" && editionOptions.length > 0;
+
   useEffect(() => {
-    if (!editionOptions.length) {
+    if (!showEdition) {
       setEditionId(CURRENT_EDITION);
       return;
     }
     if (!editionOptions.some((option) => option.id === editionId)) {
       setEditionId(CURRENT_EDITION);
     }
-  }, [editionOptions, editionId]);
+  }, [showEdition, editionOptions, editionId]);
 
   const viewData = useMemo(() => {
-    if (!data || view !== "section") return data;
+    if (!data || view !== "section" || !showEdition) return data;
     return dataForSectionEdition(data, sectionId, editionId);
-  }, [data, view, sectionId, editionId]);
+  }, [data, view, sectionId, editionId, showEdition]);
 
-  const viewingPast = view === "section" && editionId !== CURRENT_EDITION;
+  const viewingPast = showEdition && editionId !== CURRENT_EDITION;
 
   useEffect(() => {
     if (!facultyOptions.length) {
@@ -251,6 +253,7 @@ export default function TimetablePage() {
         program={program}
         onProgramChange={(next) => runViewTransition(() => setProgram(next))}
         branches={branches}
+        showEdition={showEdition}
         editionId={editionId}
         editionOptions={editionOptions}
         onEditionChange={(next) => runViewTransition(() => setEditionId(next))}
