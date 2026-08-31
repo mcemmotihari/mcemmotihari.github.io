@@ -1,0 +1,333 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "id": "123",
+      "name": "Room 123",
+      "floor": "FIRST FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 18.4,
+      "seatRowHeight": 78,
+      "rows": 6,
+      "cols": 5,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "125",
+      "name": "Room 125",
+      "floor": "FIRST FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 23,
+      "seatRowHeight": 66,
+      "rows": 7,
+      "cols": 4,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "203",
+      "name": "Room 203",
+      "floor": "SECOND FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 23,
+      "seatRowHeight": 66,
+      "rows": 7,
+      "cols": 4,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "135",
+      "name": "Room 135",
+      "floor": "FIRST FLOOR",
+      "overflow": true,
+      "landscape": true,
+      "colWidth": 18,
+      "seatRowHeight": 38,
+      "rows": 9,
+      "cols": 7,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 3
+      },
+      "cells": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "invigilators": [],
+  "lists": [],
+  "sessions": [
+    {
+      "id": "08d8612b-c978-439c-ae27-aedde273291f",
+      "kind": "midsem",
+      "title": "B.Tech Mid-Semester Examination 2026",
+      "year": "2026",
+      "hodSign": "HOD(CSE)",
+      "coordinatorSign": "Departmental Exam Co-ordinator",
+      "noticeLead": "All the Students of B.Tech are hereby informed that the Mid Semester Examination will be held as per the given schedule.",
+      "shifts": {
+        "morning": {
+          "id": "morning",
+          "label": "11:00 AM to 01:00 PM",
+          "short": "Morning",
+          "reporting": "Reporting Time : 10:30 AM"
+        },
+        "afternoon": {
+          "id": "afternoon",
+          "label": "2:30 PM to 04:30 PM",
+          "short": "Afternoon",
+          "reporting": "Reporting Time : 02:00 PM"
+        }
+      },
+      "sectionIds": [],
+      "papers": [],
+      "roomIds": [
+        "123",
+        "125",
+        "203",
+        "135"
+      ],
+      "duties": {}
+    }
+  ],
+  "activeSessionId": "08d8612b-c978-439c-ae27-aedde273291f"
+}
