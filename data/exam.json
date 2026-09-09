@@ -1,0 +1,2700 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "id": "123",
+      "name": "Room 123",
+      "floor": "FIRST FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 18.4,
+      "seatRowHeight": 78,
+      "rows": 6,
+      "cols": 5,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ]
+      ],
+      "fixtures": [
+        {
+          "kind": "door",
+          "edge": "left",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "podium",
+          "edge": "top",
+          "index": 2,
+          "span": 1
+        },
+        {
+          "kind": "whiteboard",
+          "edge": "top",
+          "index": 1,
+          "span": 3
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 2,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 4,
+          "span": 1
+        }
+      ]
+    },
+    {
+      "id": "125",
+      "name": "Room 125",
+      "floor": "FIRST FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 23,
+      "seatRowHeight": 66,
+      "rows": 7,
+      "cols": 4,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ]
+      ],
+      "fixtures": [
+        {
+          "kind": "door",
+          "edge": "left",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "podium",
+          "edge": "top",
+          "index": 2,
+          "span": 1
+        },
+        {
+          "kind": "whiteboard",
+          "edge": "top",
+          "index": 1,
+          "span": 3
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 3,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 6,
+          "span": 1
+        }
+      ]
+    },
+    {
+      "id": "203",
+      "name": "Room 203",
+      "floor": "SECOND FLOOR",
+      "overflow": false,
+      "landscape": false,
+      "colWidth": 23,
+      "seatRowHeight": 66,
+      "rows": 8,
+      "cols": 4,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 2
+      },
+      "cells": [
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ],
+        [
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          },
+          {
+            "kind": "desk",
+            "cap": 2,
+            "split": "seats"
+          }
+        ]
+      ],
+      "fixtures": [
+        {
+          "kind": "door",
+          "edge": "left",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "podium",
+          "edge": "top",
+          "index": 2,
+          "span": 1
+        },
+        {
+          "kind": "whiteboard",
+          "edge": "top",
+          "index": 1,
+          "span": 3
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 3,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 6,
+          "span": 1
+        }
+      ]
+    },
+    {
+      "id": "135",
+      "name": "Room 135",
+      "floor": "FIRST FLOOR",
+      "overflow": true,
+      "landscape": true,
+      "colWidth": 18,
+      "seatRowHeight": 38,
+      "rows": 10,
+      "cols": 8,
+      "door": {
+        "edge": "left",
+        "index": 0
+      },
+      "podium": {
+        "edge": "top",
+        "index": 0
+      },
+      "cells": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "fixtures": [
+        {
+          "kind": "door",
+          "edge": "left",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "podium",
+          "edge": "top",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "whiteboard",
+          "edge": "top",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        },
+        {
+          "kind": "window",
+          "edge": "right",
+          "index": 0,
+          "span": 1
+        }
+      ]
+    }
+  ],
+  "invigilators": [
+    {
+      "id": "508e5695-b6eb-4b00-9c3b-9653d7212463",
+      "name": "Mr. Harshit Kumar",
+      "facultyId": "harshit-kumar",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "9bf77500-21dc-4db5-ac4f-06588a91aa0b",
+      "name": "Ms. Nisha Kumari",
+      "facultyId": "nisha-kumari",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "d62f528a-df82-4af5-9985-f3ca7414bb5d",
+      "name": "Ms. Priyanshu",
+      "facultyId": "priyanshu-jha",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "c9c62959-a5a4-48d7-b082-cec60d83910f",
+      "name": "Mr. Hariom Kumar",
+      "facultyId": "hariom-kumar",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "4a0a1d9f-6f81-43b4-8a60-808d4326b28e",
+      "name": "Mr. Md Asif Jamal",
+      "facultyId": "asif-jamal",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "cf943f35-28cc-4e4e-aa21-091fb0203ec2",
+      "name": "Mr. Mukul Anand",
+      "facultyId": "mukul-anand",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "092280f1-0faf-41ba-94fa-de5ae112c2ee",
+      "name": "Mr. Suman Patel",
+      "facultyId": "suman-patel",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "59cc71b5-c4ba-4c0a-abf5-de185cac5d03",
+      "name": "Mr. Arvind Kumar",
+      "facultyId": "arvind-kumar",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "20412382-1782-4eba-875d-39555c45e56e",
+      "name": "Mr. Ravi Kumar",
+      "facultyId": "ravi-kumar",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "a616e39b-f448-4d2c-9bb3-13ec67b865f3",
+      "name": "Dr. Mohammad Aknan",
+      "facultyId": "mohammad-aknan",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "da3d253c-0c9e-4465-8b60-6a0570451fd9",
+      "name": "Ms. Juhi Kumari",
+      "facultyId": "juhi-kumari",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "b6f5e5bd-2423-486b-ad04-6b16f972d7d3",
+      "name": "Mr. Chandra Shekhar Singh Chandal",
+      "facultyId": "chandra-shekhar-singh-chandal",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "60cde1e7-4f04-4a7c-b7a2-20d382722f86",
+      "name": "Mr. Ashish Kumar",
+      "facultyId": "ashish-kumar",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "3ace5e05-71e7-48d0-a5ce-e8e534216159",
+      "name": "Ms. Rashmi Priya",
+      "facultyId": "rashmi-priya",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "1529622e-d841-40bb-b518-d73d61cb3379",
+      "name": "Dr. Aditya Kumar Singh",
+      "facultyId": "aditya-kumar-singh",
+      "department": "CSE",
+      "kind": "regular"
+    },
+    {
+      "id": "bda8a5f2-2331-40ea-a3b7-df73dbb5212b",
+      "name": "Mr. Shambhu Kumar",
+      "facultyId": "shambhu-kumar",
+      "department": "CSE",
+      "kind": "contractual"
+    },
+    {
+      "id": "5b4ed840-1ea0-4883-98e9-24e4efb9b49b",
+      "name": "Dr. Kahkashan Kouser",
+      "facultyId": "kahkashan-kouser",
+      "department": "CSE",
+      "kind": "regular"
+    }
+  ],
+  "lists": [
+    {
+      "id": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+      "name": "4th CSE",
+      "sectionId": "CSE-4",
+      "students": [
+        {
+          "id": "8b3c2695-06c6-4891-93e5-1ebfd76970af",
+          "roll": "24105113001",
+          "name": "CHANDAN KUMAR"
+        },
+        {
+          "id": "a961a828-136f-43d0-be23-f6062b35b623",
+          "roll": "24105113002",
+          "name": "SIDHI KUMARI"
+        },
+        {
+          "id": "5218a77c-dff0-4786-8422-f3857921e7bb",
+          "roll": "24105113003",
+          "name": "MADHU RANI"
+        },
+        {
+          "id": "041c1f61-9f7e-4f07-b078-a6b0aab3c3b2",
+          "roll": "24105113004",
+          "name": "DIKSHIT KUMAR VERMA"
+        },
+        {
+          "id": "62260452-46e1-4a29-add5-471c917697f8",
+          "roll": "24105113005",
+          "name": "MUSKAN PARVEEN"
+        },
+        {
+          "id": "8ca37582-3143-421d-bcf7-ef382131a7bb",
+          "roll": "24105113006",
+          "name": "PALLAVI BHARTI"
+        },
+        {
+          "id": "bef5e6c7-c199-4894-b47d-4c06e3aeac11",
+          "roll": "24105113007",
+          "name": "AMAN KUMAR"
+        },
+        {
+          "id": "26aa6f22-76df-4ae8-992d-65d2137e607a",
+          "roll": "24105113008",
+          "name": "PRIYANSHU PRINCE"
+        },
+        {
+          "id": "19576e0b-1f48-48ce-a6a4-2faf24dcc14f",
+          "roll": "24105113009",
+          "name": "NAINSI KUMARI"
+        },
+        {
+          "id": "e8e78bf1-4a71-4a1c-ae6f-c453bfd678d8",
+          "roll": "24105113010",
+          "name": "SHUBHAM KUMAR"
+        },
+        {
+          "id": "3c16b82c-56a2-4125-b354-abedc5ebcddd",
+          "roll": "24105113011",
+          "name": "VIDYA KUMARI"
+        },
+        {
+          "id": "348d4973-d655-4883-9fd8-d71d9efbd9a0",
+          "roll": "24105113012",
+          "name": "ABHISHEK KUMAR"
+        },
+        {
+          "id": "60804555-32ea-4fa4-a7ec-d95601c7f127",
+          "roll": "24105113013",
+          "name": "SUGANDHA SUMAN"
+        },
+        {
+          "id": "52995460-1155-4a8f-8047-4612a8045f82",
+          "roll": "24105113014",
+          "name": "ANKUSH KUMAR"
+        },
+        {
+          "id": "2d10fd77-40a5-4970-bbd0-7e602a13707a",
+          "roll": "24105113015",
+          "name": "PRINCE KUMAR"
+        },
+        {
+          "id": "4a901494-f4ad-4232-a0ff-a177ff84160a",
+          "roll": "24105113016",
+          "name": "GAGAN SINGH"
+        },
+        {
+          "id": "3dbad286-7897-41d1-be84-5ad9ae36fbe7",
+          "roll": "24105113017",
+          "name": "MD TANVEER ANSARI"
+        },
+        {
+          "id": "6b694aa9-ee66-4a89-8b1d-7f3f859324ff",
+          "roll": "24105113018",
+          "name": "ADITYA KUMAR DUBEY"
+        },
+        {
+          "id": "69199cc3-1780-4c90-9235-8e2166b7be0a",
+          "roll": "24105113019",
+          "name": "PRINCE KUMAR"
+        },
+        {
+          "id": "0156bcf2-dc24-4682-91ff-a2bdd1653c49",
+          "roll": "24105113020",
+          "name": "BHARTI KUMARI"
+        },
+        {
+          "id": "ece307f7-93fa-438a-b545-507bb6f3d29f",
+          "roll": "24105113021",
+          "name": "PRIYANSHU KUMAR"
+        },
+        {
+          "id": "9d1fec44-d566-429d-9d62-6e63fea6becb",
+          "roll": "24105113022",
+          "name": "ISHPRIYA SHARMA"
+        },
+        {
+          "id": "40c64929-e183-434a-a11d-5d0c813e1fc4",
+          "roll": "24105113023",
+          "name": "GUDDU GYAN"
+        },
+        {
+          "id": "5e5f196a-673b-4091-b909-69a129ffa1b5",
+          "roll": "24105113024",
+          "name": "ANKUR KUMAR"
+        },
+        {
+          "id": "7208410f-3612-4d19-960d-dbcf49d5c240",
+          "roll": "24105113025",
+          "name": "ADITI KUMARI"
+        },
+        {
+          "id": "6c7877b0-152e-484f-92ac-a8eeb81f36f9",
+          "roll": "24105113026",
+          "name": "MUSKAN KUMARI"
+        },
+        {
+          "id": "617ec632-6a84-4b7c-84e5-d3b7d01c7f68",
+          "roll": "24105113027",
+          "name": "PRIYA KUMARI"
+        },
+        {
+          "id": "c407bb64-bcc3-4a4c-b381-15d23877b78a",
+          "roll": "24105113028",
+          "name": "MILI KUMARI"
+        },
+        {
+          "id": "41e983f8-0e19-47ad-9122-a73bf14e5cef",
+          "roll": "24105113029",
+          "name": "SAKSHI SINGH"
+        },
+        {
+          "id": "795f6f09-e051-4303-bba5-00f0081f298b",
+          "roll": "24105113030",
+          "name": "SHUBHAM KUMAR RAY"
+        },
+        {
+          "id": "019b44f6-0b76-40ac-aba3-c6971d249e56",
+          "roll": "24105113031",
+          "name": "VICKY KUMAR"
+        },
+        {
+          "id": "60c49f5f-e1a8-4971-8269-432505405a91",
+          "roll": "24105113032",
+          "name": "PUJA KUMARI"
+        },
+        {
+          "id": "e59343bf-12be-4b30-806e-4b21ecbaeb93",
+          "roll": "24105113033",
+          "name": "RIYA KUMARI"
+        },
+        {
+          "id": "cce5aecf-8012-4008-9e93-e1dd2ddb0cbb",
+          "roll": "24105113034",
+          "name": "ADITYA ANAND"
+        },
+        {
+          "id": "74ea6117-f144-4eb6-9bd9-b9726293e6d8",
+          "roll": "24105113035",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "8fb18c9a-74e0-4173-bc22-3a2be3d4fd23",
+          "roll": "24105113036",
+          "name": "ASHIRWAD DUBEY"
+        },
+        {
+          "id": "815288d1-5554-440c-8a10-e9f0f8346c95",
+          "roll": "24105113037",
+          "name": "ABHIMANYU KUMAR"
+        },
+        {
+          "id": "cfec7809-b57d-416f-8401-96a3b12b0b81",
+          "roll": "24105113038",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "ca26b9fe-613e-46b7-8565-d92934cfeb07",
+          "roll": "24105113039",
+          "name": "MOHAMMED ZAID"
+        },
+        {
+          "id": "127494f2-a9a4-4948-a4e8-cf5d419600d9",
+          "roll": "24105113040",
+          "name": "SAPNA KUMARI"
+        },
+        {
+          "id": "ee47aa4d-08cc-4a3f-a321-d5fa0d5ec9d1",
+          "roll": "24105113041",
+          "name": "APARNA KUMARI"
+        },
+        {
+          "id": "9469a4b1-0af3-422c-8da2-36d1799834bb",
+          "roll": "24105113043",
+          "name": "SWATI KUMARI"
+        },
+        {
+          "id": "699b68dc-c57a-4537-baa2-f5629647b5c3",
+          "roll": "24105113044",
+          "name": "RAJNISH KUMAR"
+        },
+        {
+          "id": "425358a1-b878-45cc-8ddf-a0b69a0593e7",
+          "roll": "24105113045",
+          "name": "BARKHA RANI"
+        },
+        {
+          "id": "63580964-f18b-49b9-afa9-1f581b6f3a8d",
+          "roll": "24105113047",
+          "name": "SURYANSH CHANDAN"
+        },
+        {
+          "id": "d5582389-9e62-4234-8dbe-e045eca77422",
+          "roll": "24105113048",
+          "name": "RISHU RANJAN"
+        },
+        {
+          "id": "fd707acc-a8d1-4e34-ae16-0a7f47e7d02a",
+          "roll": "24105113049",
+          "name": "AAKARSH KUMAR"
+        },
+        {
+          "id": "5c12c6bc-5821-408d-ae48-2eb64c05530e",
+          "roll": "24105113050",
+          "name": "ALOK KUMAR"
+        },
+        {
+          "id": "88aaf607-3015-4c41-aed8-2422ecfad7cc",
+          "roll": "24105113051",
+          "name": "PRATAP RATNA"
+        },
+        {
+          "id": "67d1f22a-073f-4652-8063-c700ecff6f67",
+          "roll": "24105113052",
+          "name": "VIVEK KUMAR"
+        },
+        {
+          "id": "86a9cebf-4b39-48dc-a421-14591811d1c5",
+          "roll": "24105113054",
+          "name": "ANURAG KUMAR SUMAN"
+        },
+        {
+          "id": "6071428f-422b-4ab8-a3da-9a31a1fa0564",
+          "roll": "24105113055",
+          "name": "AKASH KUMAR"
+        },
+        {
+          "id": "ff1a2234-ae15-4921-acd3-a1aedce7d31d",
+          "roll": "24105113056",
+          "name": "SACHIN KUMAR"
+        },
+        {
+          "id": "69637e49-56cd-4d0c-9790-76824013dcd5",
+          "roll": "24105113057",
+          "name": "RASHTRA BANDHU"
+        },
+        {
+          "id": "e7da6fd9-f058-4787-9a8d-443244b87a3c",
+          "roll": "24105113058",
+          "name": "ADITYA KUMAR"
+        },
+        {
+          "id": "71c64ce6-8eda-4adf-b102-c1e089bb9431",
+          "roll": "24105113059",
+          "name": "RAJEEV KUMAR RANJAN"
+        },
+        {
+          "id": "d4183fbf-ac87-4c33-bad6-1ee12e485104",
+          "roll": "24105113060",
+          "name": "PRINCE KUMAR"
+        },
+        {
+          "id": "b66a4add-bd93-4020-9416-e1af5b52852e",
+          "roll": "24105113061",
+          "name": "YASH RAJ"
+        },
+        {
+          "id": "50127be1-4f05-4788-bd7c-1ece06b73636",
+          "roll": "25105113901",
+          "name": "SWEETY KUMARI"
+        },
+        {
+          "id": "264843a2-959b-47bc-9419-a20311360293",
+          "roll": "25105113902",
+          "name": "SACHIN KUMAR"
+        },
+        {
+          "id": "e48d7f86-faf5-4b45-9db7-cf00cf94fa27",
+          "roll": "25105113903",
+          "name": "KOMAL KUMARI"
+        },
+        {
+          "id": "69c622fb-812c-46af-a5ab-12df8597fc9c",
+          "roll": "25105113904",
+          "name": "MEGHA KUMARI"
+        },
+        {
+          "id": "fb1425ad-0c1e-43a6-a7c4-067c6631ec17",
+          "roll": "25105113905",
+          "name": "MAUSAM KUMARI"
+        },
+        {
+          "id": "c92d1fd4-2813-4cf1-8054-f4f12efe1e6d",
+          "roll": "25105113906",
+          "name": "ANKIT KUMAR"
+        },
+        {
+          "id": "58a7c727-59a7-4295-b59a-b994398a6fa5",
+          "roll": "25105113907",
+          "name": "JITENDRA KUMAR"
+        },
+        {
+          "id": "c7da00cc-1d43-442f-9ff7-346fc05407f3",
+          "roll": "25105113908",
+          "name": "ARURANJAN KUMAR"
+        },
+        {
+          "id": "5ca0dcc3-9bb5-4cc7-ad30-cd539c609b61",
+          "roll": "25105113909",
+          "name": "ISHANT KUMAR"
+        }
+      ]
+    },
+    {
+      "id": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+      "name": "4th CSE-AI",
+      "sectionId": "CSE-AI-4",
+      "students": [
+        {
+          "id": "af802c54-1519-4532-a014-1f1862f547ca",
+          "roll": "23151113018",
+          "name": "VIBHUTI KUMARI"
+        },
+        {
+          "id": "2c34f229-64c4-4158-aea5-bbb9e60fccb7",
+          "roll": "24151113001",
+          "name": "SONU KUMAR"
+        },
+        {
+          "id": "5423ca29-cc25-4905-9e27-4396f9520582",
+          "roll": "24151113002",
+          "name": "SUJEET KUMAR"
+        },
+        {
+          "id": "791f0c37-68a0-4f7e-aae8-d6b62892f060",
+          "roll": "24151113003",
+          "name": "CHANDAN KUMAR"
+        },
+        {
+          "id": "ba1c3951-d451-489d-8470-c17bce804e73",
+          "roll": "24151113004",
+          "name": "MD ZIYAUL HAQUE"
+        },
+        {
+          "id": "5d283fed-0c1c-4f2c-8fe0-f8f38e2560bd",
+          "roll": "24151113005",
+          "name": "SALONI KUMARI"
+        },
+        {
+          "id": "5204e4de-0086-4949-92dd-dfc50de0ba78",
+          "roll": "24151113006",
+          "name": "SAHIL KUMAR"
+        },
+        {
+          "id": "dccec252-ef25-4c5c-86e5-98898dc6b92c",
+          "roll": "24151113007",
+          "name": "ABHISHEK KUMAR"
+        },
+        {
+          "id": "981af1cd-85ba-4807-8877-1187b5d747c3",
+          "roll": "24151113008",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "efbb50b6-3103-420f-84e0-79ba203be2ca",
+          "roll": "24151113009",
+          "name": "ANIL KUMAR MAHTO"
+        },
+        {
+          "id": "5bbd1fac-b2ef-49b3-8f55-dae3e54b5019",
+          "roll": "24151113010",
+          "name": "SAURABH KUMAR"
+        },
+        {
+          "id": "bcfc20e4-9386-4eb0-bb4d-042f79e03f1a",
+          "roll": "24151113011",
+          "name": "SONU KUMAR YADAV"
+        },
+        {
+          "id": "ff2953fc-047a-4169-8940-7d6e78401e62",
+          "roll": "24151113013",
+          "name": "PRITI KUMARI SAH"
+        },
+        {
+          "id": "4aa18d9b-f63b-41dc-a006-5c4ed6251871",
+          "roll": "24151113014",
+          "name": "DEEP SHIKHA"
+        },
+        {
+          "id": "c55a5b16-f2df-402e-9ce7-47ab7d219818",
+          "roll": "24151113015",
+          "name": "PRARTHNA KUMARI"
+        },
+        {
+          "id": "cdbb7db1-79ed-4753-9308-5bef2b1eed7f",
+          "roll": "24151113016",
+          "name": "STUTI RAJ"
+        },
+        {
+          "id": "1569d2a8-6309-4e1b-a009-d53aa91fb61b",
+          "roll": "24151113017",
+          "name": "ROHIT KUMAR"
+        },
+        {
+          "id": "76adeb30-e145-4341-ad61-481d10d8e06b",
+          "roll": "24151113018",
+          "name": "AYUSH KUMAR"
+        },
+        {
+          "id": "57c35e4c-5c2c-4a43-a51b-d1192016038b",
+          "roll": "24151113019",
+          "name": "SHRISHTI SINHA"
+        },
+        {
+          "id": "38aa9eeb-de3e-421a-aa53-94d7842ca486",
+          "roll": "24151113020",
+          "name": "NITESH SINGH"
+        },
+        {
+          "id": "e2e1a494-72b4-4da2-b45d-ec8b08041adc",
+          "roll": "24151113021",
+          "name": "ANKIT KUMAR"
+        },
+        {
+          "id": "e41e4cac-ca37-42a2-98cf-3eb8d9fe8224",
+          "roll": "24151113022",
+          "name": "RAHUL RAJ"
+        },
+        {
+          "id": "c99c1535-1071-4b9e-93b2-ec62bc84f1ad",
+          "roll": "24151113023",
+          "name": "KAJAL SINGH"
+        },
+        {
+          "id": "146d882e-ebb5-4dcc-b4a5-07dc7cf8c9f9",
+          "roll": "24151113024",
+          "name": "SHIVANI KUMARI"
+        },
+        {
+          "id": "ba4ff3a7-a17e-4d5b-a0d6-4df901fa4457",
+          "roll": "24151113025",
+          "name": "KUNAL RAI"
+        },
+        {
+          "id": "e55ca888-41cc-4ee2-9c84-1c44e416526d",
+          "roll": "24151113026",
+          "name": "VISHAL KUMAR"
+        },
+        {
+          "id": "c60c0479-0acc-4a16-b9e7-cfea8c90a628",
+          "roll": "24151113027",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "a8906581-fe7f-44d5-b5db-10d465ec6220",
+          "roll": "24151113028",
+          "name": "ISHA KUMARI"
+        },
+        {
+          "id": "d3c482c9-5037-407e-a670-fc83ad1b7492",
+          "roll": "24151113029",
+          "name": "SHREYA SHARMA"
+        },
+        {
+          "id": "b097dd0a-0418-46e3-a56d-d5a808cf50e3",
+          "roll": "24151113030",
+          "name": "SANYA KUMARI"
+        },
+        {
+          "id": "8c607152-f8aa-4635-ae90-98857848e1f9",
+          "roll": "24151113031",
+          "name": "SHUBHANGI KUMARI"
+        },
+        {
+          "id": "6be5249c-ed30-4433-832f-fdd8dda58914",
+          "roll": "24151113032",
+          "name": "ANIRUDH AMAN"
+        },
+        {
+          "id": "fee1cd37-3be3-40b9-b671-fc448f924491",
+          "roll": "24151113033",
+          "name": "ASHMIT RAJ"
+        },
+        {
+          "id": "5141ba1e-af9f-42f3-a195-c28871c80908",
+          "roll": "24151113034",
+          "name": "ADITYA  RAJ"
+        },
+        {
+          "id": "eca21bdd-b1b3-4eea-b2b6-287fe2169245",
+          "roll": "24151113035",
+          "name": "SUMAN KUMAR DAS"
+        },
+        {
+          "id": "c28b76ba-ec40-48e6-abe0-2c00b502aec0",
+          "roll": "24151113036",
+          "name": "DIKSHA BHARTI"
+        },
+        {
+          "id": "310d5565-4d25-42e7-928f-fa8c42f4e53a",
+          "roll": "24151113037",
+          "name": "SNEHA ANAND"
+        },
+        {
+          "id": "53c78414-0729-496a-97f9-d2904f743e4a",
+          "roll": "24151113038",
+          "name": "MANSI KUNAL"
+        },
+        {
+          "id": "f26b4224-9882-4ef5-bb6d-85a41c056369",
+          "roll": "24151113039",
+          "name": "ANURAG GANESH"
+        },
+        {
+          "id": "4c81bf72-acc3-49e9-9396-4db5429543dc",
+          "roll": "24151113040",
+          "name": "ANISHA RAJ"
+        },
+        {
+          "id": "8b218b9d-5322-479d-a7ee-ae15507373df",
+          "roll": "24151113041",
+          "name": "RUPESH KUMAR"
+        },
+        {
+          "id": "d5ba7d16-d334-4e42-92ed-a3c10771de4c",
+          "roll": "24151113042",
+          "name": "SANJANA KUMARI"
+        },
+        {
+          "id": "36c1ff09-0c15-406f-9272-263c855e82d2",
+          "roll": "24151113043",
+          "name": "ADITYA KUMAR"
+        },
+        {
+          "id": "25ae6657-a250-4b57-bb17-1c3080781cba",
+          "roll": "24151113044",
+          "name": "AYUSH KUMAR"
+        },
+        {
+          "id": "d5e8f6da-5576-45a9-a248-014ca63e941c",
+          "roll": "24151113045",
+          "name": "VIVEK KUMAR ANAND"
+        },
+        {
+          "id": "3f9a6e3a-b4a2-4273-9d69-2f5fe49b6852",
+          "roll": "24151113046",
+          "name": "SHRISTI KUMARI"
+        },
+        {
+          "id": "79a0a433-18a0-47b8-8db1-0d9360bde10f",
+          "roll": "24151113047",
+          "name": "FAZLULLAH JILANI"
+        },
+        {
+          "id": "c9c1f2e5-b58a-4bd7-8f50-dbf54a460795",
+          "roll": "24151113048",
+          "name": "ROHIT KUMAR"
+        },
+        {
+          "id": "4753a920-98c7-48f4-bbd9-85d6a469e1f6",
+          "roll": "24151113049",
+          "name": "KARAN KUMAR"
+        },
+        {
+          "id": "b967a648-f07b-46f3-88e3-a4142ef16758",
+          "roll": "24151113050",
+          "name": "ANKIT KUMAR"
+        },
+        {
+          "id": "2a3948cf-d53f-406e-9085-40d22eab6267",
+          "roll": "24151113051",
+          "name": "PRIYANSHU KUMAR"
+        },
+        {
+          "id": "a3d8ec21-4ff3-4571-9c9e-4860107e0edd",
+          "roll": "24151113052",
+          "name": "ANKITESH RAJ"
+        },
+        {
+          "id": "ba28a119-1078-4d2d-9b79-ee6dfb541284",
+          "roll": "24151113053",
+          "name": "RITU RAJ"
+        },
+        {
+          "id": "044b9a21-10f8-428e-aee4-e60d90a80d2e",
+          "roll": "24151113054",
+          "name": "ABHINAV KUMAR"
+        },
+        {
+          "id": "db8eaca5-5275-4088-b2b5-13c4ddcbdccc",
+          "roll": "24151113055",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "c984d568-80bc-4fa1-a170-1717be05b27b",
+          "roll": "24151113057",
+          "name": "ANJALI KUMARI"
+        },
+        {
+          "id": "c635600f-451d-4f05-b855-cf5772bcff10",
+          "roll": "24151113058",
+          "name": "ANJALI"
+        },
+        {
+          "id": "974fc1f2-114e-43d4-8983-7369a11306c1",
+          "roll": "24151113059",
+          "name": "RAJESH KUMAR"
+        },
+        {
+          "id": "f07b9c35-d7f8-4c26-9753-25a9e5574327",
+          "roll": "25151113901",
+          "name": "CHANDAN KUMAR"
+        },
+        {
+          "id": "e248c2f3-dac3-4319-897d-6ca4fbdf4f0d",
+          "roll": "25151113902",
+          "name": "VISHAL KUMAR"
+        },
+        {
+          "id": "52e5ecc9-93a9-4720-ac5f-d571f483f98b",
+          "roll": "25151113903",
+          "name": "MANYA"
+        },
+        {
+          "id": "1971e1f0-a77d-4748-97cc-9728a43a58cd",
+          "roll": "25151113904",
+          "name": "SANIYA KUMARI"
+        },
+        {
+          "id": "22d80a88-a4c4-414f-8f18-9ea8d8ec321f",
+          "roll": "25151113905",
+          "name": "MONALI PRIYA"
+        },
+        {
+          "id": "4e1b98e5-990e-42f0-888c-ecb603551945",
+          "roll": "25151113906",
+          "name": "AAYUSHI BHARTI"
+        },
+        {
+          "id": "2f30e77d-474b-435e-a2b1-247bf7697a89",
+          "roll": "25151113907",
+          "name": "YASWANT KUMAR"
+        },
+        {
+          "id": "05c71dac-53f1-4802-ba92-171f399257a3",
+          "roll": "25151113908",
+          "name": "MD MAHTAB ALAM"
+        },
+        {
+          "id": "20e8e253-fe08-4060-934a-afce42a62d32",
+          "roll": "25151113909",
+          "name": "SHIKHA SINHA"
+        },
+        {
+          "id": "38aef998-a5dd-42f6-8202-67bcd1f5dd84",
+          "roll": "25151113910",
+          "name": "MAYANK KUMAR"
+        }
+      ]
+    },
+    {
+      "id": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+      "name": "6th CSE",
+      "sectionId": "CSE-6",
+      "students": [
+        {
+          "id": "3946b98b-94e8-4aa6-a293-2ff5783219fb",
+          "roll": "23105113001",
+          "name": "SONU RANJAN"
+        },
+        {
+          "id": "4524b907-7fda-4d0e-9436-4f52340d305f",
+          "roll": "23105113002",
+          "name": "NIRAJ KUMAR"
+        },
+        {
+          "id": "6d488ff2-61ac-41d2-a7f9-26f19f8fe9a7",
+          "roll": "23105113003",
+          "name": "RISHABH KUMAR MISHRA"
+        },
+        {
+          "id": "6b8673be-59e7-4ce2-9dc3-0c2ff2494fa3",
+          "roll": "23105113004",
+          "name": "ANJALI KUMARI"
+        },
+        {
+          "id": "4ecef1a3-e3fd-4ece-8153-0cd097f29b60",
+          "roll": "23105113005",
+          "name": "MOHIT KUMAR"
+        },
+        {
+          "id": "f5e80a65-5c1d-462e-a077-12018bad018b",
+          "roll": "23105113006",
+          "name": "AVANTIKA"
+        },
+        {
+          "id": "bb766452-2837-4c0d-aa8c-3220be168d07",
+          "roll": "23105113007",
+          "name": "ANSHU KUMARI"
+        },
+        {
+          "id": "7f1820a3-0efa-4971-b1ab-60fb657cf847",
+          "roll": "23105113008",
+          "name": "HARSH KUMAR JHA"
+        },
+        {
+          "id": "52d6db03-2790-4672-84e7-70f319e457c0",
+          "roll": "23105113009",
+          "name": "AMAN KUMAR"
+        },
+        {
+          "id": "62d74299-3a98-4c10-9870-66c455055b1f",
+          "roll": "23105113010",
+          "name": "PRITI KUMARI"
+        },
+        {
+          "id": "b810f32d-ba51-40a4-95c7-22f01a205e5d",
+          "roll": "23105113012",
+          "name": "ANSHU SAHANI"
+        },
+        {
+          "id": "13f00d34-d424-45a6-85b6-de8d692f9e28",
+          "roll": "23105113013",
+          "name": "SARVJEET KUMAR"
+        },
+        {
+          "id": "890cdbc9-e14e-45e2-b55f-b729accb5934",
+          "roll": "23105113014",
+          "name": "NAUREEN NAAZ"
+        },
+        {
+          "id": "de87aa5d-c51e-4b15-a762-0ca43e0fdf6d",
+          "roll": "23105113015",
+          "name": "ANANYA KUMARI"
+        },
+        {
+          "id": "08f9340c-9935-49d0-a104-ef98a6153135",
+          "roll": "23105113016",
+          "name": "SUPRIYA SHEKHAR"
+        },
+        {
+          "id": "df35b04d-30a2-46c9-aa86-3a9311ac935b",
+          "roll": "23105113018",
+          "name": "ABHISHEK KUMAR"
+        },
+        {
+          "id": "2ec91e92-ae73-4b81-8596-65fe201fb065",
+          "roll": "23105113019",
+          "name": "KUMARI SHAKYA"
+        },
+        {
+          "id": "8f88b816-2a76-4cd7-a86f-672b4bc2a239",
+          "roll": "23105113020",
+          "name": "RAJ KUMAR"
+        },
+        {
+          "id": "66d09855-c475-4cd3-a200-045a358062b3",
+          "roll": "23105113021",
+          "name": "ADITYA KUMAR"
+        },
+        {
+          "id": "d651a57b-758c-4625-96f3-487bbeddbe58",
+          "roll": "23105113022",
+          "name": "VIKASH KUMAR"
+        },
+        {
+          "id": "e14d3a5d-5a38-48eb-9fd3-cc5b448d5514",
+          "roll": "23105113023",
+          "name": "AMAN KUMAR"
+        },
+        {
+          "id": "fe23771c-9987-42d4-8d04-3ccc40e1f4d5",
+          "roll": "23105113024",
+          "name": "KUNDAN KUMAR"
+        },
+        {
+          "id": "bee5b284-3808-44d4-bbbc-88a4f10e8506",
+          "roll": "23105113025",
+          "name": "BISHAL PRASAD"
+        },
+        {
+          "id": "ad4e37fa-9fdc-4133-8c55-a52b0f19e97e",
+          "roll": "23105113026",
+          "name": "NIRAJ KUMAR"
+        },
+        {
+          "id": "2ab5091d-97c9-44c8-84e3-81221b884956",
+          "roll": "23105113027",
+          "name": "VIKASH KUMAR"
+        },
+        {
+          "id": "46a3dc5f-4c8b-4949-86dd-acd07927110f",
+          "roll": "23105113028",
+          "name": "RAVI KUMAR"
+        },
+        {
+          "id": "78333af2-120f-4c74-9c5c-ffae087778f5",
+          "roll": "23105113029",
+          "name": "ANIKET KUMAR"
+        },
+        {
+          "id": "ae9ffdae-b167-42c6-88b7-6c158ebc486a",
+          "roll": "23105113030",
+          "name": "ABHISHEK KUMAR SINGH"
+        },
+        {
+          "id": "3d8024b1-015b-4002-b3a5-c54e48ba1611",
+          "roll": "23105113031",
+          "name": "PRAVEEN KUMAR"
+        },
+        {
+          "id": "4ed00dbc-b108-4fc9-a763-891685c8008f",
+          "roll": "23105113032",
+          "name": "SHASHIKANT SHARMA"
+        },
+        {
+          "id": "8b9a7be6-c85d-42ef-a4f7-8972cecd4e43",
+          "roll": "23105113033",
+          "name": "KAJAL KUMARI"
+        },
+        {
+          "id": "b5adde6d-5af6-413c-a7f8-3606c64658f7",
+          "roll": "23105113034",
+          "name": "SHUBHAM KUMAR"
+        },
+        {
+          "id": "e78632e9-6f14-4532-995f-5799e0a93454",
+          "roll": "23105113035",
+          "name": "SANNU KUMARI"
+        },
+        {
+          "id": "34e5d09f-2e78-42e2-b38f-c5a2b1a0473e",
+          "roll": "23105113036",
+          "name": "AMRITA KUMARI"
+        },
+        {
+          "id": "c72a02af-141b-45b0-8ef5-dfa571e0bc3d",
+          "roll": "23105113037",
+          "name": "AYUSH RANJAN"
+        },
+        {
+          "id": "e551a7bf-b8a5-4326-8efb-a7cc6f0c9dbf",
+          "roll": "23105113038",
+          "name": "NIHARIKA SINGH"
+        },
+        {
+          "id": "370dc237-6c17-40d7-b5a9-c14cbfb953b8",
+          "roll": "23105113039",
+          "name": "AAKASH KUMAR GUPTA"
+        },
+        {
+          "id": "1c0a2b8b-038b-4a9b-97b0-e2c77179ee22",
+          "roll": "23105113040",
+          "name": "PRINCE KUMAR"
+        },
+        {
+          "id": "3bc170ab-a4c4-42aa-9c1c-6b42579229b3",
+          "roll": "23105113041",
+          "name": "SHAMA KHATOON"
+        },
+        {
+          "id": "c7304204-bdae-459b-a163-d54620b0b548",
+          "roll": "23105113042",
+          "name": "DHANANJAY KUMAR"
+        },
+        {
+          "id": "9fda40a5-c32d-4ced-bcb0-1c4db8e7376d",
+          "roll": "23105113043",
+          "name": "KHUSHI KUMARI"
+        },
+        {
+          "id": "f24a5285-c940-4c9f-a772-7cc20693ff2d",
+          "roll": "23105113044",
+          "name": "PRAJESH PALLAV"
+        },
+        {
+          "id": "3faab69a-f7da-4c06-ad8b-c9196356153c",
+          "roll": "23105113045",
+          "name": "SIDDHANT KUMAR"
+        },
+        {
+          "id": "40154cce-081f-4c8e-ad09-04e8cdcbeb74",
+          "roll": "23105113046",
+          "name": "NAVYA SINHA"
+        },
+        {
+          "id": "e9886d4d-a839-403f-9da1-fa93aaf415c2",
+          "roll": "23105113047",
+          "name": "ANANYA SARWASTHA"
+        },
+        {
+          "id": "582cebe4-fa3e-4a6c-9c3f-3c7a21e5f5c1",
+          "roll": "23105113048",
+          "name": "PREETI KUMARI"
+        },
+        {
+          "id": "06a6ba2f-1949-45ff-a720-91d38661d647",
+          "roll": "23105113049",
+          "name": "ASHWANI KUMAR"
+        },
+        {
+          "id": "580970da-4749-4e2c-b61a-badcc28ba07a",
+          "roll": "23105113050",
+          "name": "SHRUTI KUMARI"
+        },
+        {
+          "id": "ae4bd283-ad7c-4e5c-a941-d7217a62c1ec",
+          "roll": "23105113051",
+          "name": "SAKSHI SUMAN"
+        },
+        {
+          "id": "7d584699-c8e0-49a7-af42-a6a2b95bb6ba",
+          "roll": "23105113052",
+          "name": "SONAL BHUSHAN"
+        },
+        {
+          "id": "8b6d422c-a865-4d05-8a77-805258938a75",
+          "roll": "23105113053",
+          "name": "MOUSAM KUMARI"
+        },
+        {
+          "id": "89e7937b-1514-424b-9333-bce3819cf959",
+          "roll": "23105113054",
+          "name": "BABITA KUMARI"
+        },
+        {
+          "id": "190003c6-4f8a-420c-a7e9-4c11e94fd0d5",
+          "roll": "23105113057",
+          "name": "SACHIN KUMAR"
+        },
+        {
+          "id": "5f5730d8-82af-4ead-8b0c-d6e34fbd024f",
+          "roll": "23105113058",
+          "name": "ANKUSH RAJ"
+        },
+        {
+          "id": "5de52d14-f271-469f-8a34-08b80e161aec",
+          "roll": "23105113059",
+          "name": "NARESH KUMAR"
+        },
+        {
+          "id": "98122bed-d838-410d-b1d6-abb0dd599193",
+          "roll": "23105113060",
+          "name": "SHIVAM SAURAV"
+        },
+        {
+          "id": "9b040484-2921-45d0-be36-7aa2c785d9c8",
+          "roll": "24105113902",
+          "name": "ANKIT RAJ"
+        },
+        {
+          "id": "0fe21e6f-aa80-4284-b172-2f325036daf1",
+          "roll": "24105113903",
+          "name": "REENA KUMARI"
+        },
+        {
+          "id": "cdd050de-b3c0-430a-912b-99310a1d0998",
+          "roll": "24105113904",
+          "name": "ADARSH KUMAR"
+        },
+        {
+          "id": "a54fd124-6207-49d0-8d6d-1c8733c95c0f",
+          "roll": "24105113905",
+          "name": "NEHA KUMARI"
+        },
+        {
+          "id": "a06a73d8-e286-499e-ba14-e492e5bbbf0f",
+          "roll": "24105113906",
+          "name": "KHUSHBOO KUMARI"
+        },
+        {
+          "id": "3fb401b2-ffc5-4836-bd00-25caec208338",
+          "roll": "24105113907",
+          "name": "ALOK KUMAR"
+        },
+        {
+          "id": "bb66b938-a1f5-4399-ae3b-94acf969fd01",
+          "roll": "24105113909",
+          "name": "RAVI RAJ"
+        }
+      ]
+    },
+    {
+      "id": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+      "name": "6th CSE-AI",
+      "sectionId": "CSE-AI-6",
+      "students": [
+        {
+          "id": "ad1d6a42-b63d-47c2-b81a-88669dc50cbb",
+          "roll": "23151113001",
+          "name": "ABHISHEK RAJ"
+        },
+        {
+          "id": "1cdddacf-fcc4-4195-b726-8a823c22353a",
+          "roll": "23151113002",
+          "name": "MD KAUSHAR ANSARI"
+        },
+        {
+          "id": "3937296e-4646-4bc9-ab32-51bb96d308db",
+          "roll": "23151113004",
+          "name": "SHIVAM KUMAR"
+        },
+        {
+          "id": "3d06d9a2-425a-41f6-b870-818ecc602f28",
+          "roll": "23151113005",
+          "name": "PAYAL PRIYA"
+        },
+        {
+          "id": "846f76e3-122d-444b-b22c-c2e58079e47a",
+          "roll": "23151113006",
+          "name": "SANSKRITI KUMARI"
+        },
+        {
+          "id": "9ef99c66-fdba-4e5d-bcc6-fd798fcc887f",
+          "roll": "23151113007",
+          "name": "SAKSHI KUMARI"
+        },
+        {
+          "id": "d97203da-a617-440e-bbdd-f03d93df1504",
+          "roll": "23151113008",
+          "name": "SHUBHAG KUMAR"
+        },
+        {
+          "id": "8ef249b7-eae8-4b2c-8281-a2abce99cb9a",
+          "roll": "23151113009",
+          "name": "MUSKAN KUMARI"
+        },
+        {
+          "id": "80218ae0-5db5-499c-9fa2-e870f6127bc2",
+          "roll": "23151113010",
+          "name": "MUSKAN KUMARI GUPTA"
+        },
+        {
+          "id": "96085907-1f6c-42d7-afa8-790288d29493",
+          "roll": "23151113011",
+          "name": "SHIKHA KUMARI"
+        },
+        {
+          "id": "9e90fa35-6781-4899-8783-926464eab449",
+          "roll": "23151113012",
+          "name": "VARSHA RAJAN"
+        },
+        {
+          "id": "2218e7f1-0d1b-4b5d-9cb7-0076e5ff3064",
+          "roll": "23151113013",
+          "name": "PRINCE RAJ"
+        },
+        {
+          "id": "361c3bfa-5fa3-493c-909f-241c8ad95b9d",
+          "roll": "23151113014",
+          "name": "JYOTI SWARUPA"
+        },
+        {
+          "id": "04488e54-41ec-4bc0-b58a-5eabb794c5ee",
+          "roll": "23151113015",
+          "name": "RISHU RAJ"
+        },
+        {
+          "id": "624b46c5-ca30-4b8e-87f1-08a265ce91f9",
+          "roll": "23151113016",
+          "name": "ALOK RAJ"
+        },
+        {
+          "id": "e976c820-7977-449c-b420-e6286854a3b1",
+          "roll": "23151113019",
+          "name": "KHUSHI KUMARI"
+        },
+        {
+          "id": "1bff1614-8239-45a8-abd8-daa7b76e3686",
+          "roll": "23151113020",
+          "name": "MOHIT RAJ"
+        },
+        {
+          "id": "30336f78-092d-454f-98f0-c87f9978ce7c",
+          "roll": "23151113021",
+          "name": "ABHISHEK KUMAR"
+        },
+        {
+          "id": "e87e4b1f-1e4f-47c8-b2cb-20f2afbcae51",
+          "roll": "23151113022",
+          "name": "JUGNU KUMARI"
+        },
+        {
+          "id": "0c36bbfb-c2f9-4375-bf1e-e5a88b6e59e8",
+          "roll": "23151113023",
+          "name": "GAUTAM RAJ"
+        },
+        {
+          "id": "fdbb1cfa-2bfa-4e6f-8bd5-d17fbafd27ac",
+          "roll": "23151113024",
+          "name": "ASHUTOSH KUMAR"
+        },
+        {
+          "id": "c840ac6f-8baf-4980-bfe9-935188f799d1",
+          "roll": "23151113025",
+          "name": "RAMAN KUMAR"
+        },
+        {
+          "id": "0049bf5b-02e2-4c0c-9ac5-674871aab12d",
+          "roll": "23151113026",
+          "name": "PRIYANSHU RAJ"
+        },
+        {
+          "id": "1027b6ca-d0f6-4260-9432-93339755bd05",
+          "roll": "23151113027",
+          "name": "NIKHIL KUMAR"
+        },
+        {
+          "id": "b003c405-3a4a-4e7b-ad72-76648bc0c68d",
+          "roll": "23151113028",
+          "name": "PRANESH KUMAR"
+        },
+        {
+          "id": "1c317725-2d80-48ba-b29f-0dabba0985e4",
+          "roll": "23151113030",
+          "name": "MANISH KUMAR SAH"
+        },
+        {
+          "id": "17db2ca5-b6a9-4a7d-991c-f4c86ab423e8",
+          "roll": "23151113031",
+          "name": "HARSHIT RAJ"
+        },
+        {
+          "id": "f1be17c6-4f7b-476e-b588-37f5a26c037d",
+          "roll": "23151113032",
+          "name": "MRITUNJAY KUMAR"
+        },
+        {
+          "id": "7fc64282-c6c7-4a1d-9d2c-6aefaa6339d6",
+          "roll": "23151113033",
+          "name": "MRITUNJAY KUMAR"
+        },
+        {
+          "id": "90aa9ab2-aedf-4993-a9ac-3065a3b0ec15",
+          "roll": "23151113034",
+          "name": "AGREEM KUMAR RAJ"
+        },
+        {
+          "id": "2de479fc-3bb6-4327-9b5c-596532928ac1",
+          "roll": "23151113035",
+          "name": "AJAY KUMAR"
+        },
+        {
+          "id": "fedf5542-8207-47d7-b5a9-76cccbf54821",
+          "roll": "23151113036",
+          "name": "SATISH KUMAR"
+        },
+        {
+          "id": "6e7894d1-897c-4c44-a808-3539a2b85227",
+          "roll": "23151113037",
+          "name": "RAJEEV RANJAN"
+        },
+        {
+          "id": "a4e4290e-1eb8-4e5f-8da9-5c07bd271a8d",
+          "roll": "23151113038",
+          "name": "ROSHNI KUMARI"
+        },
+        {
+          "id": "fdfa8a5c-cc9f-4efe-a369-3f66b9d59dfa",
+          "roll": "23151113039",
+          "name": "ISHA KUMARI"
+        },
+        {
+          "id": "315351fd-d96e-428b-98c5-f0e9cf59ff5c",
+          "roll": "23151113041",
+          "name": "AMAN KUMAR"
+        },
+        {
+          "id": "7f3e8c2c-43ac-425f-824d-4dfce226c713",
+          "roll": "23151113042",
+          "name": "MANVEE KUMARI"
+        },
+        {
+          "id": "ced11928-08e0-49fa-95ee-f9ba6bc306f1",
+          "roll": "23151113045",
+          "name": "SHIVAM KUMAR SHUKLA"
+        },
+        {
+          "id": "3078f2b9-26d7-41ac-bae9-7a9991dc71b2",
+          "roll": "23151113046",
+          "name": "KUMAR PRIYANSHU"
+        },
+        {
+          "id": "eb2178d3-caad-49da-9f93-34e14b83e5d7",
+          "roll": "23151113047",
+          "name": "RATNA PRIYA"
+        },
+        {
+          "id": "6aab3645-8807-4050-98d4-7819c67680bc",
+          "roll": "23151113048",
+          "name": "RAUSHNI KUMARI"
+        },
+        {
+          "id": "d40fa225-f949-4258-8528-4c50690639c9",
+          "roll": "23151113049",
+          "name": "SONY KUMARI"
+        },
+        {
+          "id": "07901fa4-9579-495f-85b5-5ff1b2110736",
+          "roll": "23151113050",
+          "name": "SHALIKA RITU"
+        },
+        {
+          "id": "4d5af556-f7b5-4f27-9aeb-bce12208689c",
+          "roll": "23151113051",
+          "name": "R M NISHANT SUMAN"
+        },
+        {
+          "id": "aa0f61b1-8fd1-4724-b4bb-c4b2b601305d",
+          "roll": "23151113052",
+          "name": "ANSHIKA RAJ"
+        },
+        {
+          "id": "c69878c1-fb6a-4204-8b5a-ddfbd3ccffb3",
+          "roll": "23151113053",
+          "name": "DIWAKAR RAJ"
+        },
+        {
+          "id": "a86ce109-1fb0-4f49-a0d5-3e3bca1ee172",
+          "roll": "24151113901",
+          "name": "RAJKISHOR KUMAR"
+        },
+        {
+          "id": "54b693a5-a7ca-4ef6-840c-2961a67f819a",
+          "roll": "24151113902",
+          "name": "KHUSHBOO KUMARI"
+        },
+        {
+          "id": "6113cd28-061a-4a1a-ab8c-fe0f7b423aef",
+          "roll": "24151113904",
+          "name": "VISHAL KUMAR"
+        },
+        {
+          "id": "2b7b4ad4-4702-444c-8bd6-c338f92128fb",
+          "roll": "24151113905",
+          "name": "RAJ SINGH"
+        },
+        {
+          "id": "c840adba-8d38-4529-8a6d-ee6f1c1c3e99",
+          "roll": "24151113906",
+          "name": "ANIKET KUMAR"
+        },
+        {
+          "id": "752e4d51-6548-4178-9dc5-e9f4fbe8aebc",
+          "roll": "24151113907",
+          "name": "AISHWARYA KUMARI"
+        },
+        {
+          "id": "82a03d7b-e08a-49f8-a41a-be4160907792",
+          "roll": "24151113908",
+          "name": "SAKSHI KUMARI"
+        },
+        {
+          "id": "394a9f5d-3274-4b63-84b6-98720055c8ff",
+          "roll": "24151113909",
+          "name": "ADITI KUMARI"
+        },
+        {
+          "id": "a227b201-b4a4-4ff8-9956-6c21eb06937a",
+          "roll": "24151113910",
+          "name": "ABHISHEK KUMAR"
+        }
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "08d8612b-c978-439c-ae27-aedde273291f",
+      "kind": "midsem",
+      "title": "B.Tech Mid-Semester Examination 2026",
+      "year": "2026",
+      "hodSign": "HOD(CSE)",
+      "coordinatorSign": "Exam Co-ordinator",
+      "noticeLead": "All the Students of B.Tech 4th & 6th Semester (CSE, CSE-AI) are hereby informed that the Mid Semester Examination will be held as per the given schedule.",
+      "shifts": {
+        "morning": {
+          "id": "morning",
+          "label": "11:00 AM to 01:00 PM",
+          "short": "Morning",
+          "reporting": "Reporting Time : 10:30 AM"
+        },
+        "afternoon": {
+          "id": "afternoon",
+          "label": "2:30 PM to 04:30 PM",
+          "short": "Afternoon",
+          "reporting": "Reporting Time : 02:00 PM"
+        }
+      },
+      "sectionIds": [
+        "CSE-4",
+        "CSE-AI-4",
+        "CSE-6",
+        "CSE-AI-6"
+      ],
+      "papers": [
+        {
+          "id": "c2b7a8e6-38dc-43d0-92c8-1efd6646805d",
+          "sectionId": "CSE-4",
+          "subjectCode": "105401",
+          "subjectName": "Computer Organization and Architecture",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-14",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "73cf3acd-7ba7-4d2f-85bf-3febbff3049b",
+          "sectionId": "CSE-4",
+          "subjectCode": "105402",
+          "subjectName": "Formal Language and Automata Theory",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-19",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "3d2ef781-2447-49a0-9faf-561e0650a3a0",
+          "sectionId": "CSE-4",
+          "subjectCode": "105403",
+          "subjectName": "Design and Analysis of Algorithms",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-15",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "81215287-9d44-47ad-bb4f-3a15f9f299aa",
+          "sectionId": "CSE-4",
+          "subjectCode": "105404",
+          "subjectName": "Database Management System",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-16",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "7b034393-a9b6-4ba4-add6-3c730d99460b",
+          "sectionId": "CSE-4",
+          "subjectCode": "105405",
+          "subjectName": "Effective Technical Communication",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-17",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "ecb7b7ea-b632-479e-b225-fa1c8feb556f",
+          "sectionId": "CSE-4",
+          "subjectCode": "105406",
+          "subjectName": "Computer Networks",
+          "listId": "db1f2021-9eb3-48c3-b498-3b398bb882a1",
+          "branchYear": "4th CSE",
+          "date": "2026-09-18",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "88cca73c-f788-451a-9c52-1f513d235001",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151401",
+          "subjectName": "Computer Organization and Architecture",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-14",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "d4fecaf1-f17a-48b2-be66-dc3c0eb2f020",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151402",
+          "subjectName": "Formal Language and Automata Theory",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-19",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "7436dda9-30c9-4270-b9a7-eb4e34c6b7d5",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151403",
+          "subjectName": "Design and Analysis of Algorithms",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-15",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "106c73e7-8478-4372-8100-85718519482a",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151404",
+          "subjectName": "Database Management System",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-16",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "a8ee996f-a3eb-48c6-94c6-5c0c47660beb",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151405",
+          "subjectName": "Effective Technical Communication",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-17",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "e0c57c8d-2762-49da-aa90-1e5d62be422c",
+          "sectionId": "CSE-AI-4",
+          "subjectCode": "151406",
+          "subjectName": "Computer Networks",
+          "listId": "8ee325d4-38e5-42e2-85e9-c5edca5a8cf8",
+          "branchYear": "4th CSE-AI",
+          "date": "2026-09-18",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "9864d1d4-90fe-4531-bb86-600cb534f2b0",
+          "sectionId": "CSE-6",
+          "subjectCode": "100602",
+          "subjectName": "Computer Networks",
+          "listId": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+          "branchYear": "6th CSE",
+          "date": "2026-09-19",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "7e5799ce-9d26-48c9-8a8d-63be3d273278",
+          "sectionId": "CSE-6",
+          "subjectCode": "105601",
+          "subjectName": "Complier Design",
+          "listId": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+          "branchYear": "6th CSE",
+          "date": "2026-09-14",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "73e74b8a-fc5a-4aba-803e-471ba333624d",
+          "sectionId": "CSE-6",
+          "subjectCode": "105602",
+          "subjectName": "Machine Learning",
+          "listId": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+          "branchYear": "6th CSE",
+          "date": "2026-09-15",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "f507a94b-d89d-4222-90d9-b1f7fa6d0e50",
+          "sectionId": "CSE-6",
+          "subjectCode": "105610",
+          "subjectName": "Elective-I (Soft Computing)",
+          "listId": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+          "branchYear": "6th CSE",
+          "date": "2026-09-16",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "2294733c-fdd5-434f-9be4-a9793b192ef2",
+          "sectionId": "CSE-6",
+          "subjectCode": "105616",
+          "subjectName": "Elective-II (Cryptography and Network Security)",
+          "listId": "4ed00f47-fbb0-4828-b8f1-b248e2800bad",
+          "branchYear": "6th CSE",
+          "date": "2026-09-17",
+          "shift": "afternoon",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "d52e35bb-61aa-4758-8688-5f0111022143",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151601",
+          "subjectName": "Machine Learning",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-19",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "65272f82-adc3-41c5-a258-8977ebfed244",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151602",
+          "subjectName": "Automata Theory and Compiler Design",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-14",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "fef16dc1-a383-4e9a-8f5c-cc30e181fbc6",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151603",
+          "subjectName": "Ad hoc & Network Sensors",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-15",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "e0187339-bda9-4f55-8ac8-5dba8d8489ed",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151604",
+          "subjectName": "AI and Ethics",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-16",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "8f262d85-689e-4db4-87f6-a1e68359abab",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151605",
+          "subjectName": "Constitution of India",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "",
+          "shift": "morning",
+          "included": false,
+          "custom": false
+        },
+        {
+          "id": "1894dcaf-18bc-4442-8c28-c1a484f68fcf",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151610",
+          "subjectName": "Elective-II (Internet & Intranet Engineering)",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-17",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        },
+        {
+          "id": "d8cc68ee-63d0-4cbd-8a16-5d6c4dfb5a10",
+          "sectionId": "CSE-AI-6",
+          "subjectCode": "151614",
+          "subjectName": "Elective-III (Cloud Computing)",
+          "listId": "f0789dcf-bd84-4f56-acd2-65d390d545cb",
+          "branchYear": "6th CSE-AI",
+          "date": "2026-09-18",
+          "shift": "morning",
+          "included": true,
+          "custom": false
+        }
+      ],
+      "roomIds": [
+        "123",
+        "135"
+      ],
+      "duties": {
+        "2026-09-14|morning|123": [
+          "9bf77500-21dc-4db5-ac4f-06588a91aa0b",
+          "da3d253c-0c9e-4465-8b60-6a0570451fd9"
+        ],
+        "2026-09-14|morning|135": [
+          "d62f528a-df82-4af5-9985-f3ca7414bb5d",
+          "092280f1-0faf-41ba-94fa-de5ae112c2ee"
+        ],
+        "2026-09-14|afternoon|123": [
+          "c9c62959-a5a4-48d7-b082-cec60d83910f",
+          "da3d253c-0c9e-4465-8b60-6a0570451fd9"
+        ],
+        "2026-09-14|afternoon|135": [
+          "59cc71b5-c4ba-4c0a-abf5-de185cac5d03",
+          "092280f1-0faf-41ba-94fa-de5ae112c2ee"
+        ],
+        "2026-09-15|morning|123": [
+          "092280f1-0faf-41ba-94fa-de5ae112c2ee",
+          "bda8a5f2-2331-40ea-a3b7-df73dbb5212b"
+        ],
+        "2026-09-15|morning|135": [
+          "20412382-1782-4eba-875d-39555c45e56e",
+          "9bf77500-21dc-4db5-ac4f-06588a91aa0b"
+        ],
+        "2026-09-15|afternoon|123": [
+          "4a0a1d9f-6f81-43b4-8a60-808d4326b28e",
+          "bda8a5f2-2331-40ea-a3b7-df73dbb5212b"
+        ],
+        "2026-09-15|afternoon|135": [
+          "508e5695-b6eb-4b00-9c3b-9653d7212463",
+          "5b4ed840-1ea0-4883-98e9-24e4efb9b49b"
+        ],
+        "2026-09-16|morning|123": [
+          "5b4ed840-1ea0-4883-98e9-24e4efb9b49b",
+          "4a0a1d9f-6f81-43b4-8a60-808d4326b28e"
+        ],
+        "2026-09-16|morning|135": [
+          "9bf77500-21dc-4db5-ac4f-06588a91aa0b",
+          "cf943f35-28cc-4e4e-aa21-091fb0203ec2"
+        ],
+        "2026-09-16|afternoon|123": [
+          "da3d253c-0c9e-4465-8b60-6a0570451fd9",
+          "508e5695-b6eb-4b00-9c3b-9653d7212463"
+        ],
+        "2026-09-16|afternoon|135": [
+          "59cc71b5-c4ba-4c0a-abf5-de185cac5d03",
+          "d62f528a-df82-4af5-9985-f3ca7414bb5d"
+        ],
+        "2026-09-17|morning|123": [
+          "cf943f35-28cc-4e4e-aa21-091fb0203ec2",
+          "bda8a5f2-2331-40ea-a3b7-df73dbb5212b"
+        ],
+        "2026-09-17|morning|135": [
+          "20412382-1782-4eba-875d-39555c45e56e",
+          "4a0a1d9f-6f81-43b4-8a60-808d4326b28e"
+        ],
+        "2026-09-17|afternoon|123": [
+          "59cc71b5-c4ba-4c0a-abf5-de185cac5d03",
+          "508e5695-b6eb-4b00-9c3b-9653d7212463"
+        ],
+        "2026-09-17|afternoon|135": [
+          "a616e39b-f448-4d2c-9bb3-13ec67b865f3",
+          "9bf77500-21dc-4db5-ac4f-06588a91aa0b"
+        ],
+        "2026-09-18|morning|123": [
+          "c9c62959-a5a4-48d7-b082-cec60d83910f",
+          "da3d253c-0c9e-4465-8b60-6a0570451fd9"
+        ],
+        "2026-09-18|morning|135": [
+          "4a0a1d9f-6f81-43b4-8a60-808d4326b28e",
+          "bda8a5f2-2331-40ea-a3b7-df73dbb5212b"
+        ],
+        "2026-09-18|afternoon|123": [
+          "cf943f35-28cc-4e4e-aa21-091fb0203ec2",
+          "d62f528a-df82-4af5-9985-f3ca7414bb5d"
+        ],
+        "2026-09-18|afternoon|135": [
+          "20412382-1782-4eba-875d-39555c45e56e",
+          "c9c62959-a5a4-48d7-b082-cec60d83910f"
+        ],
+        "2026-09-19|morning|123": [
+          "508e5695-b6eb-4b00-9c3b-9653d7212463",
+          "59cc71b5-c4ba-4c0a-abf5-de185cac5d03"
+        ],
+        "2026-09-19|morning|135": [
+          "a616e39b-f448-4d2c-9bb3-13ec67b865f3",
+          "cf943f35-28cc-4e4e-aa21-091fb0203ec2"
+        ],
+        "2026-09-19|afternoon|123": [
+          "092280f1-0faf-41ba-94fa-de5ae112c2ee",
+          "5b4ed840-1ea0-4883-98e9-24e4efb9b49b"
+        ],
+        "2026-09-19|afternoon|135": [
+          "d62f528a-df82-4af5-9985-f3ca7414bb5d",
+          "c9c62959-a5a4-48d7-b082-cec60d83910f"
+        ]
+      },
+      "dutySlots": {},
+      "seating": {
+        "rollOrder": "asc",
+        "mix": "alternate",
+        "fill": "column",
+        "neighbor": "alternate",
+        "roomMode": "all",
+        "roomOrderMode": "same",
+        "sparePerRoom": 0,
+        "fillOverflowLast": true,
+        "seed": 2026,
+        "groupOrders": {},
+        "roomOrders": {}
+      },
+      "invigilation": {
+        "departments": [
+          "CSE"
+        ],
+        "disabledSemesters": [
+          4,
+          6
+        ],
+        "preferContractual": false,
+        "doubleContractualLoad": true,
+        "balanceLoad": true,
+        "skipBusy": true
+      }
+    }
+  ],
+  "activeSessionId": "08d8612b-c978-439c-ae27-aedde273291f"
+}
